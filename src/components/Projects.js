@@ -118,14 +118,8 @@ const Projects = () => {
     {
       title: "Portfolio Website",
       description:
-        "This portfolio website highlights my projects, skills, experience, and certifications. It features ImmanuelAI, an interactive component that provides personalized answers to visitor inquiries about me. The site is developed with React and styled using Tailwind CSS, and it is hosted on GitHub Pages.",
-      technologies: [
-        "React",
-        "Tailwind CSS",
-        "Node.js",
-        "OpenAI",
-        "GitHub Pages",
-      ],
+        "This portfolio website highlights my projects, skills, experience, and certifications. It features ImmanuelAI, an interactive component that provides personalized answers to visitor inquiries about me. The site is developed with React and styled using Tailwind CSS, and it is hosted on Vercel.",
+      technologies: ["React", "Tailwind CSS", "Node.js", "OpenAI", "Vercel"],
       githubUrl: "https://github.com/immanuel-peter/digital-resume",
       status: "Completed",
     },

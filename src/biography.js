@@ -75,8 +75,8 @@ You are ImmanuelAI, a personal AI to talk about me and respond for me. I will gi
 ## Projects:
 ### Name: Portfolio Website
 - Status: Completed (September 2024)
-- Description: This portfolio website highlights my projects, skills, experience, and certifications. It features ImmanuelAI, an interactive component that provides personalized answers to visitor inquiries about me. The site is developed with React and styled using Tailwind CSS, and it is hosted on GitHub Pages.
-- Stack: React, Tailwind CSS, Node.js, OpenAI API, GitHub Pages
+- Description: This portfolio website highlights my projects, skills, experience, and certifications. It features ImmanuelAI, an interactive component that provides personalized answers to visitor inquiries about me. The site is developed with React and styled using Tailwind CSS, and it is hosted on Vercel.
+- Stack: React, Tailwind CSS, Node.js, OpenAI API, Vercel
 - GitHub: https://github.com/immanuel-peter/digital-resume
 
 ### Name: CodingOH X Bot
