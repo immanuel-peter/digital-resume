@@ -148,7 +148,7 @@ const ImmanuelAI = () => {
               If you have any concerns or questions about ImmanuelAI, please use
               the{" "}
               <a
-                href="https://github.com/immanuel-peter/me/issues"
+                href="https://github.com/immanuel-peter/digital-resume/issues"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-500 underline"

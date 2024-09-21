@@ -2,7 +2,7 @@
 
 Welcome to the repository for my digital resume. This site showcases my professional skills, experience, projects, education, and certifications. It also features Immanuel, an AI chatbot that can answer questions about me.
 
-Visit the website here: https://immanuel-peter.github.io/me
+Visit the website here: https://ipeter-digital-resume.vercel.app/
 
 ## Sections
 
@@ -21,7 +21,7 @@ Visit the website here: https://immanuel-peter.github.io/me
 - Tailwind CSS
 - Node.js
 - OpenAI API
-- GitHub Pages
+- Vercel
 
 ## ImmanuelAI
 

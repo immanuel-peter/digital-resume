@@ -126,7 +126,7 @@ const Projects = () => {
         "OpenAI",
         "GitHub Pages",
       ],
-      githubUrl: "https://github.com/immanuel-peter/me",
+      githubUrl: "https://github.com/immanuel-peter/digital-resume",
       status: "Completed",
     },
   ];
