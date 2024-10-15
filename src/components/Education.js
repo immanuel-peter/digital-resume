@@ -51,7 +51,7 @@ const Education = () => {
       degree: "Bachelor of Science",
       fieldOfStudy: "Computer Science",
       year: "September 2024 - June 2028",
-      classes: ["Introduction to Computer Science in Python"],
+      classes: ["Introduction to Computer Science in Python", "Systems Programming in C"],
       sealImage:
         "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
     },
