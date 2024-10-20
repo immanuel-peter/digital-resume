@@ -51,7 +51,7 @@ const Contact = () => {
             <FaXTwitter />
           </a>
           <a
-            href="https://www.instagram.com/ipeter_dev/"
+            href="https://www.instagram.com/ipeter.tech/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 dark:text-gray-400 text-4xl hover:text-pink-500 dark:hover:text-pink-600 transition duration-300"
@@ -59,7 +59,7 @@ const Contact = () => {
             <FaInstagram />
           </a>
           <a
-            href="https://www.threads.net/@ipeter_dev/"
+            href="https://www.threads.net/@ipeter.tech/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-600 dark:text-gray-400 text-4xl hover:text-black dark:hover:text-gray-100 transition duration-300"
