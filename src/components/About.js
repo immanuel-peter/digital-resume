@@ -21,7 +21,7 @@ const About = () => {
             crafting innovative apps, exploring new ideas, or diving into AI,
             I'm always looking to push the boundaries of what's possible.
           </p>
-          <p className="text-lg text-gray-700 dark:text-gray-300 hover:underline">
+          <p className="text-lg text-gray-700 dark:text-gray-300">
             Need a quick crash course on my background and experience? Check out my{" "}
             <a
               href="https://tinyurl.com/2tsazrfv"
@@ -51,7 +51,7 @@ const About = () => {
 
       {/* Bottom Section: Add an Interactive or Motivational Quote */}
       <div>
-        <p className="mt-2 text-xl font-semibold text-gray-800 dark:text-gray-100">
+        <p className="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100">
           "Engineering the future, one line of code at a time." 🌍💻
         </p>
       </div>
