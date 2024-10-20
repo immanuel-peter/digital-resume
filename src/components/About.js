@@ -21,6 +21,18 @@ const About = () => {
             crafting innovative apps, exploring new ideas, or diving into AI,
             I'm always looking to push the boundaries of what's possible.
           </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300 hover:underline">
+            Need a quick crash course on my background and experience? Check out my{" "}
+            <a
+              href="https://tinyurl.com/2tsazrfv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline dark:text-blue-400"
+            >
+              resume
+            </a>
+            .
+          </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Want to dive deeper into my journey? Let's have a chat with{" "}
             <ImmanuelAI />
