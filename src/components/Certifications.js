@@ -44,6 +44,13 @@ const CertificationCard = ({ title, issuer, date, skills, url, star }) => (
 const Certifications = () => {
   const certifications = [
     {
+      title: "Learn Go",
+      issuer: "Codecademy",
+      date: "November 2024",
+      skills: ["Go"],
+      url: "https://www.codecademy.com/profiles/immanuelPeter9839511913/certificates/60773d2e920679c8e46ff634b9ed2e6e",
+    },
+    {
       title: "Intermediate Deep Learning with PyTorch",
       issuer: "Datacamp",
       date: "September 2024",
