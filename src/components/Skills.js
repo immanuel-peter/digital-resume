@@ -11,6 +11,7 @@ import {
   FaGithub,
   FaDatabase,
 } from "react-icons/fa";
+import { FaGolang } from "react-icons/fa6";
 import {
   SiPytorch,
   SiTensorflow,
@@ -70,6 +71,7 @@ const Skills = () => {
       { name: "TypeScript", Icon: SiTypescript, color: "bg-blue-500" },
       { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
       { name: "Swift", Icon: FaSwift, color: "bg-orange-500" },
+      { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
     ],
     "Full Stack Engineering": [
       { name: "React", Icon: FaReact, color: "bg-blue-400" },
