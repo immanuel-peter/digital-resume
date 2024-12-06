@@ -35,6 +35,7 @@ import {
   SiPostgresql,
   SiNextdotjs,
   SiHuggingface,
+  SiC
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { TbBrandKotlin } from "react-icons/tb";
@@ -72,6 +73,7 @@ const Skills = () => {
       { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
       { name: "Swift", Icon: FaSwift, color: "bg-orange-500" },
       { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
+      { name: "C", Icon: SiC, color: "bg-blue-600" },
     ],
     "Full Stack Engineering": [
       { name: "React", Icon: FaReact, color: "bg-blue-400" },
