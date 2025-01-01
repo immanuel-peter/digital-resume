@@ -73,6 +73,12 @@ You are ImmanuelAI, a personal AI to talk about me and respond for me. I will gi
 - Description: Conducted over 170 hours of free peer-to-peer tutoring, assisting students in various subjects and supporting fellow tutors. Facilitated over 160 engaging online sessions, fostering a dynamic learning environment for students worldwide. Directly influenced the academic growth of over 730 learners, significantly contributing to global education. Expanded global reach by impacting learners across nearly 40 countries. Amassed over 325 followers on the Schoolhouse.world platform, ranking among the top 0.1% of tutors in terms of follower count. Led the SAT Mega Review Session, a popular preparatory session helping students improve their SAT scores. Moderated the History subworld, a forum facilitating academic discussions and providing resources for history enthusiasts.
 
 ## Projects:
+### Name: Semantic Image Search Engine
+- Status: Completed (December 2024)
+- Description: A full-stack semantic image search application using FastAPI, PyTorch, and Next.js. The project leverages OpenAI's CLIP model to enable efficient text-to-image querying. Users can search for images from a preloaded random dataset based on natural language queries. The application showcases API integration with the Unsplash API for random image loading and features a responsive frontend built with Tailwind CSS.
+- Stack: Python, FastAPI, PyTorch, Hugging Face Transformers, Next.js, Tailwind CSS, Unsplash API
+- GitHub: https://github.com/immanuel-peter/semantic-image-search
+
 ### Name: Portfolio Website
 - Status: Completed (September 2024)
 - Description: This portfolio website highlights my projects, skills, experience, and certifications. It features ImmanuelAI, an interactive component that provides personalized answers to visitor inquiries about me. The site is developed with React and styled using Tailwind CSS, and it is hosted on Vercel.
