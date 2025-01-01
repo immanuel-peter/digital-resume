@@ -24,7 +24,7 @@ const About = () => {
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Need a quick crash course on my background and experience? Check out my{" "}
             <a
-              href="https://tinyurl.com/2tsazrfv"
+              href="https://tinyurl.com/k3w5wwz5"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline dark:text-blue-400"
