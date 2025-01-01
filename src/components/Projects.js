@@ -90,6 +90,22 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "Semantic Image Search Engine",
+      description:
+        "A full-stack semantic image search application using FastAPI, PyTorch, and Next.js. The project leverages OpenAI's CLIP model to enable efficient text-to-image querying. Users can search for images from a preloaded random dataset based on natural language queries. The application showcases API integration with the Unsplash API for random image loading and features a responsive frontend built with Tailwind CSS.",
+      technologies: [
+        "Python",
+        "FastAPI",
+        "PyTorch",
+        "Hugging Face Transformers",
+        "Next.js",
+        "Tailwind CSS",
+        "Unsplash API",
+      ],
+      githubUrl: "https://github.com/immanuel-peter/semantic-image-search",
+      status: "Completed",
+  },
+    {
       title: "CodingOH",
       description:
         "CodingOH's mission is to make coding human again! CodingOH aims to streamline the development process by providing a platform where coders can get direct answers to their problems. We believe developers shouldn't spend excessive time debugging at the expense of writing functional code. Rather than scouring multiple Stack Overflow pages for answers specific to your codebase, you should be able to get direct help from experienced developers. Additionally, CodingOH provides portfolio pages for developers, enabling employers to scout potential hires on the site. Developers can showcase their tech stack, coding skills, soft skills, and personal projects on CodingOH.",
