@@ -35,7 +35,8 @@ import {
   SiPostgresql,
   SiNextdotjs,
   SiHuggingface,
-  SiC
+  SiC,
+  SiFastapi
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { TbBrandKotlin } from "react-icons/tb";
@@ -89,6 +90,7 @@ const Skills = () => {
       { name: "PostgreSQL", Icon: SiPostgresql, color: "bg-blue-500" },
       { name: "MySQL", Icon: GrMysql, color: "bg-blue-600" },
       { name: "SQL", Icon: FaDatabase, color: "bg-violet-400" },
+      { name: "FastAPI", Icon: SiFastapi, color: "bg-teal-600" },
     ],
     "Machine Learning & Artificial Intelligence": [
       { name: "PyTorch", Icon: SiPytorch, color: "bg-orange-500" },
