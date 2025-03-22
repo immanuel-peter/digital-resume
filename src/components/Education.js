@@ -51,7 +51,40 @@ const Education = () => {
       degree: "Bachelor of Science",
       fieldOfStudy: "Computer Science",
       year: "September 2024 - June 2028",
-      classes: ["Introduction to Computer Science in Python", "Systems Programming in C"],
+      classes: [
+        "Introduction to Computer Science I",
+        "Introduction to Computer Science II"
+        "Systems Programming I",
+        "Systems Programming II",
+        "Mathematical Foundations of Machine Learning"
+      ],
+      sealImage:
+        "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
+    },
+    {
+      institution: "University of Chicago",
+      degree: "Bachelor of Arts",
+      fieldOfStudy: "Mathematics",
+      year: "September 2024 - June 2028",
+      classes: [
+        "Introduction to Proofs in Analysis",
+        "Abstract Linear Algebra",
+        "Analysis in Rn I",
+        "Mathematical Foundations of Machine Learning"
+      ],
+      sealImage:
+        "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
+    },
+    {
+      institution: "University of Chicago",
+      degree: "Bachelor of Arts",
+      fieldOfStudy: "Physics",
+      year: "September 2024 - June 2028",
+      classes: [
+        "Mechanics",
+        "Electricity and Magnetism",
+        "Waves, Optics, and Heat"
+      ],
       sealImage:
         "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
     },
