@@ -53,7 +53,7 @@ const Education = () => {
       year: "September 2024 - June 2028",
       classes: [
         "Introduction to Computer Science I",
-        "Introduction to Computer Science II"
+        "Introduction to Computer Science II",
         "Systems Programming I",
         "Systems Programming II",
         "Mathematical Foundations of Machine Learning"
