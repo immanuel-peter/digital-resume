@@ -21,10 +21,10 @@ const EducationCard = ({
         </div>
       )}
       <h3 className="text-2xl font-semibold text-gray-800 dark:text-blue-400 mb-1">
-        {degree}
+        {fieldOfStudy}
       </h3>
       <h4 className="text-lg text-gray-600 dark:text-gray-300 mb-2">
-        {fieldOfStudy}
+        {degree}
       </h4>
       <p className="text-gray-500 dark:text-gray-400 mb-2">{institution}</p>
       <p className="text-gray-400 dark:text-gray-500 text-sm">{year}</p>
