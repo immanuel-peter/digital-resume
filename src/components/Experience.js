@@ -32,6 +32,16 @@ const ExperienceItem = ({
 const Experience = () => {
   const experiences = [
     {
+      position: "Software Engineer Intern",
+      company: "Quantum Rings",
+      startDate: "June 2025",
+      endDate: "September 2025",
+      location: "Chicago, IL",
+      details: [
+        "Incoming SWE intern likely to work on the Quantum SDK and business operations"
+      ]
+    },
+    {
       position: "Data Analyst Intern",
       company: "Cornerstone Business Solutions",
       startDate: "June 2022",
