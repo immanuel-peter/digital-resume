@@ -90,6 +90,13 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "LocalRAG",
+      description: "Terminal LLM Chat Tool with Persistent Memory",
+      technologies: ["Python", "FAISS", "Hugging Face Transformers", "OpenAI API", "Anthropic API", "Click", "Rich"],
+      githubUrl: "https://github.com/immanuel-peter/localrag",
+      status: "Completed",
+    },
+    {
       title: "Semantic Image Search Engine",
       description:
         "A full-stack semantic image search application using FastAPI, PyTorch, and Next.js. The project leverages OpenAI's CLIP model to enable efficient text-to-image querying. Users can search for images from a preloaded random dataset based on natural language queries. The application showcases API integration with the Unsplash API for random image loading and features a responsive frontend built with Tailwind CSS.",
