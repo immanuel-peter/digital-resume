@@ -36,7 +36,8 @@ import {
   SiNextdotjs,
   SiHuggingface,
   SiC,
-  SiFastapi
+  SiFastapi,
+  SiAnthropic,
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { TbBrandKotlin } from "react-icons/tb";
@@ -96,6 +97,7 @@ const Skills = () => {
       { name: "PyTorch", Icon: SiPytorch, color: "bg-orange-500" },
       { name: "TensorFlow", Icon: SiTensorflow, color: "bg-orange-600" },
       { name: "OpenAI", Icon: SiOpenai, color: "bg-black" },
+      { name: "Anthropic", Icon: SiAnthropic, color: "bg-amber-600" },
       { name: "Hugging Face", Icon: SiHuggingface, color: "bg-yellow-400" },
     ],
     "Data Science": [
@@ -131,6 +133,7 @@ const Skills = () => {
     "Machine Learning",
     "Deep Learning",
     "Neural Networks",
+    "Transformers",
     "Convolutional Neural Networks (CNNs)",
     "Recurrent Neural Networks (RNNs)",
     "Long Short-Term Memory (LSTM)",
@@ -138,6 +141,8 @@ const Skills = () => {
     "Generative AI",
     "Web Scraping",
     "API Integration",
+    "Vector Databases",
+    "FAISS",
   ];
 
   return (
