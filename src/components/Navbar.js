@@ -14,7 +14,7 @@ const Navbar = () => {
     "experience",
     "projects",
     "education",
-    "certifications",
+    // "certifications",
     "contact",
   ];
 
@@ -147,3 +147,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

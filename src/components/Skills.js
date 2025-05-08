@@ -72,7 +72,7 @@ const Skills = () => {
       { name: "C++", Icon: SiCplusplus, color: "bg-blue-700" },
       // { name: "Java", Icon: FaJava, color: "bg-red-500" },
       { name: "TypeScript", Icon: SiTypescript, color: "bg-blue-500" },
-      { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
+      // { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
       // { name: "Swift", Icon: FaSwift, color: "bg-orange-500" },
       // { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
       // { name: "C", Icon: SiC, color: "bg-blue-600" },
