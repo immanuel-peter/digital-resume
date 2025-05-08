@@ -15,14 +15,14 @@ const About = () => {
         {/* Left Section */}
         <div className="text-center md:text-left md:w-2/3 space-y-4">
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            I am a freshman at the University of Chicago studying Computer
-            Science. I’m an aspiring, but passionate, engineer-technologist with
-            a love for building tech solutions that drive impact. Whether it's
-            crafting innovative apps, exploring new ideas, or diving into AI,
-            I'm always looking to push the boundaries of what's possible.
+            This summer, I'm diving deep into PyTorch, C++, CARLA, Docker, and
+            Linux while interning at a quantum computing startup. I'm building
+            toward deep AI/ML expertise through engineering, experimentation,
+            and system-building
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Need a quick crash course on my background and experience? Check out my{" "}
+            Need a quick crash course on my background and experience? Check out
+            my{" "}
             <a
               href="https://uchicago.box.com/s/ww0c9y7hs0623ktyfrzr3e568f0h2xh4"
               target="_blank"

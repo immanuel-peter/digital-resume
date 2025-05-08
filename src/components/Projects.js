@@ -91,8 +91,17 @@ const Projects = () => {
   const projects = [
     {
       title: "LocalRAG",
-      description: "Terminal LLM Chat Tool with Persistent Memory",
-      technologies: ["Python", "FAISS", "Hugging Face Transformers", "OpenAI API", "Anthropic API", "Click", "Rich"],
+      description:
+        "LocalRAG is a terminal-based LLM chat tool that provides infinite memory via local vector search. Designed as a privacy-first alternative to ChatGPT/Claude, it embeds chat history into FAISS and retrieves relevant past context for smarter replies. Users can save conversations, switch models mid-session, and continue prior chats seamlessly. Built with modular CLI components and persistent local storage, LocalRAG demonstrates RAG principles, efficient context injection, and LLM interfacing — all without sending data to any external server.",
+      technologies: [
+        "Python",
+        "FAISS",
+        "Hugging Face Transformers",
+        "OpenAI API",
+        "Anthropic API",
+        "Click",
+        "Rich",
+      ],
       githubUrl: "https://github.com/immanuel-peter/localrag",
       status: "Completed",
     },
@@ -111,24 +120,24 @@ const Projects = () => {
       ],
       githubUrl: "https://github.com/immanuel-peter/semantic-image-search",
       status: "Completed",
-  },
-    {
-      title: "CodingOH",
-      description:
-        "CodingOH's mission is to make coding human again! CodingOH aims to streamline the development process by providing a platform where coders can get direct answers to their problems. We believe developers shouldn't spend excessive time debugging at the expense of writing functional code. Rather than scouring multiple Stack Overflow pages for answers specific to your codebase, you should be able to get direct help from experienced developers. Additionally, CodingOH provides portfolio pages for developers, enabling employers to scout potential hires on the site. Developers can showcase their tech stack, coding skills, soft skills, and personal projects on CodingOH.",
-      technologies: [
-        "React",
-        "Node.js",
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Supabase",
-        "PostgreSQL",
-        "GitHub",
-      ],
-      githubUrl: "https://github.com/immanuel-peter/codingoh-platform",
-      status: "Ongoing",
     },
+    // {
+    //   title: "CodingOH",
+    //   description:
+    //     "CodingOH's mission is to make coding human again! CodingOH aims to streamline the development process by providing a platform where coders can get direct answers to their problems. We believe developers shouldn't spend excessive time debugging at the expense of writing functional code. Rather than scouring multiple Stack Overflow pages for answers specific to your codebase, you should be able to get direct help from experienced developers. Additionally, CodingOH provides portfolio pages for developers, enabling employers to scout potential hires on the site. Developers can showcase their tech stack, coding skills, soft skills, and personal projects on CodingOH.",
+    //   technologies: [
+    //     "React",
+    //     "Node.js",
+    //     "Next.js",
+    //     "TypeScript",
+    //     "Tailwind CSS",
+    //     "Supabase",
+    //     "PostgreSQL",
+    //     "GitHub",
+    //   ],
+    //   githubUrl: "https://github.com/immanuel-peter/codingoh-platform",
+    //   status: "Ongoing",
+    // },
     {
       title: "CodingOH Twitter Bot",
       description:
