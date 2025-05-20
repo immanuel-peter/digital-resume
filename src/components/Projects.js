@@ -90,6 +90,14 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "AI Commit",
+      description:
+        "A bash script that uses OpenAI's GPT-4.1-nano model to automatically generate meaningful commit messages based on your staged changes.",
+      technologies: ["Bash", "OpenAI API"],
+      githubUrl: "https://github.com/immanuel-peter/ai-commit",
+      status: "Completed",
+    },
+    {
       title: "LocalRAG",
       description:
         "LocalRAG is a terminal-based LLM chat tool that provides infinite memory via local vector search. Designed as a privacy-first alternative to ChatGPT/Claude, it embeds chat history into FAISS and retrieves relevant past context for smarter replies. Users can save conversations, switch models mid-session, and continue prior chats seamlessly. Built with modular CLI components and persistent local storage, LocalRAG demonstrates RAG principles, efficient context injection, and LLM interfacing — all without sending data to any external server.",
