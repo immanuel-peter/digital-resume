@@ -152,7 +152,7 @@ const Projects = () => {
         "The CodingOH Twitter Bot is a Python-based bot designed to engage the developer community on Twitter with programming insights, tips, and humor. By leveraging OpenAI's GPT-4 model and the Tweepy library, this bot generates and posts tweets every 12 hours, providing a blend of educational and entertaining content.",
       technologies: ["Python", "OpenAI", "Tweepy", "GitHub Actions"],
       githubUrl: "https://github.com/immanuel-peter/codingoh_x_bot",
-      liveUrl: "https://twitter.com/CodingOH",
+      // liveUrl: "https://twitter.com/CodingOH",
       status: "Completed",
     },
     {
