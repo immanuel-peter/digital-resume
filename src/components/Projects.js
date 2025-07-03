@@ -90,6 +90,22 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "GovHub",
+      description: "GitHub for Government!",
+      technologies: [
+        "React",
+        "Node.js",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "GitHub",
+        "Congress.gov API",
+      ],
+      githubUrl: "https://github.com/immanuel-peter/govhub",
+      liveUrl: "https://govhub-five.vercel.app",
+      status: "Ongoing",
+    },
+    {
       title: "AI Commit",
       description:
         "A bash script that uses OpenAI's GPT-4.1-nano model to automatically generate meaningful commit messages based on your staged changes.",
