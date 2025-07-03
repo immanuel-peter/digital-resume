@@ -38,8 +38,13 @@ const Experience = () => {
       endDate: "September 2025",
       location: "Chicago, IL",
       details: [
-        "Incoming SWE intern likely to work on the Quantum SDK and business operations"
-      ]
+        "Diagnosed and resolved a Docker startup failure in the backend API container, restoring reliable local development and ensuring seamless Docker Compose integration.",
+        "Refactored user schema by migrating execution telemetry into a dedicated execution stats table with foreign key relations, improving schema modularity and test reliability with zero performance regressions.",
+        "Designed and implemented analytics backend endpoints and frontend admin dashboards to visualize new and active user metrics with dynamic time-interval filtering.",
+        "Developed and deployed a background telemetry aggregation worker using AWS SQS and TypeORM, enabling daily rollups of user execution data with idempotent upsert logic and scalable event processing.",
+        "Coordinated SQL schema changes, message queue integration, and worker deployment configs across backend infrastructure; documented workflows for long-term maintainability.",
+        "Integrated HubSpot contact-sync automation to streamline lead intake and bridge backend systems with CRM infrastructure.",
+      ],
     },
     {
       position: "Data Analyst Intern",

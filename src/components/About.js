@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileImage from "../assets/ipeter.jpg";
+import ProfileImage from "../assets/ipeter-github.jpg";
 import ImmanuelAI from "./ImmanuelAI";
 
 const About = () => {

@@ -56,7 +56,8 @@ const Education = () => {
         "Introduction to Computer Science II",
         "Systems Programming I",
         "Systems Programming II",
-        "Mathematical Foundations of Machine Learning"
+        "Mathematical Foundations of Machine Learning",
+        "Discrete Mathematics",
       ],
       sealImage:
         "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
@@ -70,7 +71,8 @@ const Education = () => {
         "Introduction to Proofs in Analysis",
         "Abstract Linear Algebra",
         "Analysis in Rn I",
-        "Mathematical Foundations of Machine Learning"
+        "Analysis in Rn II",
+        "Mathematical Foundations of Machine Learning",
       ],
       sealImage:
         "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
@@ -83,7 +85,8 @@ const Education = () => {
       classes: [
         "Mechanics",
         "Electricity and Magnetism",
-        "Waves, Optics, and Heat"
+        "Waves, Optics, and Heat",
+        "Intermediate Mechanics",
       ],
       sealImage:
         "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",

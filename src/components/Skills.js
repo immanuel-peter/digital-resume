@@ -10,6 +10,8 @@ import {
   FaGitAlt,
   FaGithub,
   FaDatabase,
+  FaDocker,
+  FaAws,
 } from "react-icons/fa";
 import { FaGolang } from "react-icons/fa6";
 import {
@@ -69,12 +71,12 @@ const Skills = () => {
     "Programming Languages": [
       { name: "Python", Icon: FaPython, color: "bg-yellow-500" },
       { name: "JavaScript", Icon: FaJs, color: "bg-yellow-300" },
-      { name: "C++", Icon: SiCplusplus, color: "bg-blue-700" },
       // { name: "Java", Icon: FaJava, color: "bg-red-500" },
       { name: "TypeScript", Icon: SiTypescript, color: "bg-blue-500" },
+      { name: "C++", Icon: SiCplusplus, color: "bg-blue-700" },
       // { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
       // { name: "Swift", Icon: FaSwift, color: "bg-orange-500" },
-      // { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
+      { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
       // { name: "C", Icon: SiC, color: "bg-blue-600" },
     ],
     "Full Stack Engineering": [
@@ -114,10 +116,12 @@ const Skills = () => {
     ],
     "Cloud Computing & DevOps": [
       // { name: "Azure", Icon: SiMicrosoftazure, color: "bg-blue-600" },
+      { name: "Docker", Icon: FaDocker, color: "bg-blue-600" },
       { name: "Git", Icon: FaGitAlt, color: "bg-orange-600" },
       { name: "GitHub", Icon: FaGithub, color: "bg-black" },
       { name: "GitHub Actions", Icon: SiGithubactions, color: "bg-blue-500" },
       { name: "Bash", Icon: SiGnubash, color: "bg-black" },
+      { name: "AWS", Icon: FaAws, color: "bg-orange-500" },
     ],
   };
 
