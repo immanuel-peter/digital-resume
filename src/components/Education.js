@@ -1,5 +1,10 @@
 import React from "react";
 
+const SEAL_IMAGES = {
+  "University of Chicago":
+    "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
+};
+
 const EducationCard = ({
   institution,
   degree,
@@ -59,8 +64,7 @@ const Education = () => {
         "Mathematical Foundations of Machine Learning",
         "Discrete Mathematics",
       ],
-      sealImage:
-        "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
+      sealImage: SEAL_IMAGES["University of Chicago"],
     },
     {
       institution: "University of Chicago",
@@ -74,8 +78,7 @@ const Education = () => {
         "Analysis in Rn II",
         "Mathematical Foundations of Machine Learning",
       ],
-      sealImage:
-        "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
+      sealImage: SEAL_IMAGES["University of Chicago"],
     },
     {
       institution: "University of Chicago",
@@ -88,8 +91,7 @@ const Education = () => {
         "Waves, Optics, and Heat",
         "Intermediate Mechanics",
       ],
-      sealImage:
-        "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
+      sealImage: SEAL_IMAGES["University of Chicago"],
     },
   ];
 

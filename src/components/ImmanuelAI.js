@@ -11,16 +11,18 @@ import ReactMarkdown from "react-markdown";
 
 const ImmanuelAI = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const initMessages = [{ role: "system", content: biography }];
+  const initMessages = [{ role: "developer", content: biography }];
   const [messages, setMessages] = useState(initMessages);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false); // Add loading state
   const messagesEndRef = useRef(null);
+  const isComposingRef = useRef(false);
 
   const openDialog = () => setIsOpen(true);
   const closeDialog = () => setIsOpen(false);
 
   const handleSendMessage = async () => {
+    if (loading) return;
     if (userInput.trim() === "") return;
 
     // Create a new messages array with the user message
@@ -35,8 +37,9 @@ const ImmanuelAI = () => {
       const response = await axios.post(
         "https://api.openai.com/v1/chat/completions",
         {
-          model: "gpt-4o-mini",
+          model: "gpt-5-nano",
           messages: newMessages, // Use the updated messages array
+          reasoning_effort: "low",
         },
         {
           headers: {
@@ -54,6 +57,7 @@ const ImmanuelAI = () => {
           content: response.data.choices[0].message.content,
         },
       ]);
+      console.log(response.data.choices[0].message.content);
     } catch (error) {
       console.error("Error fetching OpenAI response:", error);
       setMessages((prev) => [
@@ -63,6 +67,16 @@ const ImmanuelAI = () => {
     }
 
     setLoading(false); // Set loading to false when response is received
+  };
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      if (isComposingRef.current) return;
+      e.preventDefault();
+      if (!loading) {
+        handleSendMessage();
+      }
+    }
   };
 
   // Scroll to the latest message
@@ -96,7 +110,7 @@ const ImmanuelAI = () => {
             {/* Chat Messages */}
             <div className="mt-4 h-80 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-md p-2">
               {messages
-                .filter((msg) => msg.role !== "system")
+                .filter((msg) => msg.role !== "developer")
                 .map((msg, index) => (
                   <div
                     key={index}
@@ -107,7 +121,9 @@ const ImmanuelAI = () => {
                     }`}
                   >
                     {msg.role === "assistant" ? (
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      <div className="prose prose-md dark:prose-invert">
+                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      </div>
                     ) : (
                       msg.content
                     )}
@@ -133,6 +149,10 @@ const ImmanuelAI = () => {
                 placeholder="Type your message..."
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
+                onKeyDown={handleInputKeyDown}
+                onCompositionStart={() => (isComposingRef.current = true)}
+                onCompositionEnd={() => (isComposingRef.current = false)}
+                aria-label="Chat input. Press Enter to send, Shift+Enter for a new line."
               />
               <button
                 onClick={handleSendMessage}
@@ -146,7 +166,7 @@ const ImmanuelAI = () => {
             {/* Message for user feedback */}
             <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
               If you have any concerns or questions about ImmanuelAI, please use
-              the{" "}
+              the repo's{" "}
               <a
                 href="https://github.com/immanuel-peter/digital-resume/issues"
                 target="_blank"
@@ -154,8 +174,7 @@ const ImmanuelAI = () => {
                 className="text-blue-500 underline"
               >
                 Issues tab
-              </a>{" "}
-              in the repo.
+              </a>.
             </p>
           </DialogPanel>
         </div>

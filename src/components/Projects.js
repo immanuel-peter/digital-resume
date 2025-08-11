@@ -90,6 +90,23 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "AutoMoE",
+      description: "A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. This approach uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.",
+      technologies: [
+        "Python",
+        "PyTorch",
+        "PyTorch DDP",
+        "CUDA",
+        "CARLA",
+        "Hugging Face",
+        "Linux",
+        "Bash",
+        "Tmux"
+      ],
+      githubUrl: "https://github.com/immanuel-peter/self-driving-model",
+      status: "Ongoing",
+    },
+    {
       title: "GovHub",
       description: "GitHub for Government!",
       technologies: [

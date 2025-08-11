@@ -24,7 +24,7 @@ const About = () => {
             Need a quick crash course on my background and experience? Check out
             my{" "}
             <a
-              href="https://uchicago.box.com/s/ww0c9y7hs0623ktyfrzr3e568f0h2xh4"
+              href="https://uchicago.box.com/s/4wsqe4uinm0tw72wiu6mtrttjrnmt1mj"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:underline dark:text-blue-400"

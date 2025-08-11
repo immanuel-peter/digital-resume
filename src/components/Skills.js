@@ -40,9 +40,11 @@ import {
   SiC,
   SiFastapi,
   SiAnthropic,
+  SiNvidia
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { TbBrandKotlin } from "react-icons/tb";
+import { FcLinux } from "react-icons/fc";
 
 // SkillIcon component for rendering icons
 const SkillIcon = ({ Icon, name, color }) => (
@@ -101,6 +103,8 @@ const Skills = () => {
       { name: "OpenAI", Icon: SiOpenai, color: "bg-black" },
       { name: "Anthropic", Icon: SiAnthropic, color: "bg-amber-600" },
       { name: "Hugging Face", Icon: SiHuggingface, color: "bg-yellow-400" },
+      { name: "Linux", Icon: FcLinux, color: "bg-gray-400" },
+      { name: "CUDA", Icon: SiNvidia, color: "bg-green-600" },
     ],
     "Data Science": [
       { name: "Pandas", Icon: SiPandas, color: "bg-purple-800" },
