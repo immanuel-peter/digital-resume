@@ -107,6 +107,14 @@ const Projects = () => {
       status: "Ongoing",
     },
     {
+      title: "Mini JAX ViT",
+      description:
+        "A compact Vision Transformer implemented from scratch in JAX/Flax. Includes patch embedding, multi-head self-attention, MLP blocks, and a clear training loop for image classification, focused on readability and educational value.",
+      technologies: ["JAX", "Flax", "NumPy"],
+      githubUrl: "https://github.com/immanuel-peter/jax-vit",
+      status: "Completed",
+    },
+    {
       title: "GovHub",
       description: "GitHub for Government!",
       technologies: [

@@ -12,8 +12,10 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 
 ## What He’s Building Now
 - AutoMoE — A modular, multi-task self-driving system grounded in a Mixture-of-Experts (MoE) architecture for CARLA simulation. Uses specialized expert networks for perception/planning subtasks and a gating network to route inputs. Built with PyTorch (DDP), CUDA, and Linux; designed for interpretability, scalability, and clean handoffs between modules. Source: github.com/immanuel-peter/self-driving-model
+- Mini JAX ViT — A compact Vision Transformer implemented in JAX/Flax to study transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop. Source: github.com/immanuel-peter/jax-vit
 
 ## Selected Projects
+- Mini JAX ViT — Compact Vision Transformer in JAX/Flax focused on clarity and pedagogy. Repo: github.com/immanuel-peter/jax-vit
 - LocalRAG — Terminal LLM chat with infinite memory via local vector search (FAISS). Persistent conversations, model switching, and context injection without external servers.
 - Semantic Image Search — Full-stack text-to-image retrieval with FastAPI, CLIP, and a Next.js/Tailwind frontend; Unsplash API integration.
 - AI Commit — Bash utility using the OpenAI API to generate meaningful commit messages from staged diffs.
@@ -35,10 +37,9 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - Volunteer Tutor, Schoolhouse.world (2021–Present)
   - 170+ hours; 160+ sessions; helped learners across ~40 countries; top-tier follower count on the platform.
 
-## Technical Strengths
 - Languages: Python, C++, Go, JavaScript/TypeScript, SQL
 - Frameworks/Platforms: React, Next.js, Node.js, FastAPI
-- ML/AI: PyTorch, TensorFlow, NumPy, Pandas, FAISS, OpenAI/Anthropic APIs, Hugging Face
+- ML/AI: PyTorch, TensorFlow, JAX/Flax, NumPy, Pandas, FAISS, OpenAI/Anthropic APIs, Hugging Face
 - Systems/Infra: Linux, Docker, Git/GitHub, GitHub Actions, AWS
 - Data: PostgreSQL, MySQL, MongoDB
 - Additional: CUDA; strong math foundation (linear algebra, probability, analysis)
