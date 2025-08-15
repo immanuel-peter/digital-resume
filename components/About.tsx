@@ -1,12 +1,11 @@
 import React from "react";
-import ProfileImage from "../public/ipeter.jpg";
 import ImmanuelAI from "./ImmanuelAI";
 
 const About = () => {
   return (
     <div
       id="about"
-      className="flex flex-col justify-center py-10 px-6 md:px-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+      className="flex flex-col justify-center py-10 px-6 md:px-16 bg-gray-50 dark:bg-gray-900"
     >
       <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-6">
         Hey, I'm Immanuel Peter! 👋
@@ -24,7 +23,7 @@ const About = () => {
             Need a quick crash course on my background and experience? Check out
             my{" "}
             <a
-              href="https://uchicago.box.com/s/ww0c9y7hs0623ktyfrzr3e568f0h2xh4"
+              href="https://uchicago.box.com/s/4wsqe4uinm0tw72wiu6mtrttjrnmt1mj"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer text-blue-500 hover:underline dark:text-blue-400"
@@ -42,7 +41,7 @@ const About = () => {
         {/* Profile Image */}
         <div className="mt-6 md:mt-0 md:w-1/3 flex justify-end">
           <img
-            src={ProfileImage.src}
+            src="/ipeter.jpg"
             alt="Immanuel Peter"
             className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg ring-4 ring-blue-300 dark:ring-blue-600"
           />

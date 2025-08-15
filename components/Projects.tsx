@@ -101,6 +101,47 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "AutoMoE",
+      description: "A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. This approach uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.",
+      technologies: [
+        "Python",
+        "PyTorch",
+        "PyTorch DDP",
+        "CUDA",
+        "CARLA",
+        "Hugging Face",
+        "Linux",
+        "Bash",
+        "Tmux"
+      ],
+      githubUrl: "https://github.com/immanuel-peter/self-driving-model",
+      status: "Ongoing",
+    },
+    {
+      title: "Mini JAX ViT",
+      description:
+        "A compact Vision Transformer implemented from scratch in JAX/Flax. Includes patch embedding, multi-head self-attention, MLP blocks, and a clear training loop for image classification, focused on readability and educational value.",
+      technologies: ["JAX", "Flax", "NumPy"],
+      githubUrl: "https://github.com/immanuel-peter/jax-vit",
+      status: "Completed",
+    },
+    {
+      title: "GovHub",
+      description: "GitHub for Government!",
+      technologies: [
+        "React",
+        "Node.js",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "GitHub",
+        "Congress.gov API",
+      ],
+      githubUrl: "https://github.com/immanuel-peter/govhub",
+      liveUrl: "https://govhub-five.vercel.app",
+      status: "Ongoing",
+    },
+    {
       title: "AI Commit",
       description:
         "A bash script that uses OpenAI's GPT-4.1-nano model to automatically generate meaningful commit messages based on your staged changes.",

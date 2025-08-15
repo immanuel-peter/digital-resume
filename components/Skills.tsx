@@ -3,30 +3,45 @@ import {
   FaPython,
   FaJs,
   FaReact,
+  FaJava,
   FaNodeJs,
+  FaSwift,
+  FaHtml5,
   FaGitAlt,
   FaGithub,
   FaDatabase,
+  FaDocker,
+  FaAws,
 } from "react-icons/fa";
+import { FaGolang } from "react-icons/fa6";
 import {
   SiPytorch,
   SiTensorflow,
   SiCplusplus,
   SiMongodb,
   SiTypescript,
+  SiRedux,
   SiOpenai,
+  SiJquery,
   SiPandas,
   SiNumpy,
   SiJupyter,
   SiGnubash,
+  SiCss3,
+  SiTailwindcss,
+  SiTableau,
   SiGithubactions,
   SiPostgresql,
   SiNextdotjs,
   SiHuggingface,
+  SiC,
   SiFastapi,
   SiAnthropic,
+  SiNvidia
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
+import { TbBrandKotlin } from "react-icons/tb";
+import { FcLinux } from "react-icons/fc";
 
 type SkillIconProps = {
   Icon: React.ElementType;
@@ -61,12 +76,22 @@ const Skills = () => {
     "Programming Languages": [
       { name: "Python", Icon: FaPython, color: "bg-yellow-500" },
       { name: "JavaScript", Icon: FaJs, color: "bg-yellow-300" },
-      { name: "C++", Icon: SiCplusplus, color: "bg-blue-700" },
+      // { name: "Java", Icon: FaJava, color: "bg-red-500" },
       { name: "TypeScript", Icon: SiTypescript, color: "bg-blue-500" },
+      { name: "C++", Icon: SiCplusplus, color: "bg-blue-700" },
+      // { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
+      // { name: "Swift", Icon: FaSwift, color: "bg-orange-500" },
+      { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
+      // { name: "C", Icon: SiC, color: "bg-blue-600" },
     ],
     "Full Stack Engineering": [
       { name: "React", Icon: FaReact, color: "bg-blue-400" },
       { name: "React Native", Icon: FaReact, color: "bg-blue-400" },
+      // { name: "Redux", Icon: SiRedux, color: "bg-purple-500" },
+      // { name: "jQuery", Icon: SiJquery, color: "bg-blue-400" },
+      // { name: "HTML", Icon: FaHtml5, color: "bg-orange-600" },
+      // { name: "CSS", Icon: SiCss3, color: "bg-blue-600" },
+      // { name: "Tailwind CSS", Icon: SiTailwindcss, color: "bg-sky-400" },
       { name: "Next.js", Icon: SiNextdotjs, color: "bg-black" },
       { name: "Node.js", Icon: FaNodeJs, color: "bg-green-500" },
       { name: "MongoDB", Icon: SiMongodb, color: "bg-green-700" },
@@ -81,42 +106,76 @@ const Skills = () => {
       { name: "OpenAI", Icon: SiOpenai, color: "bg-black" },
       { name: "Anthropic", Icon: SiAnthropic, color: "bg-amber-600" },
       { name: "Hugging Face", Icon: SiHuggingface, color: "bg-yellow-400" },
+      { name: "Linux", Icon: FcLinux, color: "bg-gray-400" },
+      { name: "CUDA", Icon: SiNvidia, color: "bg-green-600" },
     ],
     "Data Science": [
       { name: "Pandas", Icon: SiPandas, color: "bg-purple-800" },
       { name: "NumPy", Icon: SiNumpy, color: "bg-sky-400" },
       { name: "Jupyter", Icon: SiJupyter, color: "bg-orange-400" },
+      // {
+      //   name: "Microsoft Excel",
+      //   Icon: SiMicrosoftexcel,
+      //   color: "bg-green-600",
+      // },
+      // { name: "Tableau", Icon: SiTableau, color: "bg-blue-700" },
+      // { name: "Power BI", Icon: SiPowerbi, color: "bg-yellow-500" },
     ],
     "Cloud Computing & DevOps": [
+      // { name: "Azure", Icon: SiMicrosoftazure, color: "bg-blue-600" },
+      { name: "Docker", Icon: FaDocker, color: "bg-blue-600" },
       { name: "Git", Icon: FaGitAlt, color: "bg-orange-600" },
       { name: "GitHub", Icon: FaGithub, color: "bg-black" },
       { name: "GitHub Actions", Icon: SiGithubactions, color: "bg-blue-500" },
       { name: "Bash", Icon: SiGnubash, color: "bg-black" },
+      { name: "AWS", Icon: FaAws, color: "bg-orange-500" },
     ],
   };
 
   const knowledgeSkills = [
-    "Data Structures & Algorithms",
-    "Linear Algebra",
-    "Statistics & Probability",
-    "Data Cleaning",
-    "Data Preprocessing",
-    "Business Analytics",
-    "Data Visualization",
-    "Artificial Intelligence (AI)",
-    "Machine Learning",
-    "Deep Learning",
-    "Neural Networks",
-    "Transformers",
-    "Convolutional Neural Networks (CNNs)",
-    "Recurrent Neural Networks (RNNs)",
-    "Long Short-Term Memory (LSTM)",
-    "Gated Recurrent Units (GRUs)",
-    "Generative AI",
-    "Web Scraping",
-    "API Integration",
-    "Vector Databases",
+    // Tooling & Infrastructure
+    "JAX",
     "FAISS",
+    
+    // Core AI/ML
+    "Supervised Learning",
+    "Unsupervised Learning",
+    "Reinforcement Learning",
+    "Transfer Learning",
+    "Neural Network Architecture Design",
+    "Model Optimization",
+    "Distributed Training",
+    "Multi-GPU Scaling",
+    
+    // Computer Vision
+    "Object Detection",
+    "Semantic Segmentation",
+    "Instance Segmentation",
+    "3D Object Detection",
+    "Depth Estimation",
+    "Optical Flow Estimation",
+    "Image Augmentation",
+    
+    // Autonomy-Specific
+    "Sensor Fusion",
+    "Camera Perception",
+    "LiDAR Perception",
+    "Path Planning",
+    
+    // Advanced Techniques
+    "Vision Transformers",
+    "Mixture of Experts",
+    "Attention Mechanisms",
+    "Hungarian Matching",
+    "Vector Embeddings",
+    "Approximate Nearest Neighbor Search",
+    
+    // Mathematical Foundations
+    "Linear Algebra",
+    "Probability",
+    "Statistics",
+    "Optimization",
+    "Graph Theory"
   ];
 
   return (

@@ -17,6 +17,7 @@ const ImmanuelAI = () => {
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isComposingRef = useRef(false);
 
   const openDialog = () => setIsOpen(true);
   const closeDialog = () => setIsOpen(false);
@@ -66,6 +67,16 @@ const ImmanuelAI = () => {
     setLoading(false);
   };
 
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      if (isComposingRef.current) return;
+      e.preventDefault();
+      if (!loading) {
+        handleSendMessage();
+      }
+    }
+  };
+
   // Scroll to the latest message
   useEffect(() => {
     if (messagesEndRef.current) {
@@ -108,7 +119,9 @@ const ImmanuelAI = () => {
                     }`}
                   >
                     {msg.role === "assistant" ? (
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      <div className="prose prose-md dark:prose-invert">
+                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      </div>
                     ) : (
                       msg.content
                     )}
@@ -128,12 +141,16 @@ const ImmanuelAI = () => {
 
             {/* User Input */}
             <div className="mt-4 flex items-center">
-              <textarea
+            <textarea
                 className="flex-grow p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring focus:ring-blue-300 dark:focus:ring-blue-600"
                 rows={1}
                 placeholder="Type your message..."
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
+                onKeyDown={handleInputKeyDown}
+                onCompositionStart={() => (isComposingRef.current = true)}
+                onCompositionEnd={() => (isComposingRef.current = false)}
+                aria-label="Chat input. Press Enter to send, Shift+Enter for a new line."
               />
               <button
                 onClick={handleSendMessage}
@@ -147,16 +164,15 @@ const ImmanuelAI = () => {
             {/* Message for user feedback */}
             <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
               If you have any concerns or questions about ImmanuelAI, please use
-              the{" "}
+              the repo's{" "}
               <a
                 href="https://github.com/immanuel-peter/digital-resume/issues"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cursor-pointer text-blue-500 underline"
+                className="text-blue-500 underline"
               >
                 Issues tab
-              </a>{" "}
-              in the repo.
+              </a>.
             </p>
           </DialogPanel>
         </div>
