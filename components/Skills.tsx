@@ -17,9 +17,7 @@ import { FaGolang } from "react-icons/fa6";
 import {
   SiPytorch,
   SiTensorflow,
-  SiMicrosoftazure,
   SiCplusplus,
-  SiMicrosoftexcel,
   SiMongodb,
   SiTypescript,
   SiRedux,
@@ -33,7 +31,6 @@ import {
   SiTailwindcss,
   SiTableau,
   SiGithubactions,
-  SiPowerbi,
   SiPostgresql,
   SiNextdotjs,
   SiHuggingface,
@@ -46,8 +43,14 @@ import { GrMysql } from "react-icons/gr";
 import { TbBrandKotlin } from "react-icons/tb";
 import { FcLinux } from "react-icons/fc";
 
+type SkillIconProps = {
+  Icon: React.ElementType;
+  name: string;
+  color: string;
+};
+
 // SkillIcon component for rendering icons
-const SkillIcon = ({ Icon, name, color }) => (
+const SkillIcon = ({ Icon, name, color }: SkillIconProps) => (
   <div className="flex flex-col items-center m-4 transition-transform duration-300 ease-in-out transform hover:scale-110 hover:-translate-y-1">
     <div
       className={`w-16 h-16 flex items-center justify-center rounded-lg shadow-md hover:shadow-lg ${color}`}
@@ -61,7 +64,7 @@ const SkillIcon = ({ Icon, name, color }) => (
 );
 
 // Chip component for knowledge-based skills
-const SkillChip = ({ name }) => (
+const SkillChip = ({ name }: { name: string }) => (
   <span className="m-2 px-4 py-2 bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-200 rounded-full text-sm font-medium cursor-default hover:bg-blue-300 dark:hover:bg-blue-600">
     {name}
   </span>
@@ -130,27 +133,49 @@ const Skills = () => {
   };
 
   const knowledgeSkills = [
-    "Data Structures & Algorithms",
-    "Linear Algebra",
-    "Statistics & Probability",
-    "Data Cleaning",
-    "Data Preprocessing",
-    "Business Analytics",
-    "Data Visualization",
-    "Artificial Intelligence (AI)",
-    "Machine Learning",
-    "Deep Learning",
-    "Neural Networks",
-    "Transformers",
-    "Convolutional Neural Networks (CNNs)",
-    "Recurrent Neural Networks (RNNs)",
-    "Long Short-Term Memory (LSTM)",
-    "Gated Recurrent Units (GRUs)",
-    "Generative AI",
-    "Web Scraping",
-    "API Integration",
-    "Vector Databases",
+    // Tooling & Infrastructure
+    "JAX",
     "FAISS",
+    
+    // Core AI/ML
+    "Supervised Learning",
+    "Unsupervised Learning",
+    "Reinforcement Learning",
+    "Transfer Learning",
+    "Neural Network Architecture Design",
+    "Model Optimization",
+    "Distributed Training",
+    "Multi-GPU Scaling",
+    
+    // Computer Vision
+    "Object Detection",
+    "Semantic Segmentation",
+    "Instance Segmentation",
+    "3D Object Detection",
+    "Depth Estimation",
+    "Optical Flow Estimation",
+    "Image Augmentation",
+    
+    // Autonomy-Specific
+    "Sensor Fusion",
+    "Camera Perception",
+    "LiDAR Perception",
+    "Path Planning",
+    
+    // Advanced Techniques
+    "Vision Transformers",
+    "Mixture of Experts",
+    "Attention Mechanisms",
+    "Hungarian Matching",
+    "Vector Embeddings",
+    "Approximate Nearest Neighbor Search",
+    
+    // Mathematical Foundations
+    "Linear Algebra",
+    "Probability",
+    "Statistics",
+    "Optimization",
+    "Graph Theory"
   ];
 
   return (
@@ -169,7 +194,7 @@ const Skills = () => {
             {category}
           </h2>
           <div className="flex flex-wrap justify-start">
-            {skills.map((skill, index) => (
+            {skills.map((skill: SkillIconProps, index: number) => (
               <SkillIcon
                 key={index}
                 Icon={skill.Icon}
@@ -186,7 +211,7 @@ const Skills = () => {
         Knowledge Skills
       </h2>
       <div className="flex flex-wrap">
-        {knowledgeSkills.map((skill, index) => (
+        {knowledgeSkills.map((skill: string, index: number) => (
           <SkillChip key={index} name={skill} />
         ))}
       </div>

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   FaExternalLinkAlt,
@@ -5,7 +7,23 @@ import {
   FaChevronRight,
 } from "react-icons/fa";
 
-const CertificationCard = ({ title, issuer, date, skills, url, star }) => (
+type CertificationCardProps = {
+  title: string;
+  issuer: string;
+  date: string;
+  skills: string[];
+  url: string;
+  star?: boolean;
+};
+
+const CertificationCard = ({
+  title,
+  issuer,
+  date,
+  skills,
+  url,
+  star = false,
+}: CertificationCardProps) => (
   <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg">
     <div className="p-6">
       <div className="flex justify-between items-start">
@@ -74,7 +92,7 @@ const Certifications = () => {
         "Machine Learning",
         "Natural Language Processing (NLP)",
         "Neural Networks",
-        "Transformers"
+        "Transformers",
       ],
       url: "https://www.codecademy.com/profiles/immanuelPeter9839511913/certificates/332641805a3840ff92dbfbb317c3c2e3",
     },

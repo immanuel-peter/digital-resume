@@ -1,5 +1,14 @@
 import React from "react";
 
+type ExperienceItemProps = {
+  position: string;
+  company: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  details: string[];
+};
+
 const ExperienceItem = ({
   position,
   company,
@@ -7,7 +16,7 @@ const ExperienceItem = ({
   endDate,
   location,
   details,
-}) => {
+}: ExperienceItemProps) => {
   return (
     <div className="py-6 px-3 hover:shadow-lg dark:hover:bg-gray-800 transition-shadow duration-300">
       <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
@@ -19,7 +28,7 @@ const ExperienceItem = ({
       </p>
       <p className="text-gray-500 dark:text-gray-400 text-sm">{location}</p>
       <ul className="list-disc ml-6 mt-3 text-gray-700 dark:text-gray-300">
-        {details.map((detail, index) => (
+        {details.map((detail: string, index: number) => (
           <li key={index} className="mt-1">
             {detail}
           </li>

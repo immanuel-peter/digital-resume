@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import {
   FaGithub,
@@ -6,6 +8,15 @@ import {
   FaChevronUp,
 } from "react-icons/fa";
 
+type ProjectCardProps = {
+  title: string;
+  description: string;
+  technologies: string[];
+  githubUrl: string;
+  liveUrl?: string;
+  status: string;
+};
+
 const ProjectCard = ({
   title,
   description,
@@ -13,7 +24,7 @@ const ProjectCard = ({
   githubUrl,
   liveUrl,
   status,
-}) => {
+}: ProjectCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -31,7 +42,7 @@ const ProjectCard = ({
         </p>
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 mt-2 flex items-center transition-colors duration-200"
+          className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 mt-2 flex items-center transition-colors duration-200 cursor-pointer"
         >
           {expanded ? (
             <>
@@ -53,7 +64,7 @@ const ProjectCard = ({
           >
             {status}
           </span>
-          {technologies.map((tech, index) => (
+          {technologies.map((tech: string, index: number) => (
             <span
               key={index}
               className="bg-blue-100 text-blue-600 dark:bg-blue-600 dark:text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm"
@@ -68,7 +79,7 @@ const ProjectCard = ({
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center text-gray-600 hover:text-blue-500 transition-colors duration-200 dark:text-gray-300 dark:hover:text-blue-500"
+          className="flex items-center text-gray-600 hover:text-blue-500 transition-colors duration-200 dark:text-gray-300 dark:hover:text-blue-500 cursor-pointer"
         >
           <FaGithub className="mr-2" /> GitHub
         </a>
@@ -77,7 +88,7 @@ const ProjectCard = ({
             href={liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center text-gray-600 hover:text-blue-500 transition-colors duration-200 dark:text-gray-300 dark:hover:text-blue-500"
+            className="flex items-center text-gray-600 hover:text-blue-500 transition-colors duration-200 dark:text-gray-300 dark:hover:text-blue-500 cursor-pointer"
           >
             <FaExternalLinkAlt className="mr-2" /> Live Demo
           </a>
@@ -215,7 +226,7 @@ const Projects = () => {
         Projects
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project, index) => (
+        {projects.map((project: ProjectCardProps, index: number) => (
           <ProjectCard key={index} {...project} />
         ))}
       </div>

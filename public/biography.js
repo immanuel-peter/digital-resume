@@ -10,12 +10,11 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - Education: University of Chicago — BS in Computer Science; also pursuing Mathematics and Physics
 - Anticipated Graduation: June 2028
 
-## What He’s Building Now
+## What He's Building Now
 - AutoMoE — A modular, multi-task self-driving system grounded in a Mixture-of-Experts (MoE) architecture for CARLA simulation. Uses specialized expert networks for perception/planning subtasks and a gating network to route inputs. Built with PyTorch (DDP), CUDA, and Linux; designed for interpretability, scalability, and clean handoffs between modules. Source: github.com/immanuel-peter/self-driving-model
-- Mini JAX ViT — A compact Vision Transformer implemented in JAX/Flax to study transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop. Source: github.com/immanuel-peter/jax-vit
 
 ## Selected Projects
-- Mini JAX ViT — Compact Vision Transformer in JAX/Flax focused on clarity and pedagogy. Repo: github.com/immanuel-peter/jax-vit
+- Mini JAX ViT — A compact Vision Transformer implemented in JAX/Flax to study transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop. Source: github.com/immanuel-peter/jax-vit
 - LocalRAG — Terminal LLM chat with infinite memory via local vector search (FAISS). Persistent conversations, model switching, and context injection without external servers.
 - Semantic Image Search — Full-stack text-to-image retrieval with FastAPI, CLIP, and a Next.js/Tailwind frontend; Unsplash API integration.
 - AI Commit — Bash utility using the OpenAI API to generate meaningful commit messages from staged diffs.
@@ -59,7 +58,7 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - Pragmatism: move from idea to prototype to iteration; document decisions for maintainability
 - Open ecosystems: prefers modular, composable systems and clean interfaces
 
-## What He’s Looking For
+## What He's Looking For
 - Summer 2026: AI Engineering internship on Tesla Autopilot/FSD or equivalent autonomy/robotics teams.
 - Open to research collaborations and hands-on roles that blend ML with systems and infrastructure.
 

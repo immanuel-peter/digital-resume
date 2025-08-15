@@ -1,4 +1,4 @@
-// src/components/Navbar.js
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
@@ -43,12 +43,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (!section) return;
 
     const navbarHeight = 80;
-    const targetY = section.getBoundingClientRect().top + window.pageYOffset;
+    const targetY = section.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: targetY - navbarHeight, behavior: "smooth" });
 
     // Close mobile menu after clicking
@@ -82,7 +82,7 @@ const Navbar = () => {
             <li key={sec}>
               <button
                 onClick={() => scrollToSection(sec)}
-                className={`text-sm font-medium px-3 py-2 rounded-full transition-colors duration-200 ${
+                className={`text-sm font-medium px-3 py-2 rounded-full transition-colors duration-200 cursor-pointer ${
                   activeSection === sec
                     ? "bg-blue-600 text-white"
                     : "text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
@@ -97,7 +97,7 @@ const Navbar = () => {
           <li>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 cursor-pointer"
             >
               {isDarkMode ? (
                 <FaSun className="text-yellow-500" size={18} />
@@ -111,11 +111,11 @@ const Navbar = () => {
         {/* Mobile menu overlay */}
         {menuOpen && (
           <ul className="md:hidden flex flex-col items-center justify-center w-full absolute top-full mt-2 rounded-xl shadow-lg bg-white dark:bg-gray-800 z-40 animate-fade-in">
-            {sections.map((sec) => (
+            {sections.map((sec: string) => (
               <li key={sec} className="w-full my-1">
                 <button
                   onClick={() => scrollToSection(sec)}
-                  className={`w-full text-center font-medium px-4 py-3 rounded-lg transition-colors duration-200 ${
+                  className={`w-full text-center font-medium px-4 py-3 rounded-lg transition-colors duration-200 cursor-pointer ${
                     activeSection === sec
                       ? "bg-blue-600 text-white"
                       : "text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
@@ -147,4 +147,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

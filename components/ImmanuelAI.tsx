@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useRef, useEffect } from "react";
 import {
   Description,
@@ -5,8 +7,7 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import axios from "axios";
-import { biography } from "../biography";
+import { biography } from "../public/biography";
 import ReactMarkdown from "react-markdown";
 
 const ImmanuelAI = () => {
@@ -14,8 +15,8 @@ const ImmanuelAI = () => {
   const initMessages = [{ role: "developer", content: biography }];
   const [messages, setMessages] = useState(initMessages);
   const [userInput, setUserInput] = useState("");
-  const [loading, setLoading] = useState(false); // Add loading state
-  const messagesEndRef = useRef(null);
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
   const isComposingRef = useRef(false);
 
   const openDialog = () => setIsOpen(true);
@@ -30,46 +31,45 @@ const ImmanuelAI = () => {
 
     // Add user message
     setMessages(newMessages);
-    setLoading(true); // Set loading to true when user sends a message
-    setUserInput(""); // Clear input
+    setLoading(true);
+    setUserInput("");
 
     try {
-      const response = await axios.post(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          model: "gpt-5-nano",
-          messages: newMessages, // Use the updated messages array
-          reasoning_effort: "low",
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+        body: JSON.stringify({ messages: newMessages }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
+
+      const data = await response.json();
 
       // Add bot response
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: response.data.choices[0].message.content,
+          content: data.content,
         },
       ]);
-      console.log(response.data.choices[0].message.content);
+      console.log(data.content);
     } catch (error) {
-      console.error("Error fetching OpenAI response:", error);
+      console.error("Error fetching response:", error);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "Sorry, I couldn't respond." },
       ]);
     }
 
-    setLoading(false); // Set loading to false when response is received
+    setLoading(false);
   };
 
-  const handleInputKeyDown = (e) => {
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       if (isComposingRef.current) return;
       e.preventDefault();
@@ -90,7 +90,7 @@ const ImmanuelAI = () => {
     <>
       <button
         onClick={openDialog}
-        className="p-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md shadow-lg hover:from-blue-600 hover:to-purple-600 transition duration-300"
+        className="p-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md shadow-lg cursor-pointer hover:from-blue-600 hover:to-purple-600 transition duration-300"
       >
         ImmanuelAI 🤖
       </button>
@@ -143,9 +143,9 @@ const ImmanuelAI = () => {
 
             {/* User Input */}
             <div className="mt-4 flex items-center">
-              <textarea
+            <textarea
                 className="flex-grow p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring focus:ring-blue-300 dark:focus:ring-blue-600"
-                rows="1"
+                rows={1}
                 placeholder="Type your message..."
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
@@ -156,7 +156,7 @@ const ImmanuelAI = () => {
               />
               <button
                 onClick={handleSendMessage}
-                className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+                className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 transition duration-300"
                 disabled={loading} // Disable button while loading
               >
                 Send

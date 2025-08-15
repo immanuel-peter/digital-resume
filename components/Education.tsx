@@ -5,6 +5,15 @@ const SEAL_IMAGES = {
     "https://upload.wikimedia.org/wikipedia/commons/c/cd/University_of_Chicago_Coat_of_arms.png",
 };
 
+type EducationCardProps = {
+  institution: string;
+  degree: string;
+  fieldOfStudy: string;
+  year: string;
+  classes: string[];
+  sealImage: string;
+};
+
 const EducationCard = ({
   institution,
   degree,
@@ -12,7 +21,7 @@ const EducationCard = ({
   year,
   classes,
   sealImage,
-}) => {
+}: EducationCardProps) => {
   return (
     <div className="relative rounded-lg shadow-lg p-6 bg-white dark:bg-gray-800 transition-transform transform hover:scale-105">
       {/* School Seal */}
@@ -39,7 +48,7 @@ const EducationCard = ({
             Relevant Courses:
           </h5>
           <ul className="list-disc ml-5 text-gray-600 dark:text-gray-400 text-sm">
-            {classes.map((course, index) => (
+            {classes.map((course: string, index: number) => (
               <li key={index}>{course}</li>
             ))}
           </ul>
