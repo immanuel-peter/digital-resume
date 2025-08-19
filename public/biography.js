@@ -14,6 +14,7 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - AutoMoE — A modular, multi-task self-driving system grounded in a Mixture-of-Experts (MoE) architecture for CARLA simulation. Uses specialized expert networks for perception/planning subtasks and a gating network to route inputs. Built with PyTorch (DDP), CUDA, and Linux; designed for interpretability, scalability, and clean handoffs between modules. Source: github.com/immanuel-peter/self-driving-model
 
 ## Selected Projects
+- CARLA Autopilot ImagesDataset — An open, multi-camera dataset (~188 GB, 68k frames) generated in CARLA with synchronized images, vehicle kinematics, control signals, traffic density, and collision logs. Designed for imitation learning, vision-to-control benchmarks, and multimodal self-driving research. Released with a reproducible collection pipeline and Hugging Face integration. Source: github.com/immanuel-peter, Dataset: huggingface.co/datasets/immanuelpeter/carla-autopilot-images
 - Mini JAX ViT — A compact Vision Transformer implemented in JAX/Flax to study transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop. Source: github.com/immanuel-peter/jax-vit
 - LocalRAG — Terminal LLM chat with infinite memory via local vector search (FAISS). Persistent conversations, model switching, and context injection without external servers.
 - Semantic Image Search — Full-stack text-to-image retrieval with FastAPI, CLIP, and a Next.js/Tailwind frontend; Unsplash API integration.

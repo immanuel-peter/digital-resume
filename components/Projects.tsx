@@ -110,12 +110,28 @@ const Projects = () => {
         "CUDA",
         "CARLA",
         "Hugging Face",
+        "NumPy",
         "Linux",
         "Bash",
         "Tmux"
       ],
       githubUrl: "https://github.com/immanuel-peter/self-driving-model",
       status: "Ongoing",
+    },
+    {
+      title: "CARLA Autopilot Images Dataset",
+      description: "An open, multi-camera dataset (~188 GB, 68k frames) generated in CARLA with synchronized images, vehicle kinematics, control signals, traffic density, and collision logs. Designed for imitation learning, vision-to-control benchmarks, and multimodal self-driving research. Released with a reproducible collection pipeline and Hugging Face integration.",
+      technologies: [
+        "Python",
+        "CARLA",
+        "NumPy",
+        "Hugging Face Datasets",
+        "Linux",
+        "Bash"
+      ],
+      githubUrl: "https://github.com/immanuel-peter",
+      liveUrl: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-images",
+      status: "Completed"
     },
     {
       title: "Mini JAX ViT",

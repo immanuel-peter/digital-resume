@@ -107,7 +107,7 @@ const Skills = () => {
       { name: "Anthropic", Icon: SiAnthropic, color: "bg-amber-600" },
       { name: "Hugging Face", Icon: SiHuggingface, color: "bg-yellow-400" },
       { name: "Linux", Icon: FcLinux, color: "bg-gray-400" },
-      { name: "CUDA", Icon: SiNvidia, color: "bg-green-600" },
+      // { name: "CUDA", Icon: SiNvidia, color: "bg-green-600" },
     ],
     "Data Science": [
       { name: "Pandas", Icon: SiPandas, color: "bg-purple-800" },
