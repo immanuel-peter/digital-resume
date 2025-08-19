@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# My Digital Resume
 
-## Getting Started
+Welcome to the repository for my digital resume. This site showcases my professional skills, experience, projects, and education. It also features Immanuel, an AI chatbot that can answer questions about me.
 
-First, run the development server:
+Visit the website here: [ipeter.tech](https://ipeter.tech)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Sections
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **About Me**: An introduction to who I am and what I do.
+2. **Skills**: A comprehensive list of my technical and soft skills.
+3. **Experience**: Details of my professional work history.
+4. **Projects**: Highlights of key projects I've worked on, with links to live demos or repositories.
+5. **Education**: Information about my academic background.
+7. **Contact Info**: How to get in touch with me.
+8. **ImmanuelAI**: An interactive AI that can answer questions about my background and skills.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- OpenAI API
+- Headless UI
+- React Icons
+- React Markdown
+- Vercel
 
-## Learn More
+## ImmanuelAI
 
-To learn more about Next.js, take a look at the following resources:
+The AI chatbot is trained on my personal and professional information. It can answer questions about my skills, experience, and projects. To interact with the chatbot, visit the deployed website and click 'ImmanuelAI' in the About section.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Dark Mode Support**: Automatic theme switching based on system preferences
+- **AI Chatbot**: Interactive AI assistant powered by OpenAI
+- **Modern UI**: Built with Tailwind CSS for a clean, professional look
+- **TypeScript**: Full type safety throughout the application
+- **Performance Optimized**: Built with Next.js 15 and React 19 for optimal performance
 
-## Deploy on Vercel
+## Contribution
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+While this is my digital resume, I welcome any suggestions for improvement. Please open an issue if you have any ideas or find any bugs.
