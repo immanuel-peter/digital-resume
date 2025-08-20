@@ -11,16 +11,45 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - Anticipated Graduation: June 2028
 
 ## What He's Building Now
-- AutoMoE — A modular, multi-task self-driving system grounded in a Mixture-of-Experts (MoE) architecture for CARLA simulation. Uses specialized expert networks for perception/planning subtasks and a gating network to route inputs. Built with PyTorch (DDP), CUDA, and Linux; designed for interpretability, scalability, and clean handoffs between modules. Source: github.com/immanuel-peter/self-driving-model
+**AutoMoE**
+- Modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture for CARLA simulation.
+- Uses specialized expert networks for perception and planning subtasks, with a gating network to route inputs.
+- Built with PyTorch (DDP), CUDA, and Linux.
+- Designed for interpretability, scalability, and clean handoffs between modules.
+- [Source](https://github.com/immanuel-peter/self-driving-model)
 
 ## Selected Projects
-- CARLA Autopilot ImagesDataset — An open, multi-camera dataset (~188 GB, 68k frames) generated in CARLA with synchronized images, vehicle kinematics, control signals, traffic density, and collision logs. Designed for imitation learning, vision-to-control benchmarks, and multimodal self-driving research. Released with a reproducible collection pipeline and Hugging Face integration. Source: github.com/immanuel-peter, Dataset: huggingface.co/datasets/immanuelpeter/carla-autopilot-images
-- Mini JAX ViT — A compact Vision Transformer implemented in JAX/Flax to study transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop. Source: github.com/immanuel-peter/jax-vit
-- LocalRAG — Terminal LLM chat with infinite memory via local vector search (FAISS). Persistent conversations, model switching, and context injection without external servers.
-- Semantic Image Search — Full-stack text-to-image retrieval with FastAPI, CLIP, and a Next.js/Tailwind frontend; Unsplash API integration.
-- AI Commit — Bash utility using the OpenAI API to generate meaningful commit messages from staged diffs.
-- GovHub — Civic software concept: GitHub-style workflow for legislation; built with React/Next.js/TypeScript.
-- Portfolio — This site, including ImmanuelAI for interactive Q&A.
+**Datasets**
+- **CARLA Autopilot Multimodal Dataset**
+  - Large-scale open dataset for autonomous driving research: 82K+ synchronized samples (RGB camera, semantic segmentation, LiDAR, 2D boxes, ego-vehicle states).
+  - Built in CARLA with varied weather, maps, and traffic for tasks like object detection, sensor fusion, imitation learning, and RL.
+  - [Source](https://github.com/immanuel-peter) | [Dataset](https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset)
+- **CARLA Autopilot Images Dataset**
+  - Multi-camera dataset (~188 GB, 68k frames) from CARLA: synchronized images, vehicle kinematics, control signals, traffic density, collision logs.
+  - For imitation learning, vision-to-control, and multimodal self-driving research. Includes reproducible pipeline and Hugging Face integration.
+  - [Source](https://github.com/immanuel-peter) | [Dataset](https://huggingface.co/datasets/immanuelpeter/carla-autopilot-images)
+
+**AI & ML Projects**
+- **Mini JAX ViT**
+  - Compact Vision Transformer in JAX/Flax for studying transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop.
+  - [Source](https://github.com/immanuel-peter/jax-vit)
+- **LocalRAG**
+  - Terminal LLM chat with infinite memory via local vector search (FAISS). Persistent conversations, model switching, and context injection—no external servers.
+  - [Source](https://github.com/immanuel-peter/localrag)
+- **Semantic Image Search**
+  - Full-stack text-to-image retrieval: FastAPI backend, CLIP, Next.js/Tailwind frontend, Unsplash API integration.
+  - [Source](https://github.com/immanuel-peter/semantic-image-search)
+- **AI Commit**
+  - Bash utility using OpenAI API to generate meaningful commit messages from staged diffs.
+  - [Source](https://github.com/immanuel-peter/ai-commit)
+
+**Web & Software**
+- **GovHub**
+  - Civic software concept: GitHub-style workflow for legislation. Built with React, Next.js, TypeScript.
+  - [Source](https://github.com/immanuel-peter/govhub)
+- **Portfolio**
+  - This site, including ImmanuelAI for interactive Q&A.
+  - [Source](https://github.com/immanuel-peter/digital-resume)
 
 ## Experience Highlights
 - Software Engineering Intern, Quantum Rings (Summer 2025)
@@ -66,6 +95,7 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 ## How To Assess Him
 - GitHub profile and active projects: github.com/immanuel-peter
 - AutoMoE (self-driving): github.com/immanuel-peter/self-driving-model
+- Hugging Face: huggingface.co/immanuelpeter
 - Browse commits, readmes, and issue discussions for velocity, code clarity, and ownership.
 
 ## Contact

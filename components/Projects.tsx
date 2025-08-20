@@ -112,11 +112,25 @@ const Projects = () => {
         "Hugging Face",
         "NumPy",
         "Linux",
-        "Bash",
-        "Tmux"
+        "Bash"
       ],
       githubUrl: "https://github.com/immanuel-peter/self-driving-model",
       status: "Ongoing",
+    },
+    {
+      title: "CARLA Autopilot Multimodal Dataset",
+      description: "A large-scale open dataset for autonomous driving research, featuring 82K+ synchronized samples with RGB camera views, semantic segmentation, LiDAR point clouds, 2D bounding boxes, and detailed ego-vehicle states. Built in CARLA with varied weather, maps, and traffic to support tasks like object detection, sensor fusion, imitation learning, and reinforcement learning.",
+      technologies: [
+        "Python",
+        "CARLA",
+        "NumPy",
+        "Hugging Face Datasets",
+        "Linux",
+        "Bash"
+      ],
+      githubUrl: "https://github.com/immanuel-peter",
+      liveUrl: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset",
+      status: "Completed"
     },
     {
       title: "CARLA Autopilot Images Dataset",
