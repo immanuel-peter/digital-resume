@@ -7,6 +7,7 @@ type ExperienceItemProps = {
   endDate: string;
   location: string;
   details: string[];
+  boldDetails?: number[]; // Array of indices to bold
 };
 
 const ExperienceItem = ({
@@ -16,6 +17,7 @@ const ExperienceItem = ({
   endDate,
   location,
   details,
+  boldDetails = [],
 }: ExperienceItemProps) => {
   return (
     <div className="py-6 px-3 hover:shadow-lg dark:hover:bg-gray-800 transition-shadow duration-300">
@@ -29,7 +31,7 @@ const ExperienceItem = ({
       <p className="text-gray-500 dark:text-gray-400 text-sm">{location}</p>
       <ul className="list-disc ml-6 mt-3 text-gray-700 dark:text-gray-300">
         {details.map((detail: string, index: number) => (
-          <li key={index} className="mt-1">
+          <li key={index} className={`mt-1 ${boldDetails.includes(index) ? 'font-bold' : ''}`}>
             {detail}
           </li>
         ))}
@@ -47,17 +49,19 @@ const Experience = () => {
       endDate: "August 2025",
       location: "Chicago, IL",
       details: [
-        "Fixed backend API container startup in Docker, restoring a reliable docker-compose development environment.",
-        "Migrated executionStats from the User entity to a dedicated table with a foreign key; updated entities, queries, and tests with no performance regressions.",
-        "Built analytics API endpoints and admin dashboards for new/active users with time-interval filtering and robust missing-bucket handling.",
-        "Implemented an SQS-driven telemetry aggregation worker (TypeORM) to compute daily rollups with idempotent upserts; added migrations and infra configs.",
-        "Added Executions and Executions by User widgets and a Usage Metrics tab (MUI + Recharts) with interval selection and performance indexes.",
-        "Integrated HubSpot contact sync via SQS: introduced HubSpotQueueService and two consumers (user sync, execution sync) with fault-tolerant retries and observability.",
-        "Decoupled telemetry execution processing from the API into an SQS worker, reducing API latency and enabling scalable, reliable background processing.",
-        "Redesigned admin analytics to a fullscreen carousel with global time filters, dark-mode theming, and 30s rotation.",
-        "Provisioned in-house LinkedIn-style certifications: designed the database schema and admin tooling to issue certificates to eligible users (in progress).",
-        "Coordinated SQL schema, queues, and Docker/env consistency across services; documented workflows for long-term maintainability.",
+        "Delivered 19 PRs, 43 contributions, and 15 completed GitHub issues across the internship, adding ~15K LOC and removing ~3.6K LOC while reviewing code and driving schema refactors.",
+        "Diagnosed and fixed critical backend reliability issues by repairing Docker container startup failures, restoring stability in the dev environment.",
+        "Migrated execution data from the user entity to a dedicated relational table with FKs, modularizing schema and ensuring test suite stability with no performance regression.",
+        "Developed full-stack admin analytics dashboards with NestJS, Next.js, and Recharts to track user growth, active usage, and execution volume; integrated SQL time-bucket aggregation and timezone-safe filtering.",
+        "Implemented a telemetry aggregation background worker (AWS SQS + TypeORM) to asynchronously roll up user execution activity, improving scalability and simplifying downstream analytics queries.",
+        "Designed and deployed queue-driven execution processing to decouple heavy telemetry operations from the API, reducing request latency and enabling horizontal scaling.",
+        "Integrated HubSpot CRM sync with fault-tolerant background workers, ensuring user and execution data flowed reliably into marketing/sales automation pipelines without impacting core app performance.",
+        "Overhauled the admin dashboard UI/UX into a fullscreen carousel design with real-time charts, responsive layouts, and dark-mode support, enabling low-friction public demos and investor-facing displays.",
+        "Added developer-facing features including public profile pages with badges and UUID-based certifications, strengthening community visibility and recognition.",
+        "Introduced circuit execution metrics (complexity, duration, backend usage %) to surface workload patterns and highlight developer skill levels.",
+        "Designed and launched a KPI dashboard for UTM-based marketing attribution, building an analytics pipeline and pie-chart visualizations that provided actionable insights for growth strategy.",
       ],
+      boldDetails: [0],
     },
     {
       position: "Data Analyst Intern",

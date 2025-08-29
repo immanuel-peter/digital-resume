@@ -23,14 +23,6 @@ const About = () => {
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Need a quick crash course on my background and experience? Check out
             my{" "}
-            {/* <a
-              href="https://uchicago.box.com/s/4wsqe4uinm0tw72wiu6mtrttjrnmt1mj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer text-blue-500 hover:underline dark:text-blue-400"
-            >
-              resume
-            </a> */}
             <Link
               href="/resume.pdf"
               target="_blank"
@@ -38,7 +30,7 @@ const About = () => {
               className="cursor-pointer text-blue-500 hover:underline dark:text-blue-400"
             >
               resume
-            </Link>
+            </Link>.
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Want to dive deeper into my journey? Let's have a chat with{" "}
