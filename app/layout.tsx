@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import Navbar from "@/components/Navbar";
 
 const roboto = Roboto({
@@ -62,9 +63,9 @@ export const metadata: Metadata = {
       index: true,
       follow: true,
       noimageindex: false,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   category: "technology",
@@ -80,6 +81,7 @@ export default function RootLayout({
       <body className={`${roboto.variable} antialiased`}>
         <Navbar />
         {children}
+        <Analytics />
       </body>
     </html>
   );
