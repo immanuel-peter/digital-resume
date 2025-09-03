@@ -37,12 +37,12 @@ export const metadata: Metadata = {
     "University of Chicago",
   ],
   creator: "Immanuel Peter",
-  authors: [{ name: "Immanuel Peter", url: "https://ipeter.tech" }],
+  authors: [{ name: "Immanuel Peter", url: "https://ipeter.dev" }],
   openGraph: {
     title: "Immanuel Peter",
     description: "Immanuel Peter's personal website",
-    url: "https://ipeter.tech",
-    images: ["https://ipeter.tech/opengraph-image.png"],
+    url: "https://ipeter.dev",
+    images: ["https://ipeter.dev/opengraph-image.png"],
     type: "website",
   },
   twitter: {
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "Immanuel Peter",
     description: "Immanuel Peter's personal website",
     creator: "@moby763canary21",
-    images: ["https://ipeter.tech/twitter-image.png"],
+    images: ["https://ipeter.dev/twitter-image.png"],
   },
   icons: {
     icon: "/favicon.ico",

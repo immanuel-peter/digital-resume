@@ -2,7 +2,7 @@
 
 Welcome to the repository for my digital resume. This site showcases my professional skills, experience, projects, and education. It also features Immanuel, an AI chatbot that can answer questions about me.
 
-Visit the website here: [ipeter.tech](https://ipeter.tech)
+Visit the website here: [ipeter.dev](https://ipeter.dev)
 
 ## Sections
 
