@@ -59,6 +59,8 @@ const ProjectCard = ({
             className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
               status === "Ongoing"
                 ? "bg-green-300 text-green-800 dark:bg-green-500 dark:text-white"
+                : status === "Paused"
+                ? "bg-yellow-300 text-yellow-800 dark:bg-yellow-500 dark:text-white"
                 : "bg-blue-300 text-blue-800 dark:bg-blue-500 dark:text-white"
             }`}
           >
@@ -115,7 +117,7 @@ const Projects = () => {
         "Bash"
       ],
       githubUrl: "https://github.com/immanuel-peter/self-driving-model",
-      status: "Ongoing",
+      status: "Paused",
     },
     {
       title: "CARLA Autopilot Multimodal Dataset",
