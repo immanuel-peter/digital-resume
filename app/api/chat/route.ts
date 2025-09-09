@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
-import { biography } from "../../../public/biography";
+import { biography } from "@/public/biography";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -55,18 +55,20 @@ export async function POST(req: Request) {
 
     const getReasoningText = async (response: any) => {
       const output = response.output;
+      var text = "";
       for (const part of output) {
         if (part.type === "reasoning") {
           if (part.summary) {
             for (const summary of part.summary) {
               if (summary.text) {
-                return summary.text;
+                text += summary.text;
+                text += "\n";
               }
             }
           }
         }
       }
-      return null;
+      return text;
     };
 
     const reasoning_text = await getReasoningText(response);
