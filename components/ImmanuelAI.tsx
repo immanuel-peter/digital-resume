@@ -57,7 +57,6 @@ const ImmanuelAI = () => {
           content: data.content,
         },
       ]);
-      console.log(data.content);
     } catch (error) {
       console.error("Error fetching response:", error);
       setMessages((prev) => [
