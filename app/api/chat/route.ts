@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         ],
       }));
 
-    const createPayload: any = {
+    const createPayload = {
       model: "gpt-5-nano",
       store: true,
       include: ["reasoning.encrypted_content", "web_search_call.action.sources"],
@@ -51,14 +51,17 @@ export async function POST(req: Request) {
     };
 
     if (previous_response_id) {
-      createPayload.previous_response_id = previous_response_id;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (createPayload as any).previous_response_id = previous_response_id;
     }
 
-    const response = await openai.responses.create(createPayload);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const response = await openai.responses.create(createPayload as any);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getReasoningText = async (response: any) => {
-      const output = response.output;
-      var text = "";
+      const output = response.output as Array<{ type: string; summary?: Array<{ text?: string }> }>;
+      let text = "";
       for (const part of output) {
         if (part.type === "reasoning") {
           if (part.summary) {
