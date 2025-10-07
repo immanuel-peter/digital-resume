@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ImmanuelAI from "./ImmanuelAI";
 import Link from "next/link";
 
@@ -34,7 +34,9 @@ const About = () => {
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Want to dive deeper into my journey? Let's have a chat with{" "}
-            <ImmanuelAI />
+            <Suspense fallback={<span>ImmanuelAI 🤖</span>}>
+              <ImmanuelAI />
+            </Suspense>
           </p>
         </div>
 
