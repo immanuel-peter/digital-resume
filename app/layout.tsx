@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     title: "Immanuel Peter",
     description: "Immanuel Peter's personal website",
     url: "https://ipeter.dev",
+    siteName: "Immanuel Peter",
     images: ["https://ipeter.dev/opengraph-image.png"],
     type: "website",
   },
