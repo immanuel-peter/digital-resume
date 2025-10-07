@@ -12,7 +12,7 @@ type ProjectCardProps = {
   title: string;
   description: string;
   technologies: string[];
-  githubUrl: string;
+  githubUrl?: string;
   liveUrl?: string;
   status: string;
 };
@@ -77,7 +77,8 @@ const ProjectCard = ({
         </div>
       </div>
       <div className="mt-4 flex justify-between p-4 border-t border-gray-300 dark:border-gray-700">
-        <a
+        {githubUrl && (
+          <a
           href={githubUrl}
           target="_blank"
           rel="noopener noreferrer"
@@ -85,6 +86,7 @@ const ProjectCard = ({
         >
           <FaGithub className="mr-2" /> GitHub
         </a>
+        )}
         {liveUrl && (
           <a
             href={liveUrl}
@@ -102,6 +104,25 @@ const ProjectCard = ({
 
 const Projects = () => {
   const projects = [
+    {
+      title: "Ragstack",
+      description: "A deployable, developer-first RAG infra bundle: Postgres, Chroma, Postgres Meta, PostgREST for a lightweight REST surface, and Kong as the edge API gateway. Self-hosted uses local Postgres + Chroma + PostgREST + Kong; cloud-hosted runs pooled Postgres via Supavisor-style pooling and managed Chroma on GCP infrastructure. Python + TypeScript SDKs provide simple primitives so teams can build RAG without wiring everything themselves.",
+      technologies: [
+        "Python",
+        "TypeScript",
+        "PostgreSQL",
+        "Chroma",
+        "PostgREST",
+        "Kong",
+        "Supavisor",
+        "GCP",
+        "Linux",
+        "Bash",
+        "Docker",
+        "FastAPI",
+      ],
+      status: "Ongoing",
+    },
     {
       title: "AutoMoE",
       description: "A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. This approach uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.",
