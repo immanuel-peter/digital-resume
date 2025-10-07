@@ -114,7 +114,8 @@ const Projects = () => {
         "Hugging Face",
         "NumPy",
         "Linux",
-        "Bash"
+        "Bash",
+        "Nvidia Brev"
       ],
       githubUrl: "https://github.com/immanuel-peter/self-driving-model",
       status: "Paused",

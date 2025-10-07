@@ -11,7 +11,12 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - Anticipated Graduation: June 2028
 
 ## What He's Building Now
-**AutoMoE**
+**1. Ragstack**
+- Deployable, developer-first RAG infra bundle: Postgres, Chroma, Postgres Meta, PostgREST for a lightweight REST surface, and Kong as the edge API gateway. Self-hosted uses local Postgres + Chroma + PostgREST + Kong; cloud-hosted runs pooled Postgres via Supavisor-style pooling and managed Chroma on GCP infrastructure. Python + TypeScript SDKs provide simple primitives so teams can build RAG without wiring everything themselves.
+- Tech Stack: Python, TypeScript, PostgreSQL, Chroma, PostgREST, Kong, Supavisor, GCP, Linux, Bash, Docker, FastAPI
+- Status: Ongoing
+
+**2. AutoMoE**
 - Modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture for CARLA simulation.
 - Uses specialized expert networks for perception and planning subtasks, with a gating network to route inputs.
 - Built with PyTorch (DDP), CUDA, and Linux.
@@ -19,8 +24,9 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 - [Source](https://github.com/immanuel-peter/self-driving-model)
 - Status: Paused
 
-**GovHub**
+**3. GovHub**
 - Civic software concept: GitHub-style workflow for legislation. Built with React, Next.js, TypeScript.
+- [Live Demo](https://govhub-five.vercel.app)
 - [Source](https://github.com/immanuel-peter/govhub)
 - Status: Ongoing
 
@@ -58,6 +64,7 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 **Web & Software**
 - **Portfolio**
   - This site, including ImmanuelAI for interactive Q&A.
+  - [Live Demo](https://ipeter.dev)
   - [Source](https://github.com/immanuel-peter/digital-resume)
   - Status: Completed
 
@@ -126,4 +133,4 @@ I'm Immanuel's AI, here to answer questions about his background, skills, and ex
 
 ## Fun
 - Personal quirk captured from his notes: he dislikes p-adic numbers.
-`;
+`;                                                                                                                                              

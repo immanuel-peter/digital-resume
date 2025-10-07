@@ -7,17 +7,18 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { biography } from "../public/biography";
 import ReactMarkdown from "react-markdown";
+
+type ChatMessage = { role: string; content: string; reasoning?: string };
 
 const ImmanuelAI = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const initMessages = [{ role: "developer", content: biography }];
-  const [messages, setMessages] = useState(initMessages);
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isComposingRef = useRef(false);
+  const [previousResponseId, setPreviousResponseId] = useState<string | null>(null);
 
   const openDialog = () => setIsOpen(true);
   const closeDialog = () => setIsOpen(false);
@@ -27,7 +28,7 @@ const ImmanuelAI = () => {
     if (userInput.trim() === "") return;
 
     // Create a new messages array with the user message
-    const newMessages = [...messages, { role: "user", content: userInput }];
+    const newMessages: ChatMessage[] = [...messages, { role: "user", content: userInput }];
 
     // Add user message
     setMessages(newMessages);
@@ -40,7 +41,10 @@ const ImmanuelAI = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({
+          messages: newMessages,
+          previous_response_id: previousResponseId,
+        }),
       });
 
       if (!response.ok) {
@@ -49,12 +53,17 @@ const ImmanuelAI = () => {
 
       const data = await response.json();
 
-      // Add bot response
+      // Persist response id for follow-up turns
+      if (data?.response_id) {
+        setPreviousResponseId(data.response_id as string);
+      }
+
       setMessages((prev) => [
         ...prev,
         {
           role: "assistant",
-          content: data.content,
+          content: data.output_text ?? "",
+          reasoning: data?.reasoning_text || undefined,
         },
       ]);
     } catch (error) {
@@ -108,9 +117,7 @@ const ImmanuelAI = () => {
 
             {/* Chat Messages */}
             <div className="mt-4 h-80 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-md p-2">
-              {messages
-                .filter((msg) => msg.role !== "developer")
-                .map((msg, index) => (
+              {messages.map((msg, index) => (
                   <div
                     key={index}
                     className={`mb-2 p-2 rounded-md ${
@@ -120,9 +127,22 @@ const ImmanuelAI = () => {
                     }`}
                   >
                     {msg.role === "assistant" ? (
-                      <div className="prose prose-md dark:prose-invert">
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
-                      </div>
+                      <>
+                        {msg.reasoning && (
+                          <details className="mt-2">
+                            <summary className="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-300">
+                              Show reasoning
+                            </summary>
+                            <div className="mt-1 px-2 prose dark:prose-invert text-sm italic text-gray-700 dark:text-gray-300">
+                              <ReactMarkdown>{msg.reasoning}</ReactMarkdown>
+                            </div>
+                          </details>
+                        )}
+                      
+                        <div className="mt-2 prose prose-md dark:prose-invert">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>                        
+                      </>
                     ) : (
                       msg.content
                     )}

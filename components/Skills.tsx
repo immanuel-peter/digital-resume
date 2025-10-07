@@ -3,10 +3,7 @@ import {
   FaPython,
   FaJs,
   FaReact,
-  FaJava,
   FaNodeJs,
-  FaSwift,
-  FaHtml5,
   FaGitAlt,
   FaGithub,
   FaDatabase,
@@ -20,27 +17,19 @@ import {
   SiCplusplus,
   SiMongodb,
   SiTypescript,
-  SiRedux,
   SiOpenai,
-  SiJquery,
   SiPandas,
   SiNumpy,
   SiJupyter,
   SiGnubash,
-  SiCss3,
-  SiTailwindcss,
-  SiTableau,
   SiGithubactions,
   SiPostgresql,
   SiNextdotjs,
   SiHuggingface,
-  SiC,
   SiFastapi,
   SiAnthropic,
-  SiNvidia
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
-import { TbBrandKotlin } from "react-icons/tb";
 import { FcLinux } from "react-icons/fc";
 
 type SkillIconProps = {
