@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
   Description,
   Dialog,
@@ -8,6 +8,8 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import ReactMarkdown from "react-markdown";
+import { useSearchParams } from "next/navigation";
+import queryPrompts from "../lib/utils/queryPrompts.json";
 
 type ChatMessage = { role: string; content: string; reasoning?: string };
 
@@ -19,21 +21,72 @@ const ImmanuelAI = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const isComposingRef = useRef(false);
   const [previousResponseId, setPreviousResponseId] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+  const isSendingRef = useRef(false);
+  const messagesRef = useRef(messages);
+  const lastAutoPromptKeyRef = useRef<string | null>(null);
 
-  const openDialog = () => setIsOpen(true);
-  const closeDialog = () => setIsOpen(false);
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (loading) return;
-    if (userInput.trim() === "") return;
+  const appendAssistantMessage = useCallback((content: string) => {
+    setMessages((currentMessages) => {
+      const lastMessage = currentMessages[currentMessages.length - 1];
 
-    // Create a new messages array with the user message
-    const newMessages: ChatMessage[] = [...messages, { role: "user", content: userInput }];
+      if (
+        lastMessage?.role === "assistant" &&
+        lastMessage.content === content
+      ) {
+        return currentMessages;
+      }
 
-    // Add user message
-    setMessages(newMessages);
+      const updatedMessages = [
+        ...currentMessages,
+        {
+          role: "assistant" as const,
+          content,
+        },
+      ];
+      messagesRef.current = updatedMessages;
+      return updatedMessages;
+    });
+  }, []);
+
+  const appendErrorMessage = useCallback(() => {
+    const errorContent = "Sorry, I couldn't respond.";
+
+    setMessages((currentMessages) => {
+      const lastMessage = currentMessages[currentMessages.length - 1];
+
+      if (
+        lastMessage?.role === "assistant" &&
+        lastMessage.content === errorContent
+      ) {
+        return currentMessages;
+      }
+
+      const updatedMessages = [
+        ...currentMessages,
+        { role: "assistant" as const, content: errorContent },
+      ];
+      messagesRef.current = updatedMessages;
+      return updatedMessages;
+    });
+  }, []);
+
+  const sendMessage = useCallback(async (input: string) => {
+    const content = input.trim();
+    if (!content) return;
+
+    if (isSendingRef.current) return;
+    isSendingRef.current = true;
+
+    const nextMessages = [...messagesRef.current, { role: "user" as const, content }];
+
+    setMessages(nextMessages);
+    messagesRef.current = nextMessages;
     setLoading(true);
-    setUserInput("");
 
     try {
       const response = await fetch("/api/chat", {
@@ -41,9 +94,9 @@ const ImmanuelAI = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          messages: newMessages,
-          previous_response_id: previousResponseId,
+        body: JSON.stringify({ 
+          messages: nextMessages,
+          previous_response_id: previousResponseId
         }),
       });
 
@@ -52,29 +105,32 @@ const ImmanuelAI = () => {
       }
 
       const data = await response.json();
-
+      
       // Persist response id for follow-up turns
       if (data?.response_id) {
         setPreviousResponseId(data.response_id as string);
       }
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: data.output_text ?? "",
-          reasoning: data?.reasoning_text || undefined,
-        },
-      ]);
+      
+      appendAssistantMessage(data.output_text ?? data.content ?? "");
     } catch (error) {
       console.error("Error fetching response:", error);
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: "Sorry, I couldn't respond." },
-      ]);
+      appendErrorMessage();
+    } finally {
+      isSendingRef.current = false;
+      setLoading(false);
     }
+  }, [appendAssistantMessage, appendErrorMessage, previousResponseId]);
 
-    setLoading(false);
+  const openDialog = () => setIsOpen(true);
+  const closeDialog = () => setIsOpen(false);
+
+  const handleSendMessage = async () => {
+    if (loading) return;
+    if (userInput.trim() === "") return;
+
+    const input = userInput;
+    setUserInput("");
+    await sendMessage(input);
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -93,6 +149,32 @@ const ImmanuelAI = () => {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
+
+  useEffect(() => {
+    if (!searchParams) return;
+
+    const query = searchParams.get("query");
+    const queryId = searchParams.get("query_id");
+    const promptFromId = queryId
+      ? (queryPrompts as Record<string, string>)[queryId] ?? null
+      : null;
+    const messageToSend = query ?? promptFromId;
+
+    if (!messageToSend) {
+      lastAutoPromptKeyRef.current = null;
+      return;
+    }
+
+    const key = queryId ? `id:${queryId}` : `query:${messageToSend}`;
+
+    if (lastAutoPromptKeyRef.current === key) return;
+    lastAutoPromptKeyRef.current = key;
+
+    if (loading || isSendingRef.current) return;
+
+    setIsOpen(true);
+    void sendMessage(messageToSend);
+  }, [loading, searchParams, sendMessage]);
 
   return (
     <>
