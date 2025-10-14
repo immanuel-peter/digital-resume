@@ -226,7 +226,9 @@ const ImmanuelAI = () => {
                         </div>                        
                       </>
                     ) : (
-                      msg.content
+                      <div className="prose prose-md dark:prose-invert">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      </div>
                     )}
                   </div>
                 ))}
