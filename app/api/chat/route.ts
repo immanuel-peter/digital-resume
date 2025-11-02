@@ -13,57 +13,7 @@ export async function POST(req: Request) {
   try {
     const { messages, previous_response_id } = await req.json();
 
-    const formattedMessages = (Array.isArray(messages) ? messages : [])
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map((message: any, index: number) => {
-        if (!message) {
-          return `${index + 1}. [invalid message]`;
-        }
-
-        const role = message.role ?? "unknown";
-
-        const content = (() => {
-          if (typeof message.content === "string") {
-            return message.content;
-          }
-
-          if (Array.isArray(message.content)) {
-            return message.content
-              .map((part) => {
-                if (typeof part === "string") {
-                  return part;
-                }
-
-                if (part && typeof part === "object" && "text" in part && typeof part.text === "string") {
-                  return part.text;
-                }
-
-                return JSON.stringify(part);
-              })
-              .join(" | ");
-          }
-
-          if (
-            message.content &&
-            typeof message.content === "object" &&
-            "text" in message.content &&
-            typeof (message.content as { text?: string }).text === "string"
-          ) {
-            return (message.content as { text?: string }).text ?? "";
-          }
-
-          return JSON.stringify(message.content);
-        })();
-
-        return `${index + 1}. ${role}: ${content}`;
-      })
-      .join("\n");
-
-    if (formattedMessages) {
-      console.log(`Conversation history:\n${formattedMessages}`);
-    } else {
-      console.log("Conversation history: [no messages]");
-    }
+    console.log("Incoming messages:", messages);
 
     const input = (Array.isArray(messages) ? messages : [])
       .filter((m) => m && m.role === "user")
