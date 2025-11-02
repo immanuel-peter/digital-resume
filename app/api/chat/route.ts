@@ -13,6 +13,8 @@ export async function POST(req: Request) {
   try {
     const { messages, previous_response_id } = await req.json();
 
+    console.log("Incoming messages:", messages);
+
     const input = (Array.isArray(messages) ? messages : [])
       .filter((m) => m && m.role === "user")
       .map((m) => ({
@@ -57,6 +59,8 @@ export async function POST(req: Request) {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response = await openai.responses.create(createPayload as any);
+
+    console.log(`Assistant response:\n${response.output_text ?? ""}`);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getReasoningText = async (response: any) => {
