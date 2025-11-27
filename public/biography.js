@@ -25,12 +25,20 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Education: University of Chicago — BS in Computer Science; also pursuing Mathematics and Physics
 - Anticipated Graduation: June 2028
 
+## Goals
+- Looking for internship roles in Software Engineering or AI/ML Engineering.
+- Looking to work on technically challenging projects alongside experienced engineers.
+
 ## In Progress & Flagship Work
 Highlighting engineering initiatives that exemplify strong technical depth, scalability, and real project outcomes:
 
-**1. Ragstack**
-- Deployable, developer-first RAG infra bundle: Postgres, Chroma, Postgres Meta, PostgREST for a lightweight REST surface, and Kong as the edge API gateway. Self-hosted uses local Postgres + Chroma + PostgREST + Kong; cloud-hosted runs pooled Postgres via Supavisor-style pooling and managed Chroma on GCP infrastructure. Python + TypeScript SDKs provide simple primitives so teams can build RAG without wiring everything themselves.
-- Tech Stack: Python, TypeScript, PostgreSQL, Chroma, PostgREST, Kong, Supavisor, GCP, Linux, Bash, Docker, FastAPI
+**1. Edusphere Matchbox**
+- A scalable, AI-driven platform that intelligently matches students to research labs, solving the inefficiency of cold-emailing with semantic search and LLM-based compatibility scoring.
+- Architected a production-grade, serverless infrastructure on Google Cloud Platform (GCP) using Cloud Run, Cloud Load Balancing, and Terraform for reproducible Infrastructure as Code (IaC).
+- Built a modern full-stack application with Next.js 15 (React 19) and a high-concurrency FastAPI backend, utilizing ChromaDB for vector retrieval and Firestore for structured data.
+- Implemented a complex data pipeline that parses student resumes, generates vector embeddings for skills/interests, and uses OpenAI to provide detailed, reasoned "fit scores" for researchers.
+- Currently in pilot at the University of Chicago and UChicago Booth School of Business. Expecting to scale to many more universities and research labs in the future.
+- [Live Demo](https://matchbox.eduspheretech.com)
 - Status: Ongoing
 
 **2. AutoMoE**
@@ -62,6 +70,11 @@ Highlighting engineering initiatives that exemplify strong technical depth, scal
 - Status: Completed
 
 ### AI & ML Projects
+**Qwen vLLM on GKE**
+- A cloud-native deployment pipeline for serving Qwen models on Google Kubernetes Engine (GKE) Autopilot.
+- Automates infrastructure orchestration, provisioning NVIDIA T4 GPUs and deploying vLLM to create a high-throughput, OpenAI-compatible inference endpoint within a scalable Kubernetes environment.
+- [Source](https://github.com/immanuel-peter/qwen-vllm-gke)
+- Status: Completed
 **Mini JAX ViT**
 - Compact Vision Transformer in JAX/Flax for studying transformer internals (patch embeddings, MHSA, MLP blocks) with a simple training loop.
 - [Source](https://github.com/immanuel-peter/jax-vit)
@@ -110,14 +123,16 @@ Highlighting engineering initiatives that exemplify strong technical depth, scal
 - Languages: Python, C++, Go, JavaScript/TypeScript, SQL
 - Frameworks/Platforms: React, Next.js, Node.js, FastAPI
 - ML/AI: PyTorch, TensorFlow, JAX/Flax, NumPy, Pandas, FAISS, OpenAI/Anthropic APIs, Hugging Face
-- Systems/Infra: Linux, Docker, Git/GitHub, GitHub Actions, AWS
+- Systems/Infra: Linux, Docker, Git/GitHub, GitHub Actions, AWS, GCP, Terraform
 - Data: PostgreSQL, MySQL, MongoDB
 - Additional: CUDA; strong math foundation (linear algebra, probability, analysis)
 
 ## Coursework (Selected)
 - Systems Programming I & II
 - Mathematical Foundations of Machine Learning
-- Abstract Linear Algebra; Real Analysis; Discrete Mathematics
+- Abstract Linear Algebra
+- Real Analysis
+- Discrete Mathematics
 - Intro to Computer Science I & II
 - Intro to Complexity Theory
 
@@ -130,13 +145,8 @@ Highlighting engineering initiatives that exemplify strong technical depth, scal
 - Pragmatism: move from idea to prototype to iteration; document decisions for maintainability
 - Open ecosystems: prefers modular, composable systems and clean interfaces
 
-## What He's Looking For
-- Summer 2026: AI Engineering internship on Tesla Autopilot/FSD or equivalent autonomy/robotics teams.
-- Open to research collaborations and hands-on roles that blend ML with systems and infrastructure.
-
 ## How To Assess Him
 - GitHub profile and active projects: github.com/immanuel-peter
-- AutoMoE (self-driving): github.com/immanuel-peter/self-driving-model
 - Hugging Face: huggingface.co/immanuelpeter
 - Browse commits, readmes, and issue discussions for velocity, code clarity, and ownership.
 
@@ -144,7 +154,7 @@ Highlighting engineering initiatives that exemplify strong technical depth, scal
 - Email: ipeter@uchicago.edu
 - LinkedIn: linkedin.com/in/immanuel-peter/
 - GitHub: github.com/immanuel-peter/
-- Resume: https://uchicago.box.com/s/6phj52e64eoe0hynfwg63f4ro0jfjkhn
+- Resume: https://ipeter.dev/resume.pdf
 
 ## Fun
 - Personal quirk captured from his notes: he dislikes p-adic numbers.

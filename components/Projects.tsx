@@ -105,23 +105,40 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
-      title: "Ragstack",
-      description: "A deployable, developer-first RAG infra bundle: Postgres, Chroma, Postgres Meta, PostgREST for a lightweight REST surface, and Kong as the edge API gateway. Self-hosted uses local Postgres + Chroma + PostgREST + Kong; cloud-hosted runs pooled Postgres via Supavisor-style pooling and managed Chroma on GCP infrastructure. Python + TypeScript SDKs provide simple primitives so teams can build RAG without wiring everything themselves.",
+      title: "Matchbox",
+      description: "An AI-powered research matching platform that connects university students with labs using semantic search and LLM-based fit scoring. The system streamlines the application process with a centralized portal, replacing fragmented email workflows with automated candidate discovery, resume parsing, and compatibility ranking. Built as a scalable, serverless application on Google Cloud Platform with a microservices architecture.",
       technologies: [
-        "Python",
+        "Next.js",
+        "React",
         "TypeScript",
-        "PostgreSQL",
-        "Chroma",
-        "PostgREST",
-        "Kong",
-        "Supavisor",
-        "GCP",
-        "Linux",
-        "Bash",
-        "Docker",
         "FastAPI",
+        "Python",
+        "Google Cloud Platform",
+        "Cloud Run",
+        "Terraform",
+        "ChromaDB",
+        "OpenAI API",
+        "Firestore",
+        "Docker"
       ],
+      liveUrl: "https://matchbox.eduspheretech.com",
       status: "Ongoing",
+    },
+    {
+      title: "Qwen vLLM on GKE",
+      description: "A cloud-native deployment pipeline for serving Qwen models on Google Kubernetes Engine (GKE) Autopilot. This project automates infrastructure orchestration, provisioning NVIDIA T4 GPUs and deploying vLLM to create a high-throughput, OpenAI-compatible inference endpoint within a scalable Kubernetes environment.",
+      technologies: [
+        "Google Kubernetes Engine",
+        "vLLM",
+        "Kubernetes",
+        "Google Cloud Platform",
+        "Bash",
+        "GPUs",
+        "YAML",
+        "Python"
+      ],
+      githubUrl: "https://github.com/immanuel-peter/qwen-vllm-gke",
+      status: "Completed",
     },
     {
       title: "AutoMoE",
@@ -235,30 +252,12 @@ const Projects = () => {
       githubUrl: "https://github.com/immanuel-peter/semantic-image-search",
       status: "Completed",
     },
-    // {
-    //   title: "CodingOH",
-    //   description:
-    //     "CodingOH's mission is to make coding human again! CodingOH aims to streamline the development process by providing a platform where coders can get direct answers to their problems. We believe developers shouldn't spend excessive time debugging at the expense of writing functional code. Rather than scouring multiple Stack Overflow pages for answers specific to your codebase, you should be able to get direct help from experienced developers. Additionally, CodingOH provides portfolio pages for developers, enabling employers to scout potential hires on the site. Developers can showcase their tech stack, coding skills, soft skills, and personal projects on CodingOH.",
-    //   technologies: [
-    //     "React",
-    //     "Node.js",
-    //     "Next.js",
-    //     "TypeScript",
-    //     "Tailwind CSS",
-    //     "Supabase",
-    //     "PostgreSQL",
-    //     "GitHub",
-    //   ],
-    //   githubUrl: "https://github.com/immanuel-peter/codingoh-platform",
-    //   status: "Ongoing",
-    // },
     {
       title: "CodingOH Twitter Bot",
       description:
         "The CodingOH Twitter Bot is a Python-based bot designed to engage the developer community on Twitter with programming insights, tips, and humor. By leveraging OpenAI's GPT-4 model and the Tweepy library, this bot generates and posts tweets every 12 hours, providing a blend of educational and entertaining content.",
       technologies: ["Python", "OpenAI", "Tweepy", "GitHub Actions"],
       githubUrl: "https://github.com/immanuel-peter/codingoh_x_bot",
-      // liveUrl: "https://twitter.com/CodingOH",
       status: "Completed",
     },
     {
