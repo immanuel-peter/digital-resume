@@ -43,6 +43,19 @@ const ExperienceItem = ({
 const Experience = () => {
   const experiences = [
     {
+      position: "Open Source Contributor",
+      company: "Meta",
+      startDate: "October 2025",
+      endDate: "October 2025",
+      location: "Remote",
+      details: [
+        "Contributed to Pyrefly, Meta's high-performance Python type checker and language server written in Rust.",
+        "Refactored the error summarization subsystem by enforcing standard naming conventions across module definitions and import paths.",
+        "Modified Rust module structures and command-line check logic to ensure consistency in codebase terminology and file organization.",
+      ],
+      boldDetails: [0],
+    },
+    {
       position: "Software Engineer Intern",
       company: "Quantum Rings",
       startDate: "June 2025",
