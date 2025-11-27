@@ -28,6 +28,11 @@ import {
   SiHuggingface,
   SiFastapi,
   SiAnthropic,
+  SiC,
+  SiTailwindcss,
+  SiGooglecloud,
+  SiTerraform,
+  SiKubernetes
 } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { FcLinux } from "react-icons/fc";
@@ -65,22 +70,15 @@ const Skills = () => {
     "Programming Languages": [
       { name: "Python", Icon: FaPython, color: "bg-yellow-500" },
       { name: "JavaScript", Icon: FaJs, color: "bg-yellow-300" },
-      // { name: "Java", Icon: FaJava, color: "bg-red-500" },
       { name: "TypeScript", Icon: SiTypescript, color: "bg-blue-500" },
       { name: "C++", Icon: SiCplusplus, color: "bg-blue-700" },
-      // { name: "Kotlin", Icon: TbBrandKotlin, color: "bg-purple-700" },
-      // { name: "Swift", Icon: FaSwift, color: "bg-orange-500" },
       { name: "Go", Icon: FaGolang, color: "bg-cyan-500" },
-      // { name: "C", Icon: SiC, color: "bg-blue-600" },
+      { name: "C", Icon: SiC, color: "bg-blue-600" },
     ],
     "Full Stack Engineering": [
       { name: "React", Icon: FaReact, color: "bg-blue-400" },
       { name: "React Native", Icon: FaReact, color: "bg-blue-400" },
-      // { name: "Redux", Icon: SiRedux, color: "bg-purple-500" },
-      // { name: "jQuery", Icon: SiJquery, color: "bg-blue-400" },
-      // { name: "HTML", Icon: FaHtml5, color: "bg-orange-600" },
-      // { name: "CSS", Icon: SiCss3, color: "bg-blue-600" },
-      // { name: "Tailwind CSS", Icon: SiTailwindcss, color: "bg-sky-400" },
+      { name: "Tailwind CSS", Icon: SiTailwindcss, color: "bg-sky-400" },
       { name: "Next.js", Icon: SiNextdotjs, color: "bg-black" },
       { name: "Node.js", Icon: FaNodeJs, color: "bg-green-500" },
       { name: "MongoDB", Icon: SiMongodb, color: "bg-green-700" },
@@ -96,28 +94,21 @@ const Skills = () => {
       { name: "Anthropic", Icon: SiAnthropic, color: "bg-amber-600" },
       { name: "Hugging Face", Icon: SiHuggingface, color: "bg-yellow-400" },
       { name: "Linux", Icon: FcLinux, color: "bg-gray-400" },
-      // { name: "CUDA", Icon: SiNvidia, color: "bg-green-600" },
-    ],
-    "Data Science": [
       { name: "Pandas", Icon: SiPandas, color: "bg-purple-800" },
       { name: "NumPy", Icon: SiNumpy, color: "bg-sky-400" },
       { name: "Jupyter", Icon: SiJupyter, color: "bg-orange-400" },
-      // {
-      //   name: "Microsoft Excel",
-      //   Icon: SiMicrosoftexcel,
-      //   color: "bg-green-600",
-      // },
-      // { name: "Tableau", Icon: SiTableau, color: "bg-blue-700" },
-      // { name: "Power BI", Icon: SiPowerbi, color: "bg-yellow-500" },
+      // { name: "CUDA", Icon: SiNvidia, color: "bg-green-600" },
     ],
     "Cloud Computing & DevOps": [
-      // { name: "Azure", Icon: SiMicrosoftazure, color: "bg-blue-600" },
       { name: "Docker", Icon: FaDocker, color: "bg-blue-600" },
+      { name: "Kubernetes", Icon: SiKubernetes, color: "bg-blue-400" },
       { name: "Git", Icon: FaGitAlt, color: "bg-orange-600" },
       { name: "GitHub", Icon: FaGithub, color: "bg-black" },
       { name: "GitHub Actions", Icon: SiGithubactions, color: "bg-blue-500" },
       { name: "Bash", Icon: SiGnubash, color: "bg-black" },
       { name: "AWS", Icon: FaAws, color: "bg-orange-500" },
+      { name: "GCP", Icon: SiGooglecloud, color: "bg-blue-500" },
+      { name: "Terraform", Icon: SiTerraform, color: "bg-purple-600" },
     ],
   };
 
@@ -125,6 +116,8 @@ const Skills = () => {
     // Tooling & Infrastructure
     "JAX",
     "FAISS",
+    "uv",
+    "pnpm",
     
     // Core AI/ML
     "Supervised Learning",
@@ -164,7 +157,15 @@ const Skills = () => {
     "Probability",
     "Statistics",
     "Optimization",
-    "Graph Theory"
+    "Graph Theory",
+
+    // Developer Tools
+    "Cursor",
+    "Codex",
+    "Claude Code",
+    "Gemini CLI",
+    "AGENTS.md",
+    "v0"
   ];
 
   return (
