@@ -8,18 +8,12 @@ const About = () => {
       id="about"
       className="flex flex-col justify-center py-10 px-6 md:px-16 bg-gray-50 dark:bg-gray-900"
     >
-      <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100 mb-6">
+      <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">
         Hey, I'm Immanuel Peter! 👋
       </h1>
       <div className="flex flex-col md:flex-row items-center justify-between w-full">
         {/* Left Section */}
         <div className="text-center md:text-left md:w-2/3 space-y-4">
-          <p className="text-lg text-gray-700 dark:text-gray-300">
-            This summer, I'm diving deep into PyTorch, C++, CUDA, CARLA, Docker,
-            and Linux while interning at a quantum computing startup. I'm
-            building toward deep AI/ML expertise through engineering,
-            experimentation, and system-building.
-          </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Need a quick crash course on my background and experience? Check out
             my{" "}

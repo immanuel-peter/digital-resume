@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import Navbar from "@/components/Navbar";
+import ConditionalNav from "@/components/ConditionalNav";
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
@@ -81,7 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} antialiased`}>
-        <Navbar />
+        <ConditionalNav />
         {children}
         <Analytics />
         <SpeedInsights />
