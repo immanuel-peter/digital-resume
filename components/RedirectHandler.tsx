@@ -3,6 +3,12 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
+// Whitelist of trusted domains allowed for redirects
+const ALLOWED_DOMAINS = [
+  'eduspheretech.com',
+  'matchbox.eduspheretech.com',
+];
+
 export default function RedirectHandler() {
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirectTo');
@@ -27,8 +33,26 @@ export default function RedirectHandler() {
         }
 
         // Only allow http/https protocols for security
-        if (url.protocol === 'http:' || url.protocol === 'https:') {
+        if (url.protocol !== 'http:' && url.protocol !== 'https:') {
+          console.error('Invalid protocol:', url.protocol);
+          return;
+        }
+
+        // Validate hostname: allow same-origin or whitelisted domains
+        const currentHostname = typeof window !== 'undefined' ? window.location.hostname : '';
+        const redirectHostname = url.hostname.toLowerCase();
+        
+        const isSameOrigin = redirectHostname === currentHostname.toLowerCase();
+        const isWhitelisted = ALLOWED_DOMAINS.some(domain => {
+          const domainLower = domain.toLowerCase();
+          // Exact match or subdomain (e.g., www.eduspheretech.com matches eduspheretech.com)
+          return redirectHostname === domainLower || redirectHostname.endsWith(`.${domainLower}`);
+        });
+
+        if (isSameOrigin || isWhitelisted) {
           window.location.href = url.toString();
+        } else {
+          console.error('Redirect blocked: hostname not allowed:', redirectHostname);
         }
       } catch (error) {
         console.error('Invalid redirect URL:', error);
