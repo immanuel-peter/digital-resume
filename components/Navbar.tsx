@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
+import Link from "next/link";
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
@@ -93,6 +94,16 @@ const Navbar = () => {
             </li>
           ))}
 
+          {/* Blog link */}
+          <li>
+            <Link
+              href="/blog"
+              className="text-sm font-medium px-3 py-2 rounded-full transition-colors duration-200 cursor-pointer text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+            >
+              Blog
+            </Link>
+          </li>
+
           {/* Dark mode toggle */}
           <li>
             <button
@@ -125,6 +136,17 @@ const Navbar = () => {
                 </button>
               </li>
             ))}
+
+            {/* Blog link in mobile menu */}
+            <li className="w-full my-1">
+              <Link
+                href="/blog"
+                className="w-full text-center font-medium px-4 py-3 rounded-lg transition-colors duration-200 cursor-pointer text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 block"
+                onClick={() => setMenuOpen(false)}
+              >
+                Blog
+              </Link>
+            </li>
 
             {/* Dark mode toggle in mobile menu */}
             <li className="w-full my-1 flex justify-center">
