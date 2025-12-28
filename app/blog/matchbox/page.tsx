@@ -1,4 +1,22 @@
 import React from 'react';
+import Image from 'next/image';
+
+const BlogImage = ({ src, alt, caption }: { src: string, alt: string, caption: string }) => (
+  <figure className="my-10">
+    <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700 shadow-xl bg-gray-100 dark:bg-gray-800">
+      <Image 
+        src={src} 
+        alt={alt}
+        fill
+        className="object-contain"
+        sizes="(max-w-4xl) 100vw, 896px"
+      />
+    </div>
+    <figcaption className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400 font-medium italic">
+      {caption}
+    </figcaption>
+  </figure>
+);
 
 export default function MatchboxWriteup() {
   return (
@@ -31,6 +49,12 @@ export default function MatchboxWriteup() {
           detailed reasoning. Researchers can then review incoming applications ranked by 
           AI-generated fit scores and make decisions efficiently.
         </p>
+        
+        <BlogImage 
+          src="/blog/matchbox/matchbox_2.png" 
+          alt="Matchbox Lab Page View" 
+          caption="The Matchbox Lab Page: Researchers can showcase their projects and specify requirements for prospective students."
+        />
       </section>
 
       {/* Architecture Overview */}
@@ -261,20 +285,30 @@ export default function MatchboxWriteup() {
 
           <div className="border-l-2 border-emerald-500 pl-4">
             <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">4. Recommendation Display</h4>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
               The frontend displays a personalized dashboard: "Lab A – Fit 85/100: Your skills 
               in X and Y match what this lab is looking for." Students gain insight into why 
               they're recommended, making the system transparent and actionable.
             </p>
+            <BlogImage 
+              src="/blog/matchbox/matchbox_1.png" 
+              alt="Student Lab Recommendations View" 
+              caption="Student Dashboard: AI-powered recommendations ranked by semantic fit and detailed reasoning."
+            />
           </div>
 
           <div className="border-l-2 border-emerald-500 pl-4">
             <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">5. Application & Review</h4>
-            <p className="text-gray-700 dark:text-gray-300">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
               When a student applies, the backend records the application in Firestore and 
               generates a final fit score. Researchers see applicants ranked by AI-generated 
               scores with detailed reasoning, helping them prioritize candidates efficiently.
             </p>
+            <BlogImage 
+              src="/blog/matchbox/matchbox_3.png" 
+              alt="Professor Lab Candidates View" 
+              caption="Researcher View: Applications are automatically scored and summarized, allowing professors to focus on the best matches."
+            />
           </div>
         </div>
       </section>
