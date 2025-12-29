@@ -26,9 +26,22 @@ export default function MatchboxWriteup() {
         <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
           Inside the Architecture of Matchbox
         </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-400">
+        <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">
           An AI-Powered Research Matching Platform
         </p>
+        <div className="mb-8">
+          <a
+            href="https://matchbox.eduspheretech.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+          >
+            <span>Visit Matchbox</span>
+            <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        </div>
       </header>
 
       {/* Overview */}
