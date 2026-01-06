@@ -15,6 +15,7 @@ type ProjectCardProps = {
   githubUrl?: string;
   liveUrl?: string;
   status: string;
+  stat?: string;
 };
 
 const ProjectCard = ({
@@ -24,6 +25,7 @@ const ProjectCard = ({
   githubUrl,
   liveUrl,
   status,
+  stat,
 }: ProjectCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -40,6 +42,11 @@ const ProjectCard = ({
         >
           {description}
         </p>
+        {stat ? (
+          <p className="mt-3 text-sm font-semibold text-emerald-700 dark:text-emerald-400">
+            {stat}
+          </p>
+        ) : null}
         <button
           onClick={() => setExpanded(!expanded)}
           className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 mt-2 flex items-center transition-colors duration-200 cursor-pointer"
@@ -102,7 +109,23 @@ const ProjectCard = ({
   );
 };
 
-const Projects = () => {
+type ProjectsProps = {
+  datasetDownloads?: {
+    multimodal: number;
+    images: number;
+  };
+};
+
+const Projects = ({ datasetDownloads }: ProjectsProps) => {
+  const downloadsFormatter = new Intl.NumberFormat("en-US");
+  const multimodalDownloads =
+    typeof datasetDownloads?.multimodal === "number"
+      ? downloadsFormatter.format(datasetDownloads.multimodal)
+      : null;
+  const imagesDownloads =
+    typeof datasetDownloads?.images === "number"
+      ? downloadsFormatter.format(datasetDownloads.images)
+      : null;
   const projects = [
     {
       title: "Matchbox",
@@ -171,7 +194,10 @@ const Projects = () => {
       ],
       githubUrl: "https://github.com/immanuel-peter",
       liveUrl: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset",
-      status: "Completed"
+      status: "Completed",
+      stat: multimodalDownloads
+        ? `All-time downloads: ${multimodalDownloads}`
+        : undefined,
     },
     {
       title: "CARLA Autopilot Images Dataset",
@@ -186,7 +212,10 @@ const Projects = () => {
       ],
       githubUrl: "https://github.com/immanuel-peter",
       liveUrl: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-images",
-      status: "Completed"
+      status: "Completed",
+      stat: imagesDownloads
+        ? `All-time downloads: ${imagesDownloads}`
+        : undefined,
     },
     {
       title: "Mini JAX ViT",

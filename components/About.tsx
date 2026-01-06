@@ -2,7 +2,15 @@ import React, { Suspense } from "react";
 import ImmanuelAI from "./ImmanuelAI";
 import Link from "next/link";
 
-const About = () => {
+type AboutProps = {
+  totalDownloadsAllTime: number;
+};
+
+const About = ({ totalDownloadsAllTime }: AboutProps) => {
+  const formattedTotalDownloads = new Intl.NumberFormat("en-US").format(
+    totalDownloadsAllTime
+  );
+
   return (
     <div
       id="about"
@@ -15,25 +23,8 @@ const About = () => {
         {/* Left Section */}
         <div className="text-center md:text-left md:w-2/3 space-y-4">
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Check out my new write-ups for {" "}
-            <Link
-              href="/matchbox"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer text-blue-500 hover:underline dark:text-blue-400"
-            >
-              Matchbox
-            </Link>
-            {" "}and{" "}
-            <Link
-              href="/moe-self-driving"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cursor-pointer text-blue-500 hover:underline dark:text-blue-400"
-            >
-              AutoMoE
-            </Link>
-            !
+            My Hugging Face datasets have a total of{" "}
+            {formattedTotalDownloads} downloads!
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             Need a quick crash course on my background and experience? Check out

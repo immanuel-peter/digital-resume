@@ -6,18 +6,32 @@ import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import RedirectHandler from "@/components/RedirectHandler";
+import { getAllDatasetDownloadsAllTime } from "@/lib/huggingface";
 
-export default function App() {
+export const dynamic = 'force-dynamic';
+
+export default async function App() {
+  const {
+    multimodalDownloadsAllTime,
+    imagesDownloadsAllTime,
+    totalDownloadsAllTime,
+  } = await getAllDatasetDownloadsAllTime();
+
   return (
     <>
       <Suspense fallback={null}>
         <RedirectHandler />
       </Suspense>
       <div className="pt-24">
-        <About />
+        <About totalDownloadsAllTime={totalDownloadsAllTime} />
         <Skills />
         <Experience />
-        <Projects />
+        <Projects
+          datasetDownloads={{
+            multimodal: multimodalDownloadsAllTime,
+            images: imagesDownloadsAllTime,
+          }}
+        />
         <Education />
         {/* <Certifications /> */}
         <Contact />
