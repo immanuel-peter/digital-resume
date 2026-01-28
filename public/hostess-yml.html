@@ -1,0 +1,1493 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hostess.yml Specification</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="hostess.yml-—-version-1.0-specification"><code>hostess.yml</code> — Version 1.0 Specification</h1>
+<p><strong>Status</strong>: Draft<br>
+<strong>Last Updated</strong>: 2026-01-24</p>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-overview">Overview</a></li>
+<li><a href="#2-top-level-fields">Top-Level Fields</a></li>
+<li><a href="#3-repo-configuration">Repo Configuration</a></li>
+<li><a href="#4-environments">Environments</a></li>
+<li><a href="#5-services">Services</a></li>
+<li><a href="#6-magic-variables">Magic Variables</a></li>
+<li><a href="#7-complete-examples">Complete Examples</a></li>
+</ol>
+<hr>
+<h2 id="overview">1. Overview</h2>
+<h3 id="purpose">Purpose</h3>
+<p><code>hostess.yml</code> is a declarative configuration file that defines:</p>
+<ol>
+<li><strong>Where code comes from</strong> (Git repository or local)</li>
+<li><strong>Which environments exist</strong> (production, preview, custom)</li>
+<li><strong>What services run</strong> and how they behave</li>
+<li><strong>Scheduled tasks</strong> (cron jobs)</li>
+</ol>
+<h3 id="what-it-does-not-define">What It Does NOT Define</h3>
+<ul>
+<li>Kubernetes resources (Deployments, Services, etc.)</li>
+<li>Cloud provider details (GCP, AWS, Azure)</li>
+<li>Networking internals (load balancers, ingress controllers)</li>
+<li>CI/CD pipelines</li>
+</ul>
+<h3 id="design-principles">Design Principles</h3>
+<ul>
+<li><strong>Declarative</strong>: Describe desired state, not steps to achieve it</li>
+<li><strong>Minimal</strong>: Only specify what matters, accept smart defaults</li>
+<li><strong>Portable</strong>: Not tied to specific cloud or orchestrator</li>
+<li><strong>Readable</strong>: Non-engineers should understand the basics</li>
+</ul>
+<hr>
+<h2 id="top-level-fields">2. Top-Level Fields</h2>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> string
+<span class="token key atrule">name?</span><span class="token punctuation">:</span> string
+<span class="token key atrule">description?</span><span class="token punctuation">:</span> string
+<span class="token key atrule">repo?</span><span class="token punctuation">:</span> RepoSpec
+<span class="token key atrule">environments?</span><span class="token punctuation">:</span> EnvironmentsSpec
+<span class="token key atrule">services</span><span class="token punctuation">:</span> ServicesSpec
+</code></pre>
+<h3 id="field-reference">Field Reference</h3>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td><strong>Yes</strong></td>
+<td>Schema version (currently <code>"1.0"</code>)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>No</td>
+<td>Project name (displayed in Studio)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string</td>
+<td>No</td>
+<td>Project description</td>
+</tr>
+<tr>
+<td><code>repo</code></td>
+<td>RepoSpec</td>
+<td>No</td>
+<td>Git repository configuration</td>
+</tr>
+<tr>
+<td><code>environments</code></td>
+<td>EnvironmentsSpec</td>
+<td>No</td>
+<td>Environment definitions</td>
+</tr>
+<tr>
+<td><code>services</code></td>
+<td>ServicesSpec</td>
+<td><strong>Yes</strong></td>
+<td>Service definitions</td>
+</tr>
+</tbody>
+</table><hr>
+<h2 id="repo-configuration">3. Repo Configuration</h2>
+<p>Optional. Enables repo-based deployments and preview environments.</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">repo</span><span class="token punctuation">:</span>
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> github <span class="token punctuation">|</span> gitlab <span class="token punctuation">|</span> bitbucket
+  <span class="token key atrule">owner</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">branch?</span><span class="token punctuation">:</span> string
+</code></pre>
+<h3 id="field-reference-1">Field Reference</h3>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>provider</code></td>
+<td>enum</td>
+<td><strong>Yes</strong></td>
+<td>-</td>
+<td>Git provider</td>
+</tr>
+<tr>
+<td><code>owner</code></td>
+<td>string</td>
+<td><strong>Yes</strong></td>
+<td>-</td>
+<td>Organization or user</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td><strong>Yes</strong></td>
+<td>-</td>
+<td>Repository name</td>
+</tr>
+<tr>
+<td><code>branch</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>main</code></td>
+<td>Default branch for production</td>
+</tr>
+</tbody>
+</table><h3 id="supported-providers-v1.0">Supported Providers (v1.0)</h3>
+<ul>
+<li><code>github</code> — GitHub</li>
+<li><code>gitlab</code> — GitLab (future)</li>
+<li><code>bitbucket</code> — Bitbucket (future)</li>
+</ul>
+<h3 id="behavior">Behavior</h3>
+<p><strong>If <code>repo</code> is not present</strong>:</p>
+<ul>
+<li>Manual deployments only (<code>hostess deploy</code> from local directory)</li>
+<li>No automatic preview environments</li>
+</ul>
+<p><strong>If <code>repo</code> is present</strong>:</p>
+<ul>
+<li>Hostess watches repository for changes</li>
+<li>Automatic deployments on push (if configured)</li>
+<li>Preview environments for pull requests</li>
+</ul>
+<hr>
+<h2 id="environments">4. Environments</h2>
+<p>Optional. Defines deployment environments.</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">environments</span><span class="token punctuation">:</span>
+  <span class="token key atrule">production?</span><span class="token punctuation">:</span> ProductionEnvironmentSpec
+  <span class="token key atrule">preview?</span><span class="token punctuation">:</span> PreviewEnvironmentSpec
+  <span class="token key atrule">&lt;custom-name&gt;?</span><span class="token punctuation">:</span> CustomEnvironmentSpec
+</code></pre>
+<p>Environments define <strong>when and how deployments occur</strong>, not how services are exposed.</p>
+<p>Domains are configured <strong>at the service level</strong>.</p>
+<hr>
+<h3 id="production-environment">4.1 Production Environment</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">production</span><span class="token punctuation">:</span>
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> string
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>branch</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>main</code></td>
+<td>Git branch used for production deployments</td>
+</tr>
+</tbody>
+</table><hr>
+<h3 id="preview-environment">4.2 Preview Environment</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">preview</span><span class="token punctuation">:</span>
+  <span class="token key atrule">branches</span><span class="token punctuation">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+  <span class="token key atrule">ephemeral</span><span class="token punctuation">:</span> boolean
+  <span class="token key atrule">ttl?</span><span class="token punctuation">:</span> string
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>branches</code></td>
+<td>string[]</td>
+<td>No</td>
+<td><code>["*"]</code></td>
+<td>Branch patterns (glob)</td>
+</tr>
+<tr>
+<td><code>ephemeral</code></td>
+<td>boolean</td>
+<td>No</td>
+<td><code>true</code></td>
+<td>Auto-delete when PR closes</td>
+</tr>
+<tr>
+<td><code>ttl</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>7d</code></td>
+<td>Time-to-live (e.g. <code>7d</code>, <code>24h</code>)</td>
+</tr>
+</tbody>
+</table><hr>
+<h3 id="custom-environments">4.3 Custom Environments</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">environments</span><span class="token punctuation">:</span>
+  <span class="token key atrule">staging</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branch</span><span class="token punctuation">:</span> develop
+    <span class="token key atrule">ephemeral</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+</code></pre>
+<p>Custom environments behave like preview environments unless explicitly overridden.</p>
+<hr>
+<h3 id="autogenerated-url-format">Autogenerated URL Format</h3>
+<p>All services receive <strong>autogenerated external URLs</strong> with the following format:</p>
+<pre><code>https://{project}-{service}-{nanoID}[-{portNum}].hostess.run
+</code></pre>
+<p>Where:</p>
+<ul>
+<li><code>{project}</code> is your project name</li>
+<li><code>{service}</code> is the service name</li>
+<li><code>{nanoID}</code> is an 8-character unique identifier (alphanumeric, generated once per service)</li>
+<li><code>{portNum}</code> is optional, only for ports 2+ (e.g., <code>-2</code>, <code>-3</code>)</li>
+</ul>
+<p><strong>Examples</strong>:</p>
+<pre><code>https://my-app-frontend-k7xm9p2q.hostess.run
+https://my-app-api-a3x9d2m1.hostess.run
+https://my-app-minio-p4k8n7v2.hostess.run        (port 1)
+https://my-app-minio-p4k8n7v2-2.hostess.run      (port 2)
+</code></pre>
+<p>The nano-ID persists across deployments for a given service, ensuring URL stability.</p>
+<p>Custom domains are configured via the <code>domains</code> field (production only in v1.0).</p>
+<hr>
+<h2 id="services">5. Services</h2>
+<p><strong>Required.</strong> Core of the configuration.</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">&lt;service-name&gt;</span><span class="token punctuation">:</span> ServiceSpec
+</code></pre>
+<p><strong>Service name constraints</strong>:</p>
+<ul>
+<li>DNS-safe (lowercase, alphanumeric, hyphens)</li>
+<li>Unique within deployment</li>
+<li>Max 63 characters</li>
+</ul>
+<hr>
+<h3 id="servicespec">5.1 ServiceSpec</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">type</span><span class="token punctuation">:</span> ServiceType
+<span class="token key atrule">build?</span><span class="token punctuation">:</span> BuildSpec
+<span class="token key atrule">image?</span><span class="token punctuation">:</span> string
+<span class="token key atrule">command?</span><span class="token punctuation">:</span> string <span class="token punctuation">|</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token key atrule">env?</span><span class="token punctuation">:</span> EnvSpec
+<span class="token key atrule">env_file?</span><span class="token punctuation">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token key atrule">depends_on?</span><span class="token punctuation">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token key atrule">domains?</span><span class="token punctuation">:</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token key atrule">ports?</span><span class="token punctuation">:</span> number<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token key atrule">resources?</span><span class="token punctuation">:</span> ResourcesSpec
+<span class="token key atrule">replicas?</span><span class="token punctuation">:</span> ReplicasSpec
+<span class="token key atrule">health?</span><span class="token punctuation">:</span> HealthSpec
+<span class="token key atrule">retention?</span><span class="token punctuation">:</span> RetentionSpec
+<span class="token key atrule">lifecycle?</span><span class="token punctuation">:</span> LifecycleSpec
+</code></pre>
+<hr>
+<h3 id="service-type">5.2 Service Type</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">type</span><span class="token punctuation">:</span> nextjs <span class="token punctuation">|</span> fastapi <span class="token punctuation">|</span> postgres <span class="token punctuation">|</span> redis <span class="token punctuation">|</span> custom
+</code></pre>
+<h4 id="supported-types-v1.0">Supported Types (v1.0)</h4>
+<p><strong>Web Frameworks</strong></p>
+<ul>
+<li><code>nextjs</code> — Next.js (React)</li>
+<li><code>fastapi</code> — FastAPI (Python)</li>
+</ul>
+<p><strong>Databases</strong></p>
+<ul>
+<li><code>postgres</code> — PostgreSQL</li>
+<li><code>redis</code> — Redis</li>
+</ul>
+<p><strong>Generic</strong></p>
+<ul>
+<li><code>custom</code> — Arbitrary containerized service</li>
+</ul>
+<hr>
+<h3 id="type-semantics">Type Semantics</h3>
+<p>Service <code>type</code> is <strong>optional</strong> but recommended.</p>
+<p>If present, it enables:</p>
+<ul>
+<li>Default ports</li>
+<li>Default health checks</li>
+<li>Sensible resource defaults</li>
+<li>Operator-backed provisioning (for databases)</li>
+<li>Framework-specific dashboards in Hostess Studio</li>
+</ul>
+<p>If omitted or set to <code>custom</code>, all behavior must be explicitly configured.</p>
+<p>Adding new service types is a <strong>non-breaking change</strong> and reserved for future versions.</p>
+<hr>
+<h3 id="build-configuration">5.3 Build Configuration</h3>
+<p><strong>Exactly one of <code>build</code> or <code>image</code> is required</strong> (except for managed services like <code>postgres</code>).</p>
+<h4 id="buildspec">BuildSpec</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">build</span><span class="token punctuation">:</span>
+  <span class="token key atrule">source</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">dockerfile?</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">args?</span><span class="token punctuation">:</span> <span class="token punctuation">{</span> <span class="token punctuation">[</span><span class="token key atrule">key</span><span class="token punctuation">:</span> string<span class="token punctuation">]</span><span class="token punctuation">:</span> string <span class="token punctuation">}</span>
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td>string</td>
+<td><strong>Yes</strong></td>
+<td>-</td>
+<td>Build context path</td>
+</tr>
+<tr>
+<td><code>dockerfile</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>Dockerfile</code></td>
+<td>Dockerfile path (relative to source)</td>
+</tr>
+<tr>
+<td><code>args</code></td>
+<td>object</td>
+<td>No</td>
+<td>-</td>
+<td>Build arguments</td>
+</tr>
+</tbody>
+</table><p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">build</span><span class="token punctuation">:</span>
+  <span class="token key atrule">source</span><span class="token punctuation">:</span> ./backend
+  <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile.prod
+  <span class="token key atrule">args</span><span class="token punctuation">:</span>
+    <span class="token key atrule">NODE_ENV</span><span class="token punctuation">:</span> production
+</code></pre>
+<h4 id="imagespec">ImageSpec</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">image</span><span class="token punctuation">:</span> string
+</code></pre>
+<p>Fully qualified image reference (registry/repo:tag).</p>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">image</span><span class="token punctuation">:</span> ghcr.io/myorg/backend<span class="token punctuation">:</span>v1.2.3
+</code></pre>
+<hr>
+<h3 id="environment-variables">5.4 Environment Variables</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">env</span><span class="token punctuation">:</span>
+  <span class="token key atrule">KEY</span><span class="token punctuation">:</span> value <span class="token punctuation">|</span> $<span class="token punctuation">{</span>reference<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Value types</strong>:</p>
+<ul>
+<li><strong>Literal</strong>: <code>LOG_LEVEL: info</code></li>
+<li><strong>Magic variable</strong>: <code>DATABASE_URL: ${database.url}</code></li>
+<li><strong>Secret reference</strong>: <code>JWT_SECRET: ${secret:JWT_SECRET}</code></li>
+</ul>
+<p><strong>Environment files</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">env_file</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> .env
+  <span class="token punctuation">-</span> .env.production
+</code></pre>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li>Files are read in order</li>
+<li><code>env</code> values override file values</li>
+<li>Missing secrets cause deployment failure</li>
+</ul>
+<p>See <a href="#7-magic-variables">Magic Variables</a> for reference syntax.</p>
+<hr>
+<h3 id="dependencies">5.5 Dependencies</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> service<span class="token punctuation">-</span>name
+</code></pre>
+<p><strong>Semantics</strong>:</p>
+<ul>
+<li>Service waits for dependency to be <strong>healthy</strong></li>
+<li>Magic variables from dependency are guaranteed available</li>
+<li>Circular dependencies cause validation error</li>
+<li>Deployment order follows dependency DAG</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> database
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>database.url<span class="token punctuation">}</span>
+  
+  <span class="token key atrule">database</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+</code></pre>
+<hr>
+<h3 id="domains">5.6 Domains</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">domains</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> domain.com
+  <span class="token punctuation">-</span> api.domain.com
+</code></pre>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li>Only applies to <strong>production</strong> environment</li>
+<li>Preview environments get autogenerated URLs</li>
+<li>Omission means service is internal-only</li>
+<li>Automatic HTTPS with Let’s Encrypt</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">frontend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nextjs
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> myorg.com
+      <span class="token punctuation">-</span> www.myorg.com
+  
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> api.myorg.com
+  
+  <span class="token key atrule">database</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+    <span class="token comment"># No domains = internal only</span>
+</code></pre>
+<blockquote>
+<p>Domains are only configurable for the production environment in v1.0.<br>
+Preview and custom domains will be introduced in a future release.</p>
+</blockquote>
+<hr>
+<h3 id="ports">5.7 Ports</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">ports</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> <span class="token number">8000</span>
+  <span class="token punctuation">-</span> <span class="token number">9090  </span><span class="token comment"># Optional metrics port</span>
+</code></pre>
+<p><strong>Default ports by type</strong>:</p>
+<ul>
+<li><code>fastapi</code>: 8000</li>
+<li><code>nextjs</code>: 3000</li>
+<li><code>django</code>: 8000</li>
+<li><code>flask</code>: 5000</li>
+<li><code>express</code>: 3000</li>
+</ul>
+<p><strong>When to specify</strong>:</p>
+<ul>
+<li>Override default port</li>
+<li>Expose multiple ports (e.g., metrics)</li>
+<li>Custom service with non-standard port</li>
+</ul>
+<hr>
+<h3 id="resources">5.8 Resources</h3>
+<h4 id="preset-form-recommended">Preset Form (Recommended)</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">resources</span><span class="token punctuation">:</span> small <span class="token punctuation">|</span> medium <span class="token punctuation">|</span> large <span class="token punctuation">|</span> xlarge
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>CPU</th>
+<th>Memory</th>
+<th>Storage*</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>small</code></td>
+<td>0.5</td>
+<td>512Mi</td>
+<td>10Gi</td>
+<td>Dev, small apps</td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td>1.0</td>
+<td>1Gi</td>
+<td>20Gi</td>
+<td>Production APIs</td>
+</tr>
+<tr>
+<td><code>large</code></td>
+<td>2.0</td>
+<td>2Gi</td>
+<td>50Gi</td>
+<td>High-traffic services</td>
+</tr>
+<tr>
+<td><code>xlarge</code></td>
+<td>4.0</td>
+<td>4Gi</td>
+<td>100Gi</td>
+<td>Large databases, ML</td>
+</tr>
+</tbody>
+</table><p>*Storage only applies to database services (<code>postgres</code>, <code>mongodb</code>, <code>mysql</code>, <code>redis</code>)</p>
+<h4 id="preset-with-custom-storage">Preset with Custom Storage</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token key atrule">preset</span><span class="token punctuation">:</span> large
+  <span class="token key atrule">storage</span><span class="token punctuation">:</span> 200Gi  <span class="token comment"># Override default storage</span>
+</code></pre>
+<h4 id="explicit-form">Explicit Form</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">resources</span><span class="token punctuation">:</span>
+  <span class="token key atrule">cpu</span><span class="token punctuation">:</span> number      <span class="token comment"># Cores (e.g., 0.5, 1.0, 2.0)</span>
+  <span class="token key atrule">memory</span><span class="token punctuation">:</span> string   <span class="token comment"># (e.g., 512Mi, 1Gi, 2Gi)</span>
+  <span class="token key atrule">storage</span><span class="token punctuation">:</span> string  <span class="token comment"># (e.g., 10Gi, 100Gi) - databases only</span>
+</code></pre>
+<p><strong>Storage field behavior</strong>:</p>
+<ul>
+<li>Only applies to database services (<code>postgres</code>, <code>mongodb</code>, <code>mysql</code>, <code>redis</code>)</li>
+<li>Ignored for other service types</li>
+<li>Required for databases (or use preset which includes default)</li>
+</ul>
+<p><strong>Examples</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token comment"># Web service - preset only (no storage)</span>
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> medium
+  
+  <span class="token comment"># Database - preset with custom storage</span>
+  <span class="token key atrule">database</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+      <span class="token key atrule">preset</span><span class="token punctuation">:</span> large
+      <span class="token key atrule">storage</span><span class="token punctuation">:</span> 200Gi
+  
+  <span class="token comment"># Database - fully explicit</span>
+  <span class="token key atrule">cache</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+      <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token number">1.0</span>
+      <span class="token key atrule">memory</span><span class="token punctuation">:</span> 2Gi
+      <span class="token key atrule">storage</span><span class="token punctuation">:</span> 10Gi
+  
+  <span class="token comment"># Database - preset only (uses default 50Gi)</span>
+  <span class="token key atrule">mongodb</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> mongodb
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> large
+</code></pre>
+<hr>
+<h3 id="replicas--autoscaling">5.9 Replicas &amp; Autoscaling</h3>
+<h4 id="fixed-replicas">Fixed Replicas</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">replicas</span><span class="token punctuation">:</span> number
+</code></pre>
+<p>Defines a fixed number of replicas. Autoscaling is disabled.</p>
+<hr>
+<h4 id="autoscaling-v1.0">Autoscaling (v1.0)</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">replicas</span><span class="token punctuation">:</span>
+  <span class="token key atrule">min</span><span class="token punctuation">:</span> number
+  <span class="token key atrule">max</span><span class="token punctuation">:</span> number
+  <span class="token key atrule">target_cpu?</span><span class="token punctuation">:</span> number
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min</code></td>
+<td>number</td>
+<td>-</td>
+<td>Minimum number of replicas</td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td>number</td>
+<td>-</td>
+<td>Maximum number of replicas</td>
+</tr>
+<tr>
+<td><code>target_cpu</code></td>
+<td>number</td>
+<td><code>70</code></td>
+<td>CPU utilization percentage</td>
+</tr>
+</tbody>
+</table><p><strong>Autoscaling behavior (v1.0)</strong>:</p>
+<ul>
+<li>Scaling decisions are based <strong>only on CPU utilization</strong></li>
+<li>Hostess manages stabilization windows and cooldowns internally</li>
+<li>Memory-, latency-, and request-based scaling are out of scope for v1.0</li>
+</ul>
+<hr>
+<p><strong>Examples</strong></p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3  </span><span class="token comment"># Fixed replicas</span>
+</code></pre>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">frontend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">2</span>
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">10</span>
+      <span class="token key atrule">target_cpu</span><span class="token punctuation">:</span> <span class="token number">70</span>
+</code></pre>
+<hr>
+<h3 id="health-checks">5.10 Health Checks</h3>
+<h4 id="http-health-check">HTTP Health Check</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">health</span><span class="token punctuation">:</span>
+  <span class="token key atrule">http</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">interval?</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">timeout?</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">retries?</span><span class="token punctuation">:</span> number
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http</code></td>
+<td>string</td>
+<td>-</td>
+<td>HTTP path (e.g., <code>/health</code>)</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>string</td>
+<td><code>30s</code></td>
+<td>Check interval</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>string</td>
+<td><code>5s</code></td>
+<td>Request timeout</td>
+</tr>
+<tr>
+<td><code>retries</code></td>
+<td>number</td>
+<td><code>3</code></td>
+<td>Failures before unhealthy</td>
+</tr>
+</tbody>
+</table><h4 id="command-health-check">Command Health Check</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">health</span><span class="token punctuation">:</span>
+  <span class="token key atrule">command</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">interval?</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">timeout?</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">retries?</span><span class="token punctuation">:</span> number
+</code></pre>
+<p><strong>Default health checks by type</strong>:</p>
+<ul>
+<li><code>fastapi</code>: <code>GET /health</code> (or <code>GET /</code> if not found)</li>
+<li><code>nextjs</code>: <code>GET /</code></li>
+<li><code>postgres</code>: <code>pg_isready</code></li>
+<li><code>redis</code>: <code>redis-cli ping</code></li>
+<li><code>mongodb</code>: <code>mongosh --eval "db.adminCommand('ping')"</code></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">health</span><span class="token punctuation">:</span>
+      <span class="token key atrule">http</span><span class="token punctuation">:</span> /api/healthz
+      <span class="token key atrule">interval</span><span class="token punctuation">:</span> 10s
+      <span class="token key atrule">timeout</span><span class="token punctuation">:</span> 2s
+      <span class="token key atrule">retries</span><span class="token punctuation">:</span> <span class="token number">5</span>
+</code></pre>
+<hr>
+<h3 id="retention-policy">5.11 Retention Policy</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">retention</span><span class="token punctuation">:</span> permanent <span class="token punctuation">|</span> ephemeral
+</code></pre>
+<p><strong>Applies to</strong>: Database services only (<code>postgres</code>, <code>mongodb</code>, <code>mysql</code>, <code>redis</code>)</p>
+<p><strong>Default</strong>: <code>permanent</code> in production, <code>ephemeral</code> in preview environments</p>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li><code>permanent</code>: Data persists across deployments and redeploys</li>
+<li><code>ephemeral</code>: Data is deleted when deployment is destroyed (e.g., when PR closes)</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">environments</span><span class="token punctuation">:</span>
+  <span class="token key atrule">production</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branch</span><span class="token punctuation">:</span> main
+  
+  <span class="token key atrule">preview</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branches</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"*"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">ephemeral</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">database</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+      <span class="token key atrule">preset</span><span class="token punctuation">:</span> large
+      <span class="token key atrule">storage</span><span class="token punctuation">:</span> 100Gi
+    <span class="token key atrule">retention</span><span class="token punctuation">:</span> permanent  <span class="token comment"># Explicit (redundant in production)</span>
+  
+  <span class="token key atrule">test-db</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> small
+    <span class="token key atrule">retention</span><span class="token punctuation">:</span> ephemeral  <span class="token comment"># Auto-deleted with preview</span>
+</code></pre>
+<hr>
+<h3 id="lifecycle-hooks">5.12 Lifecycle Hooks</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+  <span class="token key atrule">init?</span><span class="token punctuation">:</span> LifecycleHook
+  <span class="token key atrule">migrate?</span><span class="token punctuation">:</span> LifecycleHook
+  <span class="token key atrule">post_deploy?</span><span class="token punctuation">:</span> LifecycleHook
+  <span class="token key atrule">shutdown?</span><span class="token punctuation">:</span> ShutdownHook
+</code></pre>
+<h4 id="lifecyclehook">LifecycleHook</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">command</span><span class="token punctuation">:</span> string <span class="token punctuation">|</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+<span class="token key atrule">on_failure?</span><span class="token punctuation">:</span> abort <span class="token punctuation">|</span> rollback <span class="token punctuation">|</span> continue
+<span class="token key atrule">timeout?</span><span class="token punctuation">:</span> string
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>command</code></td>
+<td>string/array</td>
+<td>-</td>
+<td>Command to execute</td>
+</tr>
+<tr>
+<td><code>on_failure</code></td>
+<td>enum</td>
+<td><code>abort</code></td>
+<td>Behavior on failure</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>string</td>
+<td><code>5m</code></td>
+<td>Max execution time</td>
+</tr>
+</tbody>
+</table><h4 id="shutdownhook">ShutdownHook</h4>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">timeout</span><span class="token punctuation">:</span> string
+<span class="token key atrule">command?</span><span class="token punctuation">:</span> string <span class="token punctuation">|</span> string<span class="token punctuation">[</span><span class="token punctuation">]</span>
+</code></pre>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+  <span class="token key atrule">init</span><span class="token punctuation">:</span>
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"python"</span><span class="token punctuation">,</span> <span class="token string">"manage.py"</span><span class="token punctuation">,</span> <span class="token string">"collectstatic"</span><span class="token punctuation">,</span> <span class="token string">"--noinput"</span><span class="token punctuation">]</span>
+  
+  <span class="token key atrule">migrate</span><span class="token punctuation">:</span>
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"alembic"</span><span class="token punctuation">,</span> <span class="token string">"upgrade"</span><span class="token punctuation">,</span> <span class="token string">"head"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">on_failure</span><span class="token punctuation">:</span> abort
+    <span class="token key atrule">timeout</span><span class="token punctuation">:</span> 10m
+  
+  <span class="token key atrule">post_deploy</span><span class="token punctuation">:</span>
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"python"</span><span class="token punctuation">,</span> <span class="token string">"scripts/warmup_cache.py"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">on_failure</span><span class="token punctuation">:</span> continue
+  
+  <span class="token key atrule">shutdown</span><span class="token punctuation">:</span>
+    <span class="token key atrule">timeout</span><span class="token punctuation">:</span> 30s
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"python"</span><span class="token punctuation">,</span> <span class="token string">"scripts/cleanup.py"</span><span class="token punctuation">]</span>
+</code></pre>
+<p><strong>Hook execution order</strong>:</p>
+<ol>
+<li><code>init</code> — Before starting main container</li>
+<li><code>migrate</code> — Before deployment (runs as K8s Job)</li>
+<li>[Main container starts]</li>
+<li><code>post_deploy</code> — After deployment succeeds</li>
+<li><code>shutdown</code> — On termination (graceful shutdown)</li>
+</ol>
+<hr>
+<h3 id="observability">5.13 Observability</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">observability</span><span class="token punctuation">:</span>
+  <span class="token key atrule">logs?</span><span class="token punctuation">:</span> structured <span class="token punctuation">|</span> plain
+  <span class="token key atrule">metrics?</span><span class="token punctuation">:</span> enabled <span class="token punctuation">|</span> disabled
+  <span class="token key atrule">traces?</span><span class="token punctuation">:</span> enabled <span class="token punctuation">|</span> disabled
+</code></pre>
+<p><strong>Defaults</strong> (all enabled):</p>
+<ul>
+<li>Logs: <code>structured</code> (JSON) for <code>fastapi</code>, <code>nextjs</code>; <code>plain</code> for others</li>
+<li>Metrics: <code>enabled</code></li>
+<li>Traces: <code>enabled</code></li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">observability</span><span class="token punctuation">:</span>
+      <span class="token key atrule">logs</span><span class="token punctuation">:</span> structured
+      <span class="token key atrule">traces</span><span class="token punctuation">:</span> <span class="token boolean important">false  </span><span class="token comment"># Disable distributed tracing</span>
+</code></pre>
+<hr>
+<h2 id="magic-variables">6. Magic Variables</h2>
+<p>Magic variables enable service discovery and configuration.</p>
+<p>Every service automatically gets a <strong>branded external URL</strong> (like Vercel’s <code>.vercel.app</code>) for users and developers to access from outside the cluster.</p>
+<h3 id="syntax">Syntax</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml">$<span class="token punctuation">{</span>reference<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="how-magic-variables-resolve">How Magic Variables Resolve</h3>
+<p>Magic variables resolve differently depending on the field type:</p>
+
+<table>
+<thead>
+<tr>
+<th>Variable Type</th>
+<th>Resolves To</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL fields (<code>url</code>, <code>external_url</code>)</td>
+<td>Kubernetes <code>SecretKeyRef</code></td>
+<td>Points to connection secret</td>
+</tr>
+<tr>
+<td>Password fields (<code>password</code>)</td>
+<td>Kubernetes <code>SecretKeyRef</code></td>
+<td>Points to operator secret</td>
+</tr>
+<tr>
+<td>Other fields (<code>host</code>, <code>port</code>, <code>user</code>, <code>database</code>)</td>
+<td>Literal string value</td>
+<td>Injected directly</td>
+</tr>
+</tbody>
+</table><p><strong>Why URL variables use secrets</strong>: Database URLs contain passwords. Since Kubernetes <code>EnvVar</code> can only be a literal value OR a <code>SecretKeyRef</code> (not both), Hostess generates a <strong>connection secret</strong> (<code>{service}-connection</code>) containing pre-constructed URLs with passwords embedded.</p>
+<h3 id="url-types">URL Types</h3>
+
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Purpose</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${service.url}</code></td>
+<td><strong>Primary</strong> — Internal URL for service-to-service</td>
+<td><code>postgresql://...@database-rw.abc123.svc.cluster.local:5432/...</code></td>
+</tr>
+<tr>
+<td><code>${service.host}</code></td>
+<td>Internal hostname</td>
+<td><code>database-rw.abc123.svc.cluster.local</code></td>
+</tr>
+<tr>
+<td><code>${service.external_url}</code></td>
+<td>Branded URL for users/developers</td>
+<td><code>postgresql://...@my-app-database-k7xm9p2q.hostess.run:5432/...</code></td>
+</tr>
+<tr>
+<td><code>${service.external_host}</code></td>
+<td>Branded hostname</td>
+<td><code>my-app-database-k7xm9p2q.hostess.run</code></td>
+</tr>
+</tbody>
+</table><h3 id="service-references">Service References</h3>
+<h4 id="database-services">Database Services</h4>
+<p><strong>Postgres</strong> (<code>type: postgres</code>):</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token comment"># Full connection URLs (resolve to SecretKeyRef → {name}-connection secret)</span>
+$<span class="token punctuation">{</span>database.url<span class="token punctuation">}</span>           <span class="token comment"># postgresql://postgres:pass@database-rw.abc123.svc.cluster.local:5432/database</span>
+$<span class="token punctuation">{</span>database.external_url<span class="token punctuation">}</span>  <span class="token comment"># postgresql://postgres:pass@my-app-database-k7xm9p2q.hostess.run:5432/database</span>
+
+<span class="token comment"># Literal values (injected directly)</span>
+$<span class="token punctuation">{</span>database.host<span class="token punctuation">}</span>          <span class="token comment"># database-rw.abc123.svc.cluster.local</span>
+$<span class="token punctuation">{</span>database.external_host<span class="token punctuation">}</span> <span class="token comment"># my-app-database-k7xm9p2q.hostess.run</span>
+$<span class="token punctuation">{</span>database.port<span class="token punctuation">}</span>          <span class="token comment"># 5432</span>
+$<span class="token punctuation">{</span>database.user<span class="token punctuation">}</span>          <span class="token comment"># postgres</span>
+$<span class="token punctuation">{</span>database.database<span class="token punctuation">}</span>      <span class="token comment"># database</span>
+
+<span class="token comment"># Password (resolves to SecretKeyRef → operator secret)</span>
+$<span class="token punctuation">{</span>database.password<span class="token punctuation">}</span>      <span class="token comment"># (from database-superuser secret)</span>
+</code></pre>
+<p><strong>Redis</strong> (<code>type: redis</code>):</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token comment"># Full connection URLs (resolve to SecretKeyRef → {name}-connection secret)</span>
+$<span class="token punctuation">{</span>cache.url<span class="token punctuation">}</span>              <span class="token comment"># redis://rfr-cache.abc123.svc.cluster.local:6379</span>
+$<span class="token punctuation">{</span>cache.external_url<span class="token punctuation">}</span>     <span class="token comment"># redis://my-app-cache-p2x8k4n7.hostess.run:6379</span>
+
+<span class="token comment"># Literal values</span>
+$<span class="token punctuation">{</span>cache.host<span class="token punctuation">}</span>             <span class="token comment"># rfr-cache.abc123.svc.cluster.local</span>
+$<span class="token punctuation">{</span>cache.external_host<span class="token punctuation">}</span>    <span class="token comment"># my-app-cache-p2x8k4n7.hostess.run</span>
+$<span class="token punctuation">{</span>cache.port<span class="token punctuation">}</span>             <span class="token comment"># 6379</span>
+</code></pre>
+<p><strong>MongoDB</strong> (<code>type: mongodb</code>):</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token comment"># Full connection URLs (resolve to SecretKeyRef → {name}-connection secret)</span>
+$<span class="token punctuation">{</span>mongodb.url<span class="token punctuation">}</span>            <span class="token comment"># mongodb://admin:pass@mongodb.abc123.svc.cluster.local:27017/mongodb</span>
+$<span class="token punctuation">{</span>mongodb.external_url<span class="token punctuation">}</span>   <span class="token comment"># mongodb://admin:pass@my-app-mongodb-m3n9v5x1.hostess.run:27017/mongodb</span>
+
+<span class="token comment"># Literal values</span>
+$<span class="token punctuation">{</span>mongodb.host<span class="token punctuation">}</span>           <span class="token comment"># mongodb.abc123.svc.cluster.local</span>
+$<span class="token punctuation">{</span>mongodb.external_host<span class="token punctuation">}</span>  <span class="token comment"># my-app-mongodb-m3n9v5x1.hostess.run</span>
+$<span class="token punctuation">{</span>mongodb.port<span class="token punctuation">}</span>           <span class="token comment"># 27017</span>
+$<span class="token punctuation">{</span>mongodb.user<span class="token punctuation">}</span>           <span class="token comment"># admin</span>
+$<span class="token punctuation">{</span>mongodb.database<span class="token punctuation">}</span>       <span class="token comment"># mongodb</span>
+
+<span class="token comment"># Password (resolves to SecretKeyRef → operator secret)</span>
+$<span class="token punctuation">{</span>mongodb.password<span class="token punctuation">}</span>       <span class="token comment"># (from mongodb-admin secret)</span>
+</code></pre>
+<p><strong>MySQL</strong> (<code>type: mysql</code>):</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token comment"># Full connection URLs (resolve to SecretKeyRef → {name}-connection secret)</span>
+$<span class="token punctuation">{</span>mysql.url<span class="token punctuation">}</span>              <span class="token comment"># mysql://root:pass@mysql.abc123.svc.cluster.local:3306/mysql</span>
+$<span class="token punctuation">{</span>mysql.external_url<span class="token punctuation">}</span>     <span class="token comment"># mysql://root:pass@my-app-mysql-s1q7l9k3.hostess.run:3306/mysql</span>
+
+<span class="token comment"># Literal values</span>
+$<span class="token punctuation">{</span>mysql.host<span class="token punctuation">}</span>             <span class="token comment"># mysql.abc123.svc.cluster.local</span>
+$<span class="token punctuation">{</span>mysql.external_host<span class="token punctuation">}</span>    <span class="token comment"># my-app-mysql-s1q7l9k3.hostess.run</span>
+$<span class="token punctuation">{</span>mysql.port<span class="token punctuation">}</span>             <span class="token comment"># 3306</span>
+$<span class="token punctuation">{</span>mysql.user<span class="token punctuation">}</span>             <span class="token comment"># root</span>
+$<span class="token punctuation">{</span>mysql.database<span class="token punctuation">}</span>         <span class="token comment"># mysql</span>
+
+<span class="token comment"># Password (resolves to SecretKeyRef → operator secret)</span>
+$<span class="token punctuation">{</span>mysql.password<span class="token punctuation">}</span>         <span class="token comment"># (from mysql-root secret)</span>
+</code></pre>
+<h4 id="http-services">HTTP Services</h4>
+<p><strong>FastAPI, Next.js, Django, Flask, Express, Custom</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token comment"># All values are literals (no secrets involved)</span>
+$<span class="token punctuation">{</span>backend.url<span class="token punctuation">}</span>            <span class="token comment"># http://backend.abc123.svc.cluster.local:8000</span>
+$<span class="token punctuation">{</span>backend.external_url<span class="token punctuation">}</span>   <span class="token comment"># https://my-app-backend-a3x9d2m1.hostess.run</span>
+$<span class="token punctuation">{</span>backend.host<span class="token punctuation">}</span>           <span class="token comment"># backend.abc123.svc.cluster.local</span>
+$<span class="token punctuation">{</span>backend.external_host<span class="token punctuation">}</span>  <span class="token comment"># my-app-backend-a3x9d2m1.hostess.run</span>
+$<span class="token punctuation">{</span>backend.port<span class="token punctuation">}</span>           <span class="token comment"># 8000</span>
+</code></pre>
+<h4 id="multi-port-http-services">Multi-Port HTTP Services</h4>
+<p>If a service defines multiple <code>ports</code>, Hostess exposes port-specific variables for each port:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token comment"># Port 1 (primary)</span>
+$<span class="token punctuation">{</span>minio.port_1.url<span class="token punctuation">}</span>           <span class="token comment"># http://minio.abc123.svc.cluster.local:9000</span>
+$<span class="token punctuation">{</span>minio.port_1.external_url<span class="token punctuation">}</span>  <span class="token comment"># https://my-app-minio-k7xm9p2q.hostess.run</span>
+$<span class="token punctuation">{</span>minio.port_1.port<span class="token punctuation">}</span>          <span class="token comment"># 9000</span>
+
+<span class="token comment"># Port 2</span>
+$<span class="token punctuation">{</span>minio.port_2.url<span class="token punctuation">}</span>           <span class="token comment"># http://minio.abc123.svc.cluster.local:9001</span>
+$<span class="token punctuation">{</span>minio.port_2.external_url<span class="token punctuation">}</span>  <span class="token comment"># https://my-app-minio-k7xm9p2q-2.hostess.run</span>
+$<span class="token punctuation">{</span>minio.port_2.port<span class="token punctuation">}</span>          <span class="token comment"># 9001</span>
+</code></pre>
+<p><code>port_1</code> is always the primary port and matches <code>${service.url}</code> / <code>${service.external_url}</code>.</p>
+<h3 id="when-to-use-which-url">When to Use Which URL</h3>
+
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Use</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend connecting to database</td>
+<td><code>${database.url}</code></td>
+<td>Stays within cluster, fast</td>
+</tr>
+<tr>
+<td>Frontend SSR calling backend</td>
+<td><code>${backend.url}</code></td>
+<td>Server-side, stays in cluster</td>
+</tr>
+<tr>
+<td>Browser calling backend API</td>
+<td><code>${backend.external_url}</code></td>
+<td>Client-side, needs external URL</td>
+</tr>
+<tr>
+<td>Webhook callback URL</td>
+<td><code>${backend.external_url}</code></td>
+<td>External service calling in</td>
+</tr>
+<tr>
+<td>Developer connecting to DB locally</td>
+<td><code>${database.external_url}</code></td>
+<td>From outside cluster</td>
+</tr>
+<tr>
+<td>Displaying URL in UI</td>
+<td><code>${service.external_url}</code></td>
+<td>User-facing, branded</td>
+</tr>
+</tbody>
+</table><h3 id="connection-secrets">Connection Secrets</h3>
+<p>For database services, Hostess generates a <strong>connection secret</strong> (<code>{service}-connection</code>) containing:</p>
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>url</code></td>
+<td>Full internal connection URL with password</td>
+<td><code>postgresql://postgres:pass@host:5432/db</code></td>
+</tr>
+<tr>
+<td><code>external_url</code></td>
+<td>Full external connection URL with password</td>
+<td><code>postgresql://postgres:pass@my-app-database-k7xm9p2q.hostess.run:5432/db</code></td>
+</tr>
+<tr>
+<td><code>host</code></td>
+<td>Internal hostname</td>
+<td><code>database-rw.abc123.svc.cluster.local</code></td>
+</tr>
+<tr>
+<td><code>external_host</code></td>
+<td>External hostname</td>
+<td><code>my-app-database-k7xm9p2q.hostess.run</code></td>
+</tr>
+<tr>
+<td><code>port</code></td>
+<td>Port number</td>
+<td><code>5432</code></td>
+</tr>
+<tr>
+<td><code>user</code></td>
+<td>Username</td>
+<td><code>postgres</code></td>
+</tr>
+<tr>
+<td><code>database</code></td>
+<td>Database name</td>
+<td><code>database</code></td>
+</tr>
+</tbody>
+</table><p>The <code>url</code> and <code>external_url</code> values are populated at <strong>deploy time</strong> by the Hostess controller, which reads the password from the operator-generated secret (e.g., <code>database-superuser</code> for CloudNativePG).</p>
+<p><strong>External URL format</strong>: <code>{project}-{service}-{nanoID}.hostess.run</code> where nano-ID is an 8-character unique identifier generated once per service.</p>
+<h3 id="deployment-metadata">Deployment Metadata</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml">$<span class="token punctuation">{</span>deployment.id<span class="token punctuation">}</span>         <span class="token comment"># abc123</span>
+$<span class="token punctuation">{</span>deployment.environment<span class="token punctuation">}</span> <span class="token comment"># production | preview | staging</span>
+$<span class="token punctuation">{</span>deployment.version<span class="token punctuation">}</span>    <span class="token comment"># v1.2.3 (git tag or commit)</span>
+$<span class="token punctuation">{</span>deployment.timestamp<span class="token punctuation">}</span>  <span class="token comment"># 2024-12-13T14:23:45Z</span>
+</code></pre>
+<h3 id="service-metadata">Service Metadata</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml">$<span class="token punctuation">{</span>service.name<span class="token punctuation">}</span>          <span class="token comment"># backend</span>
+$<span class="token punctuation">{</span>service.type<span class="token punctuation">}</span>          <span class="token comment"># fastapi</span>
+</code></pre>
+<h3 id="secret-references">Secret References</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml">$<span class="token punctuation">{</span>secret<span class="token punctuation">:</span>SECRET_NAME<span class="token punctuation">}</span>    <span class="token comment"># Value from Hostess secret store</span>
+</code></pre>
+<p><strong>Example</strong>:</p>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">env</span><span class="token punctuation">:</span>
+  <span class="token key atrule">JWT_SECRET</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>secret<span class="token punctuation">:</span>JWT_SECRET<span class="token punctuation">}</span>
+  <span class="token key atrule">STRIPE_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>secret<span class="token punctuation">:</span>STRIPE_API_KEY<span class="token punctuation">}</span>
+</code></pre>
+<p><strong>Creating secrets</strong>:</p>
+<pre class=" language-bash"><code class="prism  language-bash">hostess secrets <span class="token keyword">set</span> JWT_SECRET
+hostess secrets <span class="token keyword">set</span> STRIPE_KEY --value sk_live_abc123
+</code></pre>
+<hr>
+<h2 id="complete-examples">7. Complete Examples</h2>
+<h3 id="minimal-example">7.1 Minimal Example</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"1.0"</span>
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">app</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nextjs
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> .
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> myapp.com
+</code></pre>
+<hr>
+<h3 id="full-stack-application">7.2 Full-Stack Application</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"1.0"</span>
+<span class="token key atrule">name</span><span class="token punctuation">:</span> E<span class="token punctuation">-</span>Commerce Platform
+<span class="token key atrule">description</span><span class="token punctuation">:</span> Next.js frontend with FastAPI backend
+
+<span class="token key atrule">repo</span><span class="token punctuation">:</span>
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> github
+  <span class="token key atrule">owner</span><span class="token punctuation">:</span> myorg
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> ecommerce
+
+<span class="token key atrule">environments</span><span class="token punctuation">:</span>
+  <span class="token key atrule">production</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branch</span><span class="token punctuation">:</span> main
+  
+  <span class="token key atrule">preview</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branches</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"*"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">ephemeral</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">database</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+      <span class="token key atrule">preset</span><span class="token punctuation">:</span> large
+      <span class="token key atrule">storage</span><span class="token punctuation">:</span> 20Gi
+    <span class="token key atrule">retention</span><span class="token punctuation">:</span> permanent
+  
+  <span class="token key atrule">cache</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> redis
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> medium
+    <span class="token key atrule">retention</span><span class="token punctuation">:</span> permanent
+  
+  <span class="token key atrule">backend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./backend
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>database.url<span class="token punctuation">}</span>
+      <span class="token key atrule">REDIS_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>cache.url<span class="token punctuation">}</span>
+      <span class="token key atrule">JWT_SECRET</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>secret<span class="token punctuation">:</span>JWT_SECRET<span class="token punctuation">}</span>
+      <span class="token key atrule">STRIPE_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>secret<span class="token punctuation">:</span>STRIPE_KEY<span class="token punctuation">}</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> database
+      <span class="token punctuation">-</span> cache
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">2</span>
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">10</span>
+      <span class="token key atrule">target_cpu</span><span class="token punctuation">:</span> <span class="token number">70</span>
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> medium
+    <span class="token key atrule">lifecycle</span><span class="token punctuation">:</span>
+      <span class="token key atrule">migrate</span><span class="token punctuation">:</span>
+        <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"alembic"</span><span class="token punctuation">,</span> <span class="token string">"upgrade"</span><span class="token punctuation">,</span> <span class="token string">"head"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> api.myorg.com
+  
+  <span class="token key atrule">frontend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nextjs
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./frontend
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">NEXT_PUBLIC_API_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>backend.external_url<span class="token punctuation">}</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> backend
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">2</span>
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">20</span>
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> medium
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> myorg.com
+      <span class="token punctuation">-</span> www.myorg.com
+  
+  <span class="token key atrule">worker</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> custom
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./backend
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"celery"</span><span class="token punctuation">,</span> <span class="token string">"-A"</span><span class="token punctuation">,</span> <span class="token string">"app.celery"</span><span class="token punctuation">,</span> <span class="token string">"worker"</span><span class="token punctuation">,</span> <span class="token string">"--loglevel=info"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>database.url<span class="token punctuation">}</span>
+      <span class="token key atrule">REDIS_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>cache.url<span class="token punctuation">}</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> database
+      <span class="token punctuation">-</span> cache
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> medium
+</code></pre>
+<hr>
+<h3 id="microservices-architecture">7.3 Microservices Architecture</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"1.0"</span>
+<span class="token key atrule">name</span><span class="token punctuation">:</span> Microservices Platform
+
+<span class="token key atrule">repo</span><span class="token punctuation">:</span>
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> github
+  <span class="token key atrule">owner</span><span class="token punctuation">:</span> myorg
+  <span class="token key atrule">name</span><span class="token punctuation">:</span> platform
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">postgres</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+  
+  <span class="token key atrule">redis</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> redis
+  
+  <span class="token key atrule">auth-service</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./services/auth
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>postgres.url<span class="token punctuation">}</span>
+      <span class="token key atrule">REDIS_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>redis.url<span class="token punctuation">}</span>
+      <span class="token key atrule">JWT_SECRET</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>secret<span class="token punctuation">:</span>JWT_SECRET<span class="token punctuation">}</span>
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> auth.platform.io
+  
+  <span class="token key atrule">user-service</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./services/users
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>postgres.url<span class="token punctuation">}</span>
+      <span class="token key atrule">AUTH_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>auth<span class="token punctuation">-</span>service.url<span class="token punctuation">}</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> postgres
+      <span class="token punctuation">-</span> auth<span class="token punctuation">-</span>service
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> users.platform.io
+  
+  <span class="token key atrule">order-service</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./services/orders
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>postgres.url<span class="token punctuation">}</span>
+      <span class="token key atrule">USER_SERVICE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>user<span class="token punctuation">-</span>service.url<span class="token punctuation">}</span>
+    <span class="token key atrule">depends_on</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> postgres
+      <span class="token punctuation">-</span> user<span class="token punctuation">-</span>service
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> orders.platform.io
+  
+  <span class="token key atrule">frontend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nextjs
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./frontend
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">NEXT_PUBLIC_AUTH_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>auth<span class="token punctuation">-</span>service.external_url<span class="token punctuation">}</span>
+      <span class="token key atrule">NEXT_PUBLIC_USER_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>user<span class="token punctuation">-</span>service.external_url<span class="token punctuation">}</span>
+      <span class="token key atrule">NEXT_PUBLIC_ORDER_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>order<span class="token punctuation">-</span>service.external_url<span class="token punctuation">}</span>
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> platform.io
+</code></pre>
+<hr>
+<h3 id="aiml-application">7.4 AI/ML Application</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"1.0"</span>
+<span class="token key atrule">name</span><span class="token punctuation">:</span> AI Image Generator
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">database</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> postgres
+  
+  <span class="token key atrule">redis</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> redis
+  
+  <span class="token key atrule">api</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> fastapi
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./api
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>database.url<span class="token punctuation">}</span>
+      <span class="token key atrule">REDIS_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>redis.url<span class="token punctuation">}</span>
+      <span class="token key atrule">MODEL_SERVICE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>ml<span class="token punctuation">-</span>inference.url<span class="token punctuation">}</span>
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> api.aiapp.io
+  
+  <span class="token key atrule">ml-inference</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> custom
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./ml
+      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile.gpu
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">MODEL_PATH</span><span class="token punctuation">:</span> /models/stable<span class="token punctuation">-</span>diffusion
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span>
+      <span class="token key atrule">cpu</span><span class="token punctuation">:</span> <span class="token number">4.0</span>
+      <span class="token key atrule">memory</span><span class="token punctuation">:</span> 16Gi
+      <span class="token comment"># GPU support (future)</span>
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span>
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">1</span>
+      <span class="token key atrule">max</span><span class="token punctuation">:</span> <span class="token number">5</span>
+  
+  <span class="token key atrule">worker</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> custom
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./worker
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"celery"</span><span class="token punctuation">,</span> <span class="token string">"-A"</span><span class="token punctuation">,</span> <span class="token string">"tasks"</span><span class="token punctuation">,</span> <span class="token string">"worker"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">DATABASE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>database.url<span class="token punctuation">}</span>
+      <span class="token key atrule">REDIS_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>redis.url<span class="token punctuation">}</span>
+      <span class="token key atrule">ML_SERVICE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>ml<span class="token punctuation">-</span>inference.url<span class="token punctuation">}</span>
+    <span class="token key atrule">replicas</span><span class="token punctuation">:</span> <span class="token number">3</span>
+    <span class="token key atrule">resources</span><span class="token punctuation">:</span> medium
+  
+  <span class="token key atrule">frontend</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> nextjs
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">source</span><span class="token punctuation">:</span> ./frontend
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">NEXT_PUBLIC_API_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>api.external_url<span class="token punctuation">}</span>
+    <span class="token key atrule">domains</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> aiapp.io
+</code></pre>
+<hr>
+<h3 id="multi-port-service">7.5 Multi-Port Service</h3>
+<pre class=" language-yaml"><code class="prism  language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">"1.0"</span>
+<span class="token key atrule">name</span><span class="token punctuation">:</span> Object Storage
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">minio</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> custom
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> minio/minio
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"server"</span><span class="token punctuation">,</span> <span class="token string">"/data"</span><span class="token punctuation">,</span> <span class="token string">"--console-address"</span><span class="token punctuation">,</span> <span class="token string">":9001"</span><span class="token punctuation">]</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token number">9000</span><span class="token punctuation">,</span> <span class="token number">9001</span><span class="token punctuation">]</span>
+    <span class="token key atrule">env</span><span class="token punctuation">:</span>
+      <span class="token key atrule">MINIO_CONSOLE_URL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span>minio.port_2.external_url<span class="token punctuation">}</span>
+</code></pre>
+<hr>
+<h2 id="appendix-a-reserved-service-names">Appendix A: Reserved Service Names</h2>
+<p>The following service names are reserved and cannot be used:</p>
+<ul>
+<li><code>hostess</code></li>
+<li><code>kubernetes</code></li>
+<li><code>kube-system</code></li>
+<li><code>default</code></li>
+<li><code>system</code></li>
+</ul>
+<hr>
+<h2 id="appendix-b-validation-rules">Appendix B: Validation Rules</h2>
+<h3 id="service-names">Service Names</h3>
+<ul>
+<li>Lowercase alphanumeric + hyphens only</li>
+<li>Must start with letter</li>
+<li>Must end with letter or number</li>
+<li>Max 63 characters</li>
+<li>No consecutive hyphens</li>
+</ul>
+<h3 id="dependencies-1">Dependencies</h3>
+<ul>
+<li>No circular dependencies</li>
+<li>Referenced services must exist</li>
+<li>Cannot depend on self</li>
+</ul>
+<h3 id="resources-1">Resources</h3>
+<ul>
+<li>CPU: 0.1 - 16.0 cores</li>
+<li>Memory: 128Mi - 64Gi</li>
+<li>Storage: 1Gi - 1Ti (databases only)</li>
+</ul>
+<p><strong>Storage validation</strong>:</p>
+<ul>
+<li>Required for database services when using explicit resources</li>
+<li>Ignored (with warning) for non-database services</li>
+<li>Cannot be specified without <code>cpu</code> and <code>memory</code> in explicit form</li>
+</ul>
+<h3 id="replicas">Replicas</h3>
+<ul>
+<li>Min: 0 - 100</li>
+<li>Max: min - 1000</li>
+<li>Max must be ≥ min</li>
+</ul>
+<hr>
+<h2 id="appendix-c-default-values">Appendix C: Default Values</h2>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repo.branch</code></td>
+<td><code>main</code></td>
+</tr>
+<tr>
+<td><code>environments.preview.ephemeral</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>environments.preview.ttl</code></td>
+<td><code>7d</code></td>
+</tr>
+<tr>
+<td><code>health.interval</code></td>
+<td><code>30s</code></td>
+</tr>
+<tr>
+<td><code>health.timeout</code></td>
+<td><code>5s</code></td>
+</tr>
+<tr>
+<td><code>health.retries</code></td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td><code>resources</code></td>
+<td><code>medium</code></td>
+</tr>
+<tr>
+<td><code>resources.small.storage</code></td>
+<td><code>10Gi</code></td>
+</tr>
+<tr>
+<td><code>resources.medium.storage</code></td>
+<td><code>20Gi</code></td>
+</tr>
+<tr>
+<td><code>resources.large.storage</code></td>
+<td><code>50Gi</code></td>
+</tr>
+<tr>
+<td><code>resources.xlarge.storage</code></td>
+<td><code>100Gi</code></td>
+</tr>
+<tr>
+<td><code>retention</code></td>
+<td><code>permanent</code> (production), <code>ephemeral</code> (preview)</td>
+</tr>
+<tr>
+<td><code>replicas</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>lifecycle.*.timeout</code></td>
+<td><code>5m</code></td>
+</tr>
+<tr>
+<td><code>lifecycle.*.on_failure</code></td>
+<td><code>abort</code></td>
+</tr>
+<tr>
+<td><code>external</code></td>
+<td><code>false</code></td>
+</tr>
+</tbody>
+</table><hr>
+<h2 id="appendix-d-version-history">Appendix D: Version History</h2>
+
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2025-12-13</td>
+<td>Initial specification</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>2026-01-24</td>
+<td>Add multi-port exposure</td>
+</tr>
+</tbody>
+</table><hr>
+<p><strong>End of Specification</strong></p>
+</div>
+</body>
+
+</html>
