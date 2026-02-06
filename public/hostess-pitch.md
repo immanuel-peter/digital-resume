@@ -316,7 +316,10 @@ Distribute your project as a `hostess.yml` file. Anyone can deploy it without Te
 - Staging and production from one config
 - Easy rollbacks when things break
 
-### 4. Platform Builders (v1.3+)
+### 4. AI Coding Agents
+The deployment target for autonomous development. Agent frameworks can integrate Hostess as their deploy backend — the developer provides a PAT, the agent handles the rest. No computer use, no GUI, no friction. The entire write-deploy-debug-redeploy loop stays in the terminal where agents are fastest.
+
+### 5. Platform Builders (v1.3+)
 Turn your app into a multi-tenant SaaS. Provision isolated customer environments with the Platforms SDK.
 
 ---
@@ -425,6 +428,53 @@ Total time: 3 minutes
 5. **Kubernetes under the hood**: Production-grade orchestration without the YAML hell
 6. **Magic variables**: Service discovery that actually works without manual DNS setup
 7. **Platforms SDK roadmap**: Path to enabling multi-tenant SaaS builders
+8. **AI-agent native**: The entire deploy-debug-redeploy loop is CLI-driven — purpose-built for autonomous coding agents
+
+---
+
+## The AI Agent Advantage
+
+**Hostess is the deployment platform AI coding agents would choose for themselves.**
+
+The rise of autonomous coding agents (Claude Code, Devin, Cursor, Copilot Workspace, OpenAI Codex) is creating a new class of "developer" that writes, deploys, and iterates on code without human intervention. These agents have a fundamental constraint: **they work best in text-in, text-out environments.** Every time an agent has to navigate a GUI — click through a cloud console, switch between dashboard tabs, interact with a visual CI/CD pipeline — it becomes slower, more brittle, and more error-prone.
+
+Hostess's entire workflow is CLI and config-file driven. After a one-time account setup and PAT (Personal Access Token) generation, **an AI agent never needs to touch a GUI again**:
+
+```bash
+# Authenticate (once, via environment variable)
+export HOSTESS_TOKEN=pat_xxxxxxxx
+
+# The entire agent loop — pure stdin/stdout
+hostess deploy                          # Deploy the full stack
+hostess services logs api               # Check for errors
+hostess secrets set OPENAI_KEY --value sk-...  # Manage secrets
+hostess deployments list                # Inspect state
+hostess deploy                          # Redeploy after code changes
+```
+
+No browser automation. No computer-use overhead. No fragile UI navigation. Just text commands and a declarative config file — both of which are native operations for any LLM.
+
+### Why This Matters Now
+
+Every AI-powered application is inherently a multi-service stack: a frontend, an API layer, a database, a vector store, a model-serving endpoint, a worker queue for async inference. This is exactly the architecture Hostess is built to deploy. As AI coding agents become the primary way software gets built, **the platform that agents deploy to most easily will win by default.**
+
+### Comparison: Agent Deploying to AWS vs. Hostess
+
+| Operation | AWS (Agent Experience) | Hostess (Agent Experience) |
+|-----------|----------------------|---------------------------|
+| Define infrastructure | Write Terraform HCL or navigate console (computer use) | Write `hostess.yml` (plain text) |
+| Set secrets | AWS Secrets Manager CLI + IAM permissions | `hostess secrets set KEY` |
+| Deploy | Multi-step CI/CD pipeline with console verification | `hostess deploy` |
+| Check status | Parse CloudWatch dashboards (computer use) | `hostess deployments list` |
+| Read logs | CloudWatch Logs CLI with complex filter syntax | `hostess services logs api` |
+| Debug database | Open pgAdmin or RDS console (computer use) | `hostess connect db` |
+| Full iteration cycle | 15+ commands across multiple tools | Edit code → `hostess deploy` |
+
+An AI coding agent can go from writing code to deploying it to reading logs to fixing a bug to redeploying — **in a single agentic loop, never leaving the terminal.** That's an order of magnitude faster than any alternative.
+
+### The Implication
+
+Agent frameworks and AI IDEs will need a default deployment target. The platform with the lowest friction — fewest commands, no GUI dependencies, declarative config that an LLM can author natively — becomes that default. **Hostess is that platform.**
 
 ---
 
