@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { useSearchParams } from "next/navigation";
 import queryPrompts from "../lib/utils/queryPrompts.json";
 
@@ -216,18 +217,24 @@ const ImmanuelAI = () => {
                               Show reasoning
                             </summary>
                             <div className="mt-1 px-2 prose dark:prose-invert text-sm italic text-gray-700 dark:text-gray-300">
-                              <ReactMarkdown>{msg.reasoning}</ReactMarkdown>
+                              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {msg.reasoning}
+                              </ReactMarkdown>
                             </div>
                           </details>
                         )}
                       
                         <div className="mt-2 prose prose-md dark:prose-invert">
-                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {msg.content}
+                          </ReactMarkdown>
                         </div>                        
                       </>
                     ) : (
                       <div className="prose prose-md dark:prose-invert">
-                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {msg.content}
+                          </ReactMarkdown>
                       </div>
                     )}
                   </div>

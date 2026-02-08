@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const markdownPath = path.join(process.cwd(), "public", "hostess-pitch.md");
 const markdown = fs.readFileSync(markdownPath, "utf8");
@@ -25,7 +26,9 @@ export default function HostessPitchPage() {
   return (
     <main className="px-6 py-16">
       <article className={`${proseClassName} mx-auto max-w-4xl`}>
-        <ReactMarkdown>{markdown}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {markdown}
+        </ReactMarkdown>
       </article>
     </main>
   );
