@@ -1,15 +1,10 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import {
-  Description,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-} from "@headlessui/react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useSearchParams } from "next/navigation";
+import { FaCommentDots, FaTimes, FaPaperPlane } from "react-icons/fa";
 import queryPrompts from "../lib/utils/queryPrompts.json";
 
 type ChatMessage = { role: string; content: string; reasoning?: string };
@@ -95,9 +90,9 @@ const ImmanuelAI = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           messages: nextMessages,
-          previous_response_id: previousResponseId
+          previous_response_id: previousResponseId,
         }),
       });
 
@@ -106,12 +101,11 @@ const ImmanuelAI = () => {
       }
 
       const data = await response.json();
-      
-      // Persist response id for follow-up turns
+
       if (data?.response_id) {
         setPreviousResponseId(data.response_id as string);
       }
-      
+
       appendAssistantMessage(data.output_text ?? data.content ?? "");
     } catch (error) {
       console.error("Error fetching response:", error);
@@ -121,9 +115,6 @@ const ImmanuelAI = () => {
       setLoading(false);
     }
   }, [appendAssistantMessage, appendErrorMessage, previousResponseId]);
-
-  const openDialog = () => setIsOpen(true);
-  const closeDialog = () => setIsOpen(false);
 
   const handleSendMessage = async () => {
     if (loading) return;
@@ -144,7 +135,6 @@ const ImmanuelAI = () => {
     }
   };
 
-  // Scroll to the latest message
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -179,116 +169,112 @@ const ImmanuelAI = () => {
 
   return (
     <>
-      <button
-        onClick={openDialog}
-        className="p-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-md shadow-lg cursor-pointer hover:from-blue-600 hover:to-purple-600 transition duration-300"
+      {/* Chat Widget */}
+      <div
+        className={`fixed bottom-24 right-6 z-50 w-80 sm:w-96 h-[480px] rounded-2xl shadow-2xl flex flex-col bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 transition-all duration-300 ${
+          isOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
       >
-        ImmanuelAI 🤖
-      </button>
-
-      <Dialog open={isOpen} onClose={closeDialog} className="relative z-10">
-        <div className="fixed inset-0 bg-black/75" aria-hidden="true" />
-        <div className="fixed inset-0 flex items-center justify-center p-4">
-          {/* Increase the max width and padding of the dialog */}
-          <DialogPanel className="max-w-2xl w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-            <DialogTitle className="text-lg font-bold text-gray-900 dark:text-gray-100">
-              ImmanuelAI 🤖
-            </DialogTitle>
-            <Description className="mt-1 text-gray-500 dark:text-gray-400">
-              Ask me anything, and I'll try my best to help!
-            </Description>
-
-            {/* Chat Messages */}
-            <div className="mt-4 h-80 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded-md p-2">
-              {messages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`mb-2 p-2 rounded-md ${
-                      msg.role === "user"
-                        ? "bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-white"
-                        : "bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                    }`}
-                  >
-                    {msg.role === "assistant" ? (
-                      <>
-                        {msg.reasoning && (
-                          <details className="mt-2">
-                            <summary className="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-300">
-                              Show reasoning
-                            </summary>
-                            <div className="mt-1 px-2 prose dark:prose-invert text-sm italic text-gray-700 dark:text-gray-300">
-                              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                                {msg.reasoning}
-                              </ReactMarkdown>
-                            </div>
-                          </details>
-                        )}
-                      
-                        <div className="mt-2 prose prose-md dark:prose-invert">
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {msg.content}
-                          </ReactMarkdown>
-                        </div>                        
-                      </>
-                    ) : (
-                      <div className="prose prose-md dark:prose-invert">
-                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {msg.content}
-                          </ReactMarkdown>
-                      </div>
-                    )}
-                  </div>
-                ))}
-
-              {/* Loading state message */}
-              {loading && (
-                <div className="mb-2 p-2 rounded-md bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
-                  Thinking...
-                </div>
-              )}
-
-              {/* Reference element for scrolling */}
-              <div ref={messagesEndRef} />
-            </div>
-
-            {/* User Input */}
-            <div className="mt-4 flex items-center">
-            <textarea
-                className="flex-grow p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring focus:ring-blue-300 dark:focus:ring-blue-600"
-                rows={1}
-                placeholder="Type your message..."
-                value={userInput}
-                onChange={(e) => setUserInput(e.target.value)}
-                onKeyDown={handleInputKeyDown}
-                onCompositionStart={() => (isComposingRef.current = true)}
-                onCompositionEnd={() => (isComposingRef.current = false)}
-                aria-label="Chat input. Press Enter to send, Shift+Enter for a new line."
-              />
-              <button
-                onClick={handleSendMessage}
-                className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md cursor-pointer hover:bg-blue-600 transition duration-300"
-                disabled={loading} // Disable button while loading
-              >
-                Send
-              </button>
-            </div>
-
-            {/* Message for user feedback */}
-            <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-              If you have any concerns or questions about ImmanuelAI, please use
-              the repo's{" "}
-              <a
-                href="https://github.com/immanuel-peter/digital-resume/issues"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline"
-              >
-                Issues tab
-              </a>.
-            </p>
-          </DialogPanel>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+            ImmanuelAI
+          </span>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors cursor-pointer"
+            aria-label="Close chat"
+          >
+            <FaTimes size={14} />
+          </button>
         </div>
-      </Dialog>
+
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-3 space-y-2">
+          {messages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+            >
+              <div
+                className={`max-w-[80%] px-3 py-2 rounded-xl text-sm ${
+                  msg.role === "user"
+                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
+                    : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                }`}
+              >
+                {msg.role === "assistant" ? (
+                  <>
+                    {msg.reasoning && (
+                      <details className="mb-1">
+                        <summary className="cursor-pointer select-none text-xs text-gray-500 dark:text-gray-400">
+                          Show reasoning
+                        </summary>
+                        <div className="mt-1 prose prose-sm dark:prose-invert text-xs italic">
+                          <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                            {msg.reasoning}
+                          </ReactMarkdown>
+                        </div>
+                      </details>
+                    )}
+                    <div className="prose prose-sm dark:prose-invert">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {msg.content}
+                      </ReactMarkdown>
+                    </div>
+                  </>
+                ) : (
+                  <p className="whitespace-pre-wrap">{msg.content}</p>
+                )}
+              </div>
+            </div>
+          ))}
+
+          {loading && (
+            <div className="flex justify-start">
+              <div className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 rounded-xl text-sm">
+                Thinking...
+              </div>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Input */}
+        <div className="flex items-end gap-2 px-3 py-3 border-t border-gray-200 dark:border-gray-700">
+          <textarea
+            className="flex-grow p-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-500 resize-none"
+            rows={1}
+            placeholder="Ask me anything..."
+            value={userInput}
+            onChange={(e) => setUserInput(e.target.value)}
+            onKeyDown={handleInputKeyDown}
+            onCompositionStart={() => (isComposingRef.current = true)}
+            onCompositionEnd={() => (isComposingRef.current = false)}
+            aria-label="Chat input. Press Enter to send, Shift+Enter for a new line."
+          />
+          <button
+            onClick={handleSendMessage}
+            disabled={loading}
+            className="p-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors disabled:opacity-50"
+            aria-label="Send message"
+          >
+            <FaPaperPlane size={14} />
+          </button>
+        </div>
+      </div>
+
+      {/* FAB */}
+      <button
+        onClick={() => setIsOpen((o) => !o)}
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-lg flex items-center justify-center hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors cursor-pointer"
+        aria-label="Open ImmanuelAI chat"
+      >
+        <FaCommentDots size={22} />
+      </button>
     </>
   );
 };

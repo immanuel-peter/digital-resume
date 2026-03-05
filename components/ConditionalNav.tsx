@@ -17,7 +17,7 @@ export default function ConditionalNav() {
     <div className="fixed top-4 left-4 z-50">
       <Link
         href="/"
-        className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 shadow-md rounded-full text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 transition-colors duration-200"
+        className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 shadow-md rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
       >
         <FaArrowLeft size={16} />
         <span className="text-sm font-medium">Home</span>

@@ -1,6 +1,7 @@
-import React, { Suspense } from "react";
-import ImmanuelAI from "./ImmanuelAI";
+import React from "react";
 import Link from "next/link";
+import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 type AboutProps = {
   totalDownloadsAllTime: number;
@@ -16,19 +17,60 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
       id="about"
       className="flex flex-col justify-center py-10 px-6 md:px-16 bg-gray-50 dark:bg-gray-900"
     >
-      <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">
-        Hey, I'm Immanuel Peter! 👋
-      </h1>
-      <div className="flex flex-col md:flex-row items-center justify-between w-full">
+      <div className="flex flex-col md:flex-row items-start justify-between w-full">
         {/* Left Section */}
-        <div className="text-center md:text-left md:w-2/3 space-y-4">
-          <p className="text-lg text-gray-700 dark:text-gray-300">
+        <div className="md:w-2/3 space-y-3">
+          <h1 className="text-4xl font-extrabold text-gray-800 dark:text-gray-100">
+            Immanuel Peter
+          </h1>
+          <p className="text-base text-gray-500 dark:text-gray-400">
+            Seeking SWE &amp; ML Engineering internships · CS & Physics @ UChicago &apos;28
+          </p>
+
+          {/* Contact icons */}
+          <div className="flex items-center gap-4 pt-1">
+            <a
+              href="mailto:ipeter@uchicago.edu"
+              aria-label="Email"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              <FaEnvelope size={18} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/immanuel-peter/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              <FaLinkedin size={18} />
+            </a>
+            <a
+              href="https://github.com/immanuel-peter"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              <FaGithub size={18} />
+            </a>
+            <a
+              href="https://x.com/moby763canary21"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter"
+              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
+            >
+              <FaXTwitter size={18} />
+            </a>
+          </div>
+
+          <p className="text-lg text-gray-700 dark:text-gray-300 pt-2">
             My Hugging Face datasets have a total of{" "}
-            {formattedTotalDownloads} downloads!
+            {formattedTotalDownloads} downloads.
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Need a quick crash course on my background and experience? Check out
-            my{" "}
+            Need a quick crash course on me? Check out my{" "}
             <Link
               href="/resume.pdf"
               target="_blank"
@@ -38,12 +80,6 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
               resume
             </Link>.
           </p>
-          <p className="text-lg text-gray-700 dark:text-gray-300">
-            Want to dive deeper into my journey? Let's have a chat with{" "}
-            <Suspense fallback={<span>ImmanuelAI 🤖</span>}>
-              <ImmanuelAI />
-            </Suspense>
-          </p>
         </div>
 
         {/* Profile Image */}
@@ -51,16 +87,9 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
           <img
             src="/ipeter.jpg"
             alt="Immanuel Peter"
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg ring-4 ring-blue-300 dark:ring-blue-600"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg ring-4 ring-gray-300 dark:ring-gray-600"
           />
         </div>
-      </div>
-
-      {/* Bottom Section: Add an Interactive or Motivational Quote */}
-      <div>
-        <p className="mt-4 text-xl font-semibold text-gray-800 dark:text-gray-100">
-          "Engineering the future, one line of code at a time." 🌍💻
-        </p>
       </div>
     </div>
   );
