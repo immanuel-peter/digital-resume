@@ -11,12 +11,11 @@ const Navbar = () => {
 
   const sections = [
     "about",
-    "skills",
     "experience",
     "projects",
     "education",
     // "certifications",
-    "contact",
+    // "contact",
   ];
 
   // Apply stored theme & highlight on scroll
@@ -85,8 +84,8 @@ const Navbar = () => {
                 onClick={() => scrollToSection(sec)}
                 className={`text-sm font-medium px-3 py-2 rounded-full transition-colors duration-200 cursor-pointer ${
                   activeSection === sec
-                    ? "bg-blue-600 text-white"
-                    : "text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+                    ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
               >
                 {sec.charAt(0).toUpperCase() + sec.slice(1)}
@@ -98,7 +97,7 @@ const Navbar = () => {
           <li>
             <Link
               href="/blog"
-              className="text-sm font-medium px-3 py-2 rounded-full transition-colors duration-200 cursor-pointer text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+              className="text-sm font-medium px-3 py-2 rounded-full transition-colors duration-200 cursor-pointer text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
               Blog
             </Link>
@@ -108,7 +107,7 @@ const Navbar = () => {
           <li>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 cursor-pointer"
+              className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
             >
               {isDarkMode ? (
                 <FaSun className="text-yellow-500" size={18} />
@@ -128,8 +127,8 @@ const Navbar = () => {
                   onClick={() => scrollToSection(sec)}
                   className={`w-full text-center font-medium px-4 py-3 rounded-lg transition-colors duration-200 cursor-pointer ${
                     activeSection === sec
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+                      ? "bg-gray-900 text-white dark:bg-white dark:text-gray-900"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                   }`}
                 >
                   {sec.charAt(0).toUpperCase() + sec.slice(1)}
@@ -141,7 +140,7 @@ const Navbar = () => {
             <li className="w-full my-1">
               <Link
                 href="/blog"
-                className="w-full text-center font-medium px-4 py-3 rounded-lg transition-colors duration-200 cursor-pointer text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 block"
+                className="w-full text-center font-medium px-4 py-3 rounded-lg transition-colors duration-200 cursor-pointer text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 block"
                 onClick={() => setMenuOpen(false)}
               >
                 Blog
@@ -152,7 +151,7 @@ const Navbar = () => {
             <li className="w-full my-1 flex justify-center">
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700"
+                className="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
               >
                 {isDarkMode ? (
                   <FaSun className="text-yellow-500" size={18} />

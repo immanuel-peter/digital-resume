@@ -15,7 +15,6 @@ type ProjectCardProps = {
   githubUrl?: string;
   liveUrl?: string;
   status: string;
-  stat?: string;
 };
 
 const ProjectCard = ({
@@ -25,14 +24,13 @@ const ProjectCard = ({
   githubUrl,
   liveUrl,
   status,
-  stat,
 }: ProjectCardProps) => {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div className="rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 flex flex-col bg-slate-100 dark:bg-gray-800">
       <div className="p-4 flex-grow">
-        <h3 className="text-2xl font-semibold text-gray-800 dark:text-blue-400 mb-2">
+        <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
           {title}
         </h3>
         <p
@@ -42,14 +40,9 @@ const ProjectCard = ({
         >
           {description}
         </p>
-        {stat ? (
-          <p className="mt-3 text-sm font-semibold text-emerald-700 dark:text-emerald-400">
-            {stat}
-          </p>
-        ) : null}
         <button
           onClick={() => setExpanded(!expanded)}
-          className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-500 mt-2 flex items-center transition-colors duration-200 cursor-pointer"
+          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 mt-2 flex items-center transition-colors duration-200 cursor-pointer"
         >
           {expanded ? (
             <>
@@ -63,20 +56,14 @@ const ProjectCard = ({
         </button>
         <div className="mt-4 flex flex-wrap gap-2">
           <span
-            className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
-              status === "Ongoing"
-                ? "bg-green-300 text-green-800 dark:bg-green-500 dark:text-white"
-                : status === "Paused"
-                ? "bg-yellow-300 text-yellow-800 dark:bg-yellow-500 dark:text-white"
-                : "bg-blue-300 text-blue-800 dark:bg-blue-500 dark:text-white"
-            }`}
+            className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
           >
             {status}
           </span>
           {technologies.map((tech: string, index: number) => (
             <span
               key={index}
-              className="bg-blue-100 text-blue-600 dark:bg-blue-600 dark:text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm"
+              className="bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-xs font-medium shadow-sm"
             >
               {tech}
             </span>
@@ -86,20 +73,20 @@ const ProjectCard = ({
       <div className="mt-4 flex justify-between p-4 border-t border-gray-300 dark:border-gray-700">
         {githubUrl && (
           <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center text-gray-600 hover:text-blue-500 transition-colors duration-200 dark:text-gray-300 dark:hover:text-blue-500 cursor-pointer"
-        >
-          <FaGithub className="mr-2" /> GitHub
-        </a>
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:text-white cursor-pointer"
+          >
+            <FaGithub className="mr-2" /> GitHub
+          </a>
         )}
         {liveUrl && (
           <a
             href={liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center text-gray-600 hover:text-blue-500 transition-colors duration-200 dark:text-gray-300 dark:hover:text-blue-500 cursor-pointer"
+            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:text-white cursor-pointer"
           >
             <FaExternalLinkAlt className="mr-2" /> Live Demo
           </a>
@@ -109,192 +96,81 @@ const ProjectCard = ({
   );
 };
 
-type ProjectsProps = {
-  datasetDownloads?: {
-    multimodal: number;
-    images: number;
-  };
-};
-
-const Projects = ({ datasetDownloads }: ProjectsProps) => {
-  const downloadsFormatter = new Intl.NumberFormat("en-US");
-  const multimodalDownloads =
-    typeof datasetDownloads?.multimodal === "number"
-      ? downloadsFormatter.format(datasetDownloads.multimodal)
-      : null;
-  const imagesDownloads =
-    typeof datasetDownloads?.images === "number"
-      ? downloadsFormatter.format(datasetDownloads.images)
-      : null;
+const Projects = () => {
   const projects = [
     {
-      title: "Matchbox",
-      description: "An AI-powered research matching platform that connects university students with labs using semantic search and LLM-based fit scoring. The system streamlines the application process with a centralized portal, replacing fragmented email workflows with automated candidate discovery, resume parsing, and compatibility ranking. Built as a scalable, serverless application on Google Cloud Platform with a microservices architecture.",
-      technologies: [
-        "Next.js",
-        "React",
-        "TypeScript",
-        "FastAPI",
-        "Python",
-        "Google Cloud Platform",
-        "Cloud Run",
-        "Terraform",
-        "ChromaDB",
-        "OpenAI API",
-        "Firestore",
-        "Docker"
-      ],
-      liveUrl: "https://matchbox.eduspheretech.com",
-      status: "Ongoing",
+      title: "Hostess",
+      description:
+        "The Vercel for multi-service deployments. A Go CLI that reads a simple config file and auto-generates Kubernetes manifests for any number of services, handling routing, secrets, and scaling out of the box. Designed to eliminate the boilerplate of multi-service K8s deployments.",
+      technologies: ["Go", "Kubernetes", "Docker", "CLI"],
+      liveUrl: "https://hostess.sh",
+      status: "Completed",
     },
     {
-      title: "Qwen vLLM on GKE",
-      description: "A cloud-native deployment pipeline for serving Qwen models on Google Kubernetes Engine (GKE) Autopilot. This project automates infrastructure orchestration, provisioning NVIDIA T4 GPUs and deploying vLLM to create a high-throughput, OpenAI-compatible inference endpoint within a scalable Kubernetes environment.",
+      title: "Redis Operator",
+      description:
+        "A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone, sentinel, and cluster modes with direct pod and PVC management. Implements a fencing-first failover strategy to prevent split-brain scenarios and ensure data consistency during node failures.",
       technologies: [
-        "Google Kubernetes Engine",
-        "vLLM",
+        "Go",
         "Kubernetes",
-        "Google Cloud Platform",
-        "Bash",
-        "GPUs",
-        "YAML",
-        "Python"
+        "Redis",
+        "Operator SDK",
+        "Sentinel",
       ],
-      githubUrl: "https://github.com/immanuel-peter/qwen-vllm-gke",
+      githubUrl: "https://github.com/howl-cloud/redis-operator",
       status: "Completed",
     },
     {
       title: "AutoMoE",
-      description: "A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. This approach uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.",
+      description:
+        "A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. Uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.",
       technologies: [
         "Python",
         "PyTorch",
-        "PyTorch DDP",
         "CUDA",
         "CARLA",
         "Hugging Face",
-        "NumPy",
-        "Linux",
-        "Bash",
-        "Nvidia Brev"
       ],
       githubUrl: "https://github.com/immanuel-peter/self-driving-model",
       status: "Paused",
     },
     {
-      title: "CARLA Autopilot Multimodal Dataset",
-      description: "A large-scale open dataset for autonomous driving research, featuring 82K+ synchronized samples with RGB camera views, semantic segmentation, LiDAR point clouds, 2D bounding boxes, and detailed ego-vehicle states. Built in CARLA with varied weather, maps, and traffic to support tasks like object detection, sensor fusion, imitation learning, and reinforcement learning.",
-      technologies: [
-        "Python",
-        "CARLA",
-        "NumPy",
-        "Hugging Face Datasets",
-        "Linux",
-        "Bash"
-      ],
-      githubUrl: "https://github.com/immanuel-peter",
-      liveUrl: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset",
-      status: "Completed",
-      stat: multimodalDownloads
-        ? `All-time downloads: ${multimodalDownloads}`
-        : undefined,
-    },
-    {
-      title: "CARLA Autopilot Images Dataset",
-      description: "An open, multi-camera dataset (~188 GB, 68k frames) generated in CARLA with synchronized images, vehicle kinematics, control signals, traffic density, and collision logs. Designed for imitation learning, vision-to-control benchmarks, and multimodal self-driving research. Released with a reproducible collection pipeline and Hugging Face integration.",
-      technologies: [
-        "Python",
-        "CARLA",
-        "NumPy",
-        "Hugging Face Datasets",
-        "Linux",
-        "Bash"
-      ],
-      githubUrl: "https://github.com/immanuel-peter",
-      liveUrl: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-images",
-      status: "Completed",
-      stat: imagesDownloads
-        ? `All-time downloads: ${imagesDownloads}`
-        : undefined,
-    },
-    {
-      title: "Mini JAX ViT",
+      title: "Launchpad",
       description:
-        "A compact Vision Transformer implemented from scratch in JAX/Flax. Includes patch embedding, multi-head self-attention, MLP blocks, and a clear training loop for image classification, focused on readability and educational value.",
-      technologies: ["JAX", "Flax", "NumPy"],
-      githubUrl: "https://github.com/immanuel-peter/jax-vit",
-      status: "Completed",
-    },
-    {
-      title: "GovHub",
-      description: "GitHub for Government!",
+        "AI-powered student–startup matching platform. Uses pgvector for semantic search across student profiles and startup listings, with async BullMQ scoring pipelines that rank candidates by fit. Helps early-stage startups find talent and students discover opportunities aligned with their skills.",
       technologies: [
-        "React",
-        "Node.js",
         "Next.js",
         "TypeScript",
-        "Tailwind CSS",
-        "GitHub",
-        "Congress.gov API",
-      ],
-      githubUrl: "https://github.com/immanuel-peter/govhub",
-      liveUrl: "https://govhub-five.vercel.app",
-      status: "Ongoing",
-    },
-    {
-      title: "AI Commit",
-      description:
-        "A bash script that uses OpenAI's GPT-4.1-nano model to automatically generate meaningful commit messages based on your staged changes.",
-      technologies: ["Bash", "OpenAI API"],
-      githubUrl: "https://github.com/immanuel-peter/ai-commit",
-      status: "Completed",
-    },
-    {
-      title: "LocalRAG",
-      description:
-        "LocalRAG is a terminal-based LLM chat tool that provides infinite memory via local vector search. Designed as a privacy-first alternative to ChatGPT/Claude, it embeds chat history into FAISS and retrieves relevant past context for smarter replies. Users can save conversations, switch models mid-session, and continue prior chats seamlessly. Built with modular CLI components and persistent local storage, LocalRAG demonstrates RAG principles, efficient context injection, and LLM interfacing — all without sending data to any external server.",
-      technologies: [
-        "Python",
-        "FAISS",
-        "Hugging Face Transformers",
-        "OpenAI API",
-        "Anthropic API",
-        "Click",
-        "Rich",
-      ],
-      githubUrl: "https://github.com/immanuel-peter/localrag",
-      status: "Completed",
-    },
-    {
-      title: "Semantic Image Search Engine",
-      description:
-        "A full-stack semantic image search application using FastAPI, PyTorch, and Next.js. The project leverages OpenAI's CLIP model to enable efficient text-to-image querying. Users can search for images from a preloaded random dataset based on natural language queries. The application showcases API integration with the Unsplash API for random image loading and features a responsive frontend built with Tailwind CSS.",
-      technologies: [
-        "Python",
         "FastAPI",
-        "PyTorch",
-        "Hugging Face Transformers",
-        "Next.js",
-        "Tailwind CSS",
-        "Unsplash API",
+        "pgvector",
+        "BullMQ",
+        "PostgreSQL",
       ],
-      githubUrl: "https://github.com/immanuel-peter/semantic-image-search",
+      liveUrl: "https://trylaunchpad.xyz",
       status: "Completed",
     },
     {
-      title: "CodingOH Twitter Bot",
+      title: "Matchbox",
       description:
-        "The CodingOH Twitter Bot is a Python-based bot designed to engage the developer community on Twitter with programming insights, tips, and humor. By leveraging OpenAI's GPT-4 model and the Tweepy library, this bot generates and posts tweets every 12 hours, providing a blend of educational and entertaining content.",
-      technologies: ["Python", "OpenAI", "Tweepy", "GitHub Actions"],
-      githubUrl: "https://github.com/immanuel-peter/codingoh_x_bot",
+        "An AI-powered research matching platform that connects university students with labs using semantic search and LLM-based fit scoring. Streamlines the application process with a centralized portal, replacing fragmented email workflows with automated candidate discovery, resume parsing, and compatibility ranking.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "FastAPI",
+        "Google Cloud Platform",
+        "ChromaDB",
+        "OpenAI API",
+      ],
+      liveUrl: "https://matchbox.eduspheretech.com",
       status: "Completed",
     },
     {
-      title: "Portfolio Website",
+      title: "Grok Review",
       description:
-        "This portfolio website highlights my projects, skills, experience, and certifications. It features ImmanuelAI, an interactive component that provides personalized answers to visitor inquiries about me. The site is developed with React and styled using Tailwind CSS, and it is hosted on Vercel.",
-      technologies: ["React", "Tailwind CSS", "Node.js", "OpenAI", "Vercel"],
-      githubUrl: "https://github.com/immanuel-peter/digital-resume",
+        "Turns any public GitHub PR URL into a streaming AI code review powered by Grok-4. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.",
+      technologies: ["Next.js", "TypeScript", "Grok API", "GitHub API"],
+      githubUrl: "https://github.com/immanuel-peter/grokreview",
+      liveUrl: "https://grokreq.com",
       status: "Completed",
     },
   ];

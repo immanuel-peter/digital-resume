@@ -8,18 +8,13 @@ const Contact = () => {
       <div className="max-w-4xl mx-auto text-center">
         {/* Header */}
         <h2 className="text-5xl font-extrabold text-gray-800 dark:text-white mb-8">
-          Get In Touch
+          Get In Touch!
         </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-6 text-lg">
-          Whether you want to reach out for inquiries, collaborations, or just a
-          friendly hello, feel free to drop me a line or connect with me on
-          social media!
-        </p>
-
+        
         {/* Email Button */}
         <a
           href="mailto:ipeter@uchicago.edu"
-          className="inline-block mb-8 px-8 py-4 bg-blue-600 text-white font-bold text-xl rounded-full shadow-lg hover:bg-blue-700 transition duration-300"
+          className="inline-block mb-8 px-8 py-4 bg-gray-900 text-white font-bold text-xl rounded-full shadow-lg hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200 transition duration-300"
         >
           <FaEnvelope className="inline-block mr-3" /> Email Me
         </a>
@@ -30,7 +25,7 @@ const Contact = () => {
             href="https://www.linkedin.com/in/immanuel-peter/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 text-4xl hover:text-blue-600 dark:hover:text-blue-700 transition duration-300"
+            className="text-gray-600 dark:text-gray-400 text-4xl hover:text-gray-900 dark:hover:text-white transition duration-300"
           >
             <FaLinkedin />
           </a>
@@ -49,22 +44,6 @@ const Contact = () => {
             className="text-gray-600 dark:text-gray-400 text-4xl hover:text-black dark:hover:text-gray-100 transition duration-300"
           >
             <FaXTwitter />
-          </a>
-          <a
-            href="https://www.instagram.com/ipeter.tech/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 text-4xl hover:text-pink-500 dark:hover:text-pink-600 transition duration-300"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://www.threads.net/@ipeter.tech/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 dark:text-gray-400 text-4xl hover:text-black dark:hover:text-gray-100 transition duration-300"
-          >
-            <FaThreads />
           </a>
         </div>
       </div>

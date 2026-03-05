@@ -34,7 +34,7 @@ const EducationCard = ({
           />
         </div>
       )}
-      <h3 className="text-2xl font-semibold text-gray-800 dark:text-blue-400 mb-1">
+      <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-1">
         {fieldOfStudy}
       </h3>
       <h4 className="text-lg text-gray-600 dark:text-gray-300 mb-2">
@@ -72,20 +72,7 @@ const Education = () => {
         "Systems Programming II",
         "Mathematical Foundations of Machine Learning",
         "Discrete Mathematics",
-      ],
-      sealImage: SEAL_IMAGES["University of Chicago"],
-    },
-    {
-      institution: "University of Chicago",
-      degree: "Bachelor of Arts",
-      fieldOfStudy: "Mathematics",
-      year: "September 2024 - June 2028",
-      classes: [
-        "Introduction to Proofs in Analysis",
-        "Abstract Linear Algebra",
-        "Analysis in Rn I",
-        "Analysis in Rn II",
-        "Mathematical Foundations of Machine Learning",
+        "Theory of Algorithms and Machine Learning",
       ],
       sealImage: SEAL_IMAGES["University of Chicago"],
     },
@@ -99,6 +86,7 @@ const Education = () => {
         "Electricity and Magnetism",
         "Waves, Optics, and Heat",
         "Intermediate Mechanics",
+        "Quantum Mechanics I",
       ],
       sealImage: SEAL_IMAGES["University of Chicago"],
     },
