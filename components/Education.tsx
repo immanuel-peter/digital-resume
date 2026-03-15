@@ -72,7 +72,8 @@ const Education = () => {
         "Systems Programming II",
         "Mathematical Foundations of Machine Learning",
         "Discrete Mathematics",
-        "Theory of Algorithms and Machine Learning",
+        "Theory of Algorithms",
+        "Machine Learning"
       ],
       sealImage: SEAL_IMAGES["University of Chicago"],
     },

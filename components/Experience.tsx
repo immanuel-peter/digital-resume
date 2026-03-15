@@ -43,6 +43,17 @@ const ExperienceItem = ({
 const Experience = () => {
   const experiences = [
     {
+      position: "Member of Technical Staff Intern",
+      company: "Tensormesh",
+      startDate: "June 2026",
+      endDate: "",
+      location: "Remote",
+      details: [
+        "Tensormesh, the team behind LMCache, helps enterprises cut GPU costs by offloading KV caches to external storage for reusability during inference.",
+      ],
+      boldDetails: [0],
+    },
+    {
       position: "Open Source Contributor",
       company: "Meta",
       startDate: "October 2025",

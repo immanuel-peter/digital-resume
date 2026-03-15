@@ -1,44 +1,32 @@
-# My Digital Resume
+# Immanuel Peter 
 
-Welcome to the repository for my digital resume. This site showcases my professional skills, experience, projects, and education. It also features Immanuel, an AI chatbot that can answer questions about me.
+Personal site for [ipeter.dev](https://ipeter.dev): a Next.js portfolio that combines a recruiter-facing homepage, long-form technical project write-ups, and an embedded AI assistant that answers questions about Immanuel Peter's background, experience, and projects.
 
-Visit the website here: [ipeter.dev](https://ipeter.dev)
+## What the app includes
 
-## Sections
+- A homepage with current bio, experience, projects, education, resume link, and external profile links
+- An embedded `ImmanuelAI` chat widget backed by the OpenAI Responses API
+- Technical blog pages for deeper architectural write-ups, including Matchbox and AutoMoE
+- Server-side Hugging Face dataset stats surfaced on the site and in the AutoMoE write-up
+- A published `llms.txt` file for LLM-friendly site discovery
 
-1. **About Me**: An introduction to who I am and what I do.
-2. **Skills**: A comprehensive list of my technical and soft skills.
-3. **Experience**: Details of my professional work history.
-4. **Projects**: Highlights of key projects I've worked on, with links to live demos or repositories.
-5. **Education**: Information about my academic background.
-7. **Contact Info**: How to get in touch with me.
-8. **ImmanuelAI**: An interactive AI that can answer questions about my background and skills.
+## Main routes
 
-## Technologies Used
+- `/`: homepage portfolio
+- `/blog`: technical writing index
+- `/blog/matchbox`: Matchbox architecture deep-dive
+- `/blog/moe-self-driving`: AutoMoE project write-up
+- `/resume.pdf`: downloadable resume
+- `/llms.txt`: LLM-friendly site summary
+- `/api/chat`: server route for the embedded AI assistant
+- `/api/huggingface-dataset`: server route for allowed dataset download counts
 
-- Next.js 15
+## Tech stack
+
+- Next.js 15 App Router
 - React 19
 - TypeScript
-- Tailwind CSS
-- OpenAI API
-- Headless UI
-- React Icons
-- React Markdown
-- Vercel
-
-## ImmanuelAI
-
-The AI chatbot is trained on my personal and professional information. It can answer questions about my skills, experience, and projects. To interact with the chatbot, visit the deployed website and click 'ImmanuelAI' in the About section.
-
-## Features
-
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Dark Mode Support**: Automatic theme switching based on system preferences
-- **AI Chatbot**: Interactive AI assistant powered by OpenAI
-- **Modern UI**: Built with Tailwind CSS for a clean, professional look
-- **TypeScript**: Full type safety throughout the application
-- **Performance Optimized**: Built with Next.js 15 and React 19 for optimal performance
-
-## Contribution
-
-While this is my digital resume, I welcome any suggestions for improvement. Please open an issue if you have any ideas or find any bugs.
+- Tailwind CSS 4
+- OpenAI Responses API via the official OpenAI SDK
+- `react-markdown` + `remark-gfm` for assistant rendering
+- Vercel Analytics and Speed Insights

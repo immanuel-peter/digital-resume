@@ -1,0 +1,30 @@
+# Immanuel Peter
+
+> Personal portfolio and technical profile for Immanuel Peter, a University of Chicago student focused on software engineering, systems, and AI/ML infrastructure.
+
+This site is a recruiter- and engineer-facing portfolio. Start with the homepage for the current overview, then use the resume and technical blog posts for compact evidence and deeper architectural context.
+
+Current high-signal facts: Immanuel is an incoming Member of Technical Staff Intern at Tensormesh, studies Computer Science and Physics at the University of Chicago, and uses this site to showcase engineering work, project write-ups, and contact information.
+
+## Core Pages
+
+- [Homepage](https://ipeter.dev/): Canonical overview of Immanuel Peter, including current headline, experience, selected projects, education, and contact links.
+- [Resume](https://ipeter.dev/resume.pdf): Concise resume with experience, projects, technical skills, and education.
+- [Blog](https://ipeter.dev/blog): Index of technical write-ups and project deep-dives.
+- [Inside the Architecture of Matchbox](https://ipeter.dev/blog/matchbox): Detailed architecture write-up for an AI-powered research matching platform.
+- [Building AutoMoE](https://ipeter.dev/blog/moe-self-driving): Technical write-up on a mixture-of-experts self-driving system built with PyTorch and CARLA.
+
+## Profiles
+
+- [GitHub](https://github.com/immanuel-peter): Source code, repositories, and open-source contributions.
+- [Hugging Face](https://huggingface.co/immanuelpeter): Public datasets and model-related work.
+- [LinkedIn](https://www.linkedin.com/in/immanuel-peter/): Professional profile and career summary.
+
+## Projects
+
+- [Hostess](https://hostess.sh): Go CLI for multi-service Kubernetes deployments that generates manifests, routing, secrets, and scaling configuration.
+- [Redis Operator](https://github.com/howl-cloud/redis-operator): Kubernetes operator for Redis with standalone, sentinel, and cluster modes plus fencing-first failover.
+- [Launchpad](https://trylaunchpad.xyz): AI-powered student-startup matching platform using semantic search and asynchronous scoring.
+- [Matchbox](https://matchbox.eduspheretech.com): AI-powered research matching platform with semantic retrieval and LLM-based fit scoring.
+- [Grok Review](https://grokreq.com): Tool that turns a public GitHub pull request URL into a streaming AI code review.
+- [AutoMoE](https://github.com/immanuel-peter/self-driving-model): Mixture-of-experts self-driving system for CARLA using PyTorch and CUDA.

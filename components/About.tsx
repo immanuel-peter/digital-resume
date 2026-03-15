@@ -24,7 +24,7 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
             Immanuel Peter
           </h1>
           <p className="text-base text-gray-500 dark:text-gray-400">
-            Seeking SWE &amp; ML Engineering internships · CS & Physics @ UChicago &apos;28
+            Incoming MTS Intern @ Tensormesh · CS & Physics @ UChicago &apos;28
           </p>
 
           {/* Contact icons */}
@@ -65,7 +65,10 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
             </a>
           </div>
 
-          <p className="text-lg text-gray-700 dark:text-gray-300 pt-2">
+          <p className="text-lg text-gray-700 dark:text-gray-300 pt-2 font-bold">
+            I'm joining Tensormesh as a Member of Technical Staff Intern this summer!
+          </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300">
             My Hugging Face datasets have a total of{" "}
             {formattedTotalDownloads} downloads.
           </p>

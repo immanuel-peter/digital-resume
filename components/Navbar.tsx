@@ -64,7 +64,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed top-4 left-0 right-0 z-50 flex justify-center">
-      <nav className="w-11/12 md:w-3/4 bg-white dark:bg-gray-800 shadow-md rounded-full flex flex-col items-center relative">
+      <nav className="w-11/12 lg:w-1/2 bg-white dark:bg-gray-800 shadow-md rounded-full flex flex-col items-center relative">
         {/* Mobile hamburger / close button */}
         <div className="flex md:hidden w-full justify-end px-4 py-3">
           <button
