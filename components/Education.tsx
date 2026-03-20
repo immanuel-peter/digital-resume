@@ -73,7 +73,8 @@ const Education = () => {
         "Mathematical Foundations of Machine Learning",
         "Discrete Mathematics",
         "Theory of Algorithms",
-        "Machine Learning"
+        "Machine Learning",
+        "Foundations of Distributed Systems",
       ],
       sealImage: SEAL_IMAGES["University of Chicago"],
     },
@@ -88,6 +89,7 @@ const Education = () => {
         "Waves, Optics, and Heat",
         "Intermediate Mechanics",
         "Quantum Mechanics I",
+        "Quantum Mechanics II",
       ],
       sealImage: SEAL_IMAGES["University of Chicago"],
     },

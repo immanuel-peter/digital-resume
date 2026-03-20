@@ -5,9 +5,18 @@ import { biography } from "@/public/biography";
 export const runtime = 'nodejs'
 export const maxDuration = 60
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai: OpenAI | null = null;
+
+function getOpenAI(): OpenAI {
+  if (!openai) {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) {
+      throw new Error("OPENAI_API_KEY is not set");
+    }
+    openai = new OpenAI({ apiKey });
+  }
+  return openai;
+}
 
 export async function POST(req: Request) {
   try {
@@ -26,7 +35,7 @@ export async function POST(req: Request) {
       }));
 
     const createPayload = {
-      model: "gpt-5-nano",
+      model: "gpt-5.4-nano",
       store: true,
       include: ["reasoning.encrypted_content", "web_search_call.action.sources"],
       reasoning: { effort: "low", summary: "auto" },
@@ -35,16 +44,6 @@ export async function POST(req: Request) {
       tools: [
         {
           type: "web_search",
-          filters: {
-            allowed_domains: [
-              "github.com",
-              "huggingface.co",
-              "ipeter.dev",
-              "linkedin.com",
-              "raw.githubusercontent.com",
-              "uchicago.box.com",
-            ],
-          },
         },
       ],
       input,
@@ -56,7 +55,7 @@ export async function POST(req: Request) {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const response = await openai.responses.create(createPayload as any);
+    const response = await getOpenAI().responses.create(createPayload as any);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getReasoningText = async (response: any) => {

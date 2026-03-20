@@ -45,11 +45,12 @@ const Experience = () => {
     {
       position: "Member of Technical Staff Intern",
       company: "Tensormesh",
-      startDate: "June 2026",
-      endDate: "",
-      location: "Remote",
+      startDate: "March 2026",
+      endDate: "Present",
+      location: "Foster City, CA",
       details: [
         "Tensormesh, the team behind LMCache, helps enterprises cut GPU costs by offloading KV caches to external storage for reusability during inference.",
+        "LMCache is used by teams at Nvidia, Google, Redis, AWS, Red Hat, Cohere, and more.",
       ],
       boldDetails: [0],
     },
@@ -79,16 +80,6 @@ const Experience = () => {
         "Built full-stack admin analytics dashboards with NestJS, Next.js, and Recharts, integrating SQL time-bucket aggregation and timezone-safe filtering to track user growth, active usage, and execution volume.",
       ],
       boldDetails: [0],
-    },
-    {
-      position: "Volunteer Tutor",
-      company: "Schoolhouse.world",
-      startDate: "January 2021",
-      endDate: "Present",
-      location: "Remote",
-      details: [
-        "170+ hours of free peer-to-peer tutoring across 730+ learners in nearly 40 countries; ranked top 0.1% of tutors by follower count on the platform.",
-      ],
     },
   ];
 

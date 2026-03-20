@@ -10,7 +10,7 @@ Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
 
 My Hugging Face datasets have over **9,000** downloads.
 
-Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume.pdf).
+Need a quick crash course on me? Check out my [resume](http://localhost:3003/resume.pdf).
 
 ---
 

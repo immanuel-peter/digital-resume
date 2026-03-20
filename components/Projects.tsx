@@ -101,7 +101,7 @@ const Projects = () => {
     {
       title: "Hostess",
       description:
-        "The Vercel for multi-service deployments. A Go CLI that reads a simple config file and auto-generates Kubernetes manifests for any number of services, handling routing, secrets, and scaling out of the box. Designed to eliminate the boilerplate of multi-service K8s deployments.",
+        "Multi-service deployment platform, positioned as Docker Compose for production. You declare services in hostess.yml, run hostess deploy, and the Go CLI ships to managed Kubernetes with generated manifests plus routing, secrets, environments, scheduled backups, custom domains, and a Studio dashboard — without hand-maintaining YAML sprawl.",
       technologies: ["Go", "Kubernetes", "Docker", "CLI"],
       liveUrl: "https://hostess.sh",
       status: "Completed",
@@ -169,7 +169,7 @@ const Projects = () => {
       description:
         "Turns any public GitHub PR URL into a streaming AI code review powered by Grok-4. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.",
       technologies: ["Next.js", "TypeScript", "Grok API", "GitHub API"],
-      githubUrl: "https://github.com/immanuel-peter/grokreview",
+      githubUrl: "https://github.com/immanuel-peter/grok-review",
       liveUrl: "https://grokreq.com",
       status: "Completed",
     },

@@ -1,0 +1,17 @@
+node_modules
+.next
+out
+.git
+.github
+.gitignore
+.env
+.env.*
+.cursor
+.vscode
+.idea
+*.swp
+.DS_Store
+*.md
+LICENSE
+coverage
+*.test.*

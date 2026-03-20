@@ -1,6 +1,6 @@
 import React from "react";
-import { FaEnvelope, FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
-import { FaXTwitter, FaThreads } from "react-icons/fa6";
+import { FaEnvelope, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Contact = () => {
   return (
@@ -10,7 +10,7 @@ const Contact = () => {
         <h2 className="text-5xl font-extrabold text-gray-800 dark:text-white mb-8">
           Get In Touch!
         </h2>
-        
+
         {/* Email Button */}
         <a
           href="mailto:ipeter@uchicago.edu"
