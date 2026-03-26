@@ -1,0 +1,18 @@
+version: "1.0"
+name: "digital-resume"
+description: "My digital resume"
+
+environments:
+  production:
+    domains: 
+      app: [ipeter.dev,www.ipeter.dev]
+  preview:
+    domains: 
+      app: [beta.ipeter.dev]
+
+services:
+  app:
+    type: nextjs
+    image: ghcr.io/immanuel-peter/digital-resume:latest
+    env:
+      OPENAI_API_KEY: ${secret:OPENAI_API_KEY}
