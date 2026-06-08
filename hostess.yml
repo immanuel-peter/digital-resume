@@ -13,7 +13,6 @@ environments:
     domains: 
       app: [ipeter.dev,www.ipeter.dev]
   preview:
-    branches: ["*"]
     ephemeral: true
     ttl: 24h
     domains: 

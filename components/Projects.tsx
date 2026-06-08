@@ -101,18 +101,13 @@ const Projects = () => {
     {
       title: "Hostess",
       description:
-        "Docker Compose for Production. You declare your entire stack — frontends, APIs, Postgres, Redis, and workers — in a single hostess.yml, run hostess deploy from a Cobra-powered CLI with a live Bubble Tea TUI, and the Go control plane (a Gin REST API plus a controller-runtime reconciler) generates Kubernetes manifests via client-go and applies them to managed clusters. Images build through Docker locally or GCP Cloud Build / Azure ACR Tasks; CloudNativePG backs managed Postgres, Infisical syncs secrets, and cert-manager with Let's Encrypt handles TLS. GKE and AKS infrastructure is provisioned with Pulumi, and a Next.js Studio dashboard surfaces deploys, metrics, and logs — all without hand-maintaining YAML sprawl.",
+        "Docker Compose for Production. Declare your whole stack — frontends, APIs, databases, caches, and workers — in one hostess.yml, run hostess deploy, and your entire app ships to managed Kubernetes with service discovery, managed databases, TLS, preview environments, and a Studio dashboard built in. No infrastructure to wire up, no YAML sprawl to maintain.",
       technologies: [
         "Go",
         "Gin",
-        "Cobra",
-        "Bubble Tea",
         "Kubernetes",
-        "CloudNativePG",
         "PostgreSQL",
         "Pulumi",
-        "GKE",
-        "AKS",
         "Docker",
         "Next.js",
       ],

@@ -69,6 +69,9 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
             I'm a Member of Technical Staff Intern at Tensormesh!
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
+            Check out <a href="https://hostess.sh" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline dark:text-blue-400">Hostess</a> — the Docker Compose for Production.
+          </p>
+          <p className="text-lg text-gray-700 dark:text-gray-300">
             My Hugging Face datasets have a total of{" "}
             {formattedTotalDownloads} downloads.
           </p>

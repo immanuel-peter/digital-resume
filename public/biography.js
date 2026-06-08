@@ -33,10 +33,8 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 ## Projects
 
 **1. Hostess**
-- Docker Compose for Production. A Go control plane — a Cobra CLI, a Gin REST API, and a controller-runtime reconciler — that reads a single hostess.yml and deploys your entire multi-service stack (frontends, APIs, Postgres, Redis, workers) to managed Kubernetes with automatic service discovery, magic variables, managed databases, TLS, and preview environments.
-- Generates Kubernetes manifests with client-go, builds images via Docker / GCP Cloud Build / Azure ACR Tasks, runs managed Postgres on CloudNativePG, syncs secrets through Infisical, and issues TLS via cert-manager + Let's Encrypt. GKE and AKS clusters are provisioned with Pulumi.
-- Tech: Go, Gin, Cobra, Bubble Tea, Kubernetes (client-go, controller-runtime), CloudNativePG, PostgreSQL, Redis, Pulumi, GKE/AKS, Docker, Infisical, cert-manager, and a Next.js + Tailwind + shadcn Studio dashboard.
-- Designed to eliminate the boilerplate of multi-service deployments: define your services, run one command, and the whole stack is live.
+- Docker Compose for Production. Declare your whole stack — frontends, APIs, databases, caches, and workers — in one hostess.yml, run hostess deploy, and your entire app ships to managed Kubernetes with service discovery, managed databases, TLS, preview environments, and a Studio dashboard built in. No infrastructure to wire up, no YAML sprawl to maintain.
+- Tech: Go, Gin, Cobra, Kubernetes (client-go, controller-runtime), CloudNativePG, PostgreSQL, Pulumi, GKE/AKS, Docker, Infisical, and a Next.js Studio dashboard.
 - [Live](https://hostess.sh)
 - Status: Completed
 
