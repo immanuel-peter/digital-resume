@@ -27,14 +27,16 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Current headline: Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
 
 ## Current Focus
-- Member of Technical Staff Intern at Tensormesh (LMCache team), March 2026 - present (Foster City, CA).
+- Member of Technical Staff Intern at Tensormesh (team behind LMCache), March 2026 - present (Foster City, CA).
 - Interested in technically challenging software engineering, systems, and AI/ML infrastructure work.
 
 ## Projects
 
 **1. Hostess**
-- The Vercel for multi-service deployments. A Go CLI that reads a simple config file and auto-generates Kubernetes manifests for any number of services, handling routing, secrets, and scaling out of the box.
-- Designed to eliminate the boilerplate of multi-service K8s deployments.
+- Docker Compose for Production. A Go control plane — a Cobra CLI, a Gin REST API, and a controller-runtime reconciler — that reads a single hostess.yml and deploys your entire multi-service stack (frontends, APIs, Postgres, Redis, workers) to managed Kubernetes with automatic service discovery, magic variables, managed databases, TLS, and preview environments.
+- Generates Kubernetes manifests with client-go, builds images via Docker / GCP Cloud Build / Azure ACR Tasks, runs managed Postgres on CloudNativePG, syncs secrets through Infisical, and issues TLS via cert-manager + Let's Encrypt. GKE and AKS clusters are provisioned with Pulumi.
+- Tech: Go, Gin, Cobra, Bubble Tea, Kubernetes (client-go, controller-runtime), CloudNativePG, PostgreSQL, Redis, Pulumi, GKE/AKS, Docker, Infisical, cert-manager, and a Next.js + Tailwind + shadcn Studio dashboard.
+- Designed to eliminate the boilerplate of multi-service deployments: define your services, run one command, and the whole stack is live.
 - [Live](https://hostess.sh)
 - Status: Completed
 

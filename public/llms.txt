@@ -46,11 +46,11 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 ## Projects
 
 ### [Hostess](https://hostess.sh/)
-> The Docker Compose for Production.
+> Docker Compose for Production.
 
-A Go CLI that reads a simple config file and auto-generates Kubernetes manifests for any number of services, handling routing, secrets, and scaling out of the box. Designed to eliminate the boilerplate of multi-service K8s deployments.
+A Go control plane — a Cobra CLI, a Gin REST API, and a controller-runtime reconciler — that reads a single hostess.yml and deploys an entire multi-service stack to managed Kubernetes. Generates manifests with client-go, builds images via Docker / GCP Cloud Build / Azure ACR Tasks, runs managed Postgres on CloudNativePG, syncs secrets through Infisical, and issues TLS via cert-manager + Let's Encrypt; GKE and AKS infrastructure is provisioned with Pulumi, with a Next.js Studio dashboard for deploys, metrics, and logs.
 
-`Go` `Kubernetes` `Docker` `CLI` · **Completed** · [Live Demo](https://hostess.sh)
+`Go` `Gin` `Cobra CLI` `Kubernetes` `CloudNativePG` `PostgreSQL` `Pulumi` `GKE` `AKS` `Docker` `Next.js` · **Completed** · [Live Demo](https://hostess.sh)
 
 ---
 
