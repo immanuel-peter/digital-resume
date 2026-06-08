@@ -44,7 +44,7 @@ At Quantum Rings: 19 PRs, 43 contributions, schema refactors, telemetry aggregat
 
 | Project | Description | Stack |
 |---------|-------------|-------|
-| **Hostess** | Docker Compose for Production | Go, Gin, Cobra, Kubernetes, CloudNativePG, Pulumi, Docker, Next.js |
+| **Hostess** | Docker Compose for Production | Go, Gin, Cobra, Kubernetes, PostgreSQL, Pulumi, Docker, Next.js |
 | **Redis Operator** | Kubernetes operator for Redis (standalone, sentinel, cluster) with fencing-first failover | Go, Kubernetes, Redis, Helm, Prometheus |
 | **AutoMoE** | MoE-based self-driving system for CARLA | Python, PyTorch, DDP, CUDA, CARLA, Hugging Face |
 | **Matchbox** | AI-powered research matching platform | Next.js, FastAPI, ChromaDB, GCP, OpenAI API |

@@ -101,7 +101,7 @@ const Projects = () => {
     {
       title: "Hostess",
       description:
-        "Docker Compose for Production. Declare your whole stack — frontends, APIs, databases, caches, and workers — in one hostess.yml, run hostess deploy, and your entire app ships to managed Kubernetes with service discovery, managed databases, TLS, preview environments, and a Studio dashboard built in. No infrastructure to wire up, no YAML sprawl to maintain.",
+        "Docker Compose for Production. Declare your whole stack in one hostess.yml, run hostess deploy, and your entire app ships to the cloud — service discovery, managed databases, TLS, and preview environments built in.",
       technologies: [
         "Go",
         "Gin",
