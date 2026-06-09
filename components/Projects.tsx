@@ -101,8 +101,16 @@ const Projects = () => {
     {
       title: "Hostess",
       description:
-        "Multi-service deployment platform, positioned as Docker Compose for production. You declare services in hostess.yml, run hostess deploy, and the Go CLI ships to managed Kubernetes with generated manifests plus routing, secrets, environments, scheduled backups, custom domains, and a Studio dashboard — without hand-maintaining YAML sprawl.",
-      technologies: ["Go", "Kubernetes", "Docker", "CLI"],
+        "Docker Compose for Production. Declare your whole stack in one hostess.yml, run hostess deploy, and your entire app ships to the cloud — service discovery, managed databases, TLS, and preview environments built in.",
+      technologies: [
+        "Go",
+        "Gin",
+        "Kubernetes",
+        "PostgreSQL",
+        "Pulumi",
+        "Docker",
+        "Next.js",
+      ],
       liveUrl: "https://hostess.sh",
       status: "Completed",
     },

@@ -27,14 +27,14 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Current headline: Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
 
 ## Current Focus
-- Member of Technical Staff Intern at Tensormesh (LMCache team), March 2026 - present (Foster City, CA).
+- Member of Technical Staff Intern at Tensormesh (team behind LMCache), March 2026 - present (Foster City, CA).
 - Interested in technically challenging software engineering, systems, and AI/ML infrastructure work.
 
 ## Projects
 
 **1. Hostess**
-- The Vercel for multi-service deployments. A Go CLI that reads a simple config file and auto-generates Kubernetes manifests for any number of services, handling routing, secrets, and scaling out of the box.
-- Designed to eliminate the boilerplate of multi-service K8s deployments.
+- Docker Compose for Production. Declare your whole stack — frontends, APIs, databases, caches, and workers — in one hostess.yml, run hostess deploy, and your entire app ships to the cloud with service discovery, managed databases, TLS, preview environments, and a Studio dashboard built in. No infrastructure to wire up, no YAML sprawl to maintain.
+- Tech: Go, Gin, Cobra, CloudNativePG, PostgreSQL, Pulumi, GCP/Azure, Docker, Infisical, and a Next.js Studio dashboard.
 - [Live](https://hostess.sh)
 - Status: Completed
 

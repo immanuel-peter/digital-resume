@@ -2,17 +2,26 @@ version: "1.0"
 name: "digital-resume"
 description: "My digital resume"
 
+repo:
+  provider: github
+  owner: immanuel-peter
+  name: digital-resume
+
 environments:
   production:
+    branch: master
     domains: 
       app: [ipeter.dev,www.ipeter.dev]
   preview:
+    ephemeral: true
+    ttl: 24h
     domains: 
       app: [beta.ipeter.dev]
 
 services:
   app:
     type: nextjs
-    image: ghcr.io/immanuel-peter/digital-resume:latest
+    build:
+      source: .
     env:
       OPENAI_API_KEY: ${secret:OPENAI_API_KEY}
