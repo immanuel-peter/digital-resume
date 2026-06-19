@@ -2,7 +2,7 @@
 
 Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
 
-[Email](mailto:ipeter@uchicago.edu) · [LinkedIn](https://www.linkedin.com/in/immanuel-peter) · [GitHub](https://github.com/immanuel-peter) · [Twitter/X](https://x.com/moby763canary21)
+[Email](mailto:hello@ipeter.dev) · [LinkedIn](https://www.linkedin.com/in/immanuel-peter) · [GitHub](https://github.com/immanuel-peter) · [Twitter/X](https://x.com/moby763canary21)
 
 ---
 

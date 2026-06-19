@@ -14,7 +14,7 @@ Portfolio and technical blog at [ipeter.dev](https://ipeter.dev). Built for engi
 | **Site** | [ipeter.dev](https://ipeter.dev) |
 | **LinkedIn** | [linkedin.com/in/immanuel-peter](https://www.linkedin.com/in/immanuel-peter/) |
 | **GitHub** | [github.com/immanuel-peter](https://github.com/immanuel-peter) |
-| **Email** | ipeter@uchicago.edu |
+| **Email** | hello@ipeter.dev |
 
 ---
 

@@ -49,8 +49,8 @@ const Experience = () => {
       endDate: "Present",
       location: "Foster City, CA",
       details: [
-        "Tensormesh, the team behind LMCache, helps enterprises cut GPU costs by offloading KV caches to external storage for reusability during inference.",
-        "LMCache is used by teams at Nvidia, Google, Redis, AWS, Red Hat, Cohere, and more.",
+        "Integrated Phoenix into Tensormesh's observability stack, adding OpenInference LLM tracing across router traffic and SDK/CLI surfaces for inspecting traces and spans.",
+        "Shipped the production rollout path across Terraform, Secret Manager, and Cloud Run, with focused tests and docs for instrumentation, clients, and deployment config.",
       ],
       boldDetails: [0],
     },

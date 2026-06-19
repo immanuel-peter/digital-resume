@@ -73,8 +73,10 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 ## Experience Highlights
 
 **Member of Technical Staff Intern, Tensormesh (March 2026 - Present, Foster City, CA)**
-- Tensormesh, the team behind LMCache, helps enterprises cut GPU costs by offloading KV caches to external storage for reusability during inference.
-- LMCache is used by teams at Nvidia, Google, Redis, AWS, Red Hat, Cohere, and more.
+- Integrated Phoenix into Tensormesh's observability stack, turning router traffic into OpenInference-compatible LLM traces and spans.
+- Built the supporting SDK and CLI surfaces for inspecting Phoenix traces and spans, including sync/async client support, docs, generated references, and tests.
+- Helped productionize the Phoenix rollout path across Terraform, Secret Manager, and Cloud Run, with deployment validation and environment configuration across all environments.
+- Contributed upstream vLLM Production Stack fixes for NVIDIA runtime defaults and router volume customization.
 
 **Open Source Contributor, Meta (October 2025)**
 - Contributed to Pyrefly, Meta's high-performance Python type checker and language server written in Rust.
@@ -117,7 +119,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Browse commits, readmes, and issue discussions for velocity, code clarity, and ownership.
 
 ## Contact
-- Email: ipeter@uchicago.edu
+- Email: hello@ipeter.dev
 - LinkedIn: https://linkedin.com/in/immanuel-peter/
 - GitHub: https://github.com/immanuel-peter/
 - Resume: https://ipeter.dev/resume.pdf
