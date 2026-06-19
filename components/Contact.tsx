@@ -13,7 +13,7 @@ const Contact = () => {
 
         {/* Email Button */}
         <a
-          href="mailto:ipeter@uchicago.edu"
+          href="mailto:hello@ipeter.dev"
           className="inline-block mb-8 px-8 py-4 bg-gray-900 text-white font-bold text-xl rounded-full shadow-lg hover:bg-gray-700 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200 transition duration-300"
         >
           <FaEnvelope className="inline-block mr-3" /> Email Me

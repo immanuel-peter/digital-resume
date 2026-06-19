@@ -2,7 +2,7 @@
 
 Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
 
-[Email](mailto:ipeter@uchicago.edu) · [LinkedIn](https://www.linkedin.com/in/immanuel-peter) · [GitHub](https://github.com/immanuel-peter) · [Twitter/X](https://x.com/moby763canary21)
+[Email](mailto:hello@ipeter.dev) · [LinkedIn](https://www.linkedin.com/in/immanuel-peter) · [GitHub](https://github.com/immanuel-peter) · [Twitter/X](https://x.com/moby763canary21)
 
 ---
 
@@ -19,8 +19,10 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 ### Member of Technical Staff Intern
 **Tensormesh** · March 2026 – Present · Foster City, CA
 
-- Tensormesh, the team behind LMCache, helps enterprises cut GPU costs by offloading KV caches to external storage for reusability during inference.
-- LMCache is used by teams at Nvidia, Google, Redis, AWS, Red Hat, Cohere, and more.
+- Integrated Phoenix into Tensormesh's observability stack, adding OpenInference LLM traces/spans for router traffic.
+- Built SDK and CLI support for inspecting Phoenix traces and spans, with sync/async clients, docs, generated references, and tests.
+- Helped productionize Phoenix through Terraform, Secret Manager, and Cloud Run configuration across all environments.
+- Contributed vLLM Production Stack fixes for NVIDIA runtime defaults and router volume customization.
 
 ---
 

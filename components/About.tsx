@@ -30,7 +30,7 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
           {/* Contact icons */}
           <div className="flex items-center gap-4 pt-1">
             <a
-              href="mailto:ipeter@uchicago.edu"
+              href="mailto:hello@ipeter.dev"
               aria-label="Email"
               className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors"
             >
