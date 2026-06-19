@@ -13,6 +13,7 @@
     "@ai-sdk/openai": "^2.0.14",
     "@ai-sdk/react": "^2.0.14",
     "@headlessui/react": "^2.2.4",
+    "@hostess/nextjs": "^0.1.1",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "ai": "^5.0.14",
