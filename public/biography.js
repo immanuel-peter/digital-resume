@@ -33,8 +33,8 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 ## Projects
 
 **1. Hostess**
-- Docker Compose for Production. Declare your whole stack — frontends, APIs, databases, caches, and workers — in one hostess.yml, run hostess deploy, and your entire app ships to the cloud with service discovery, managed databases, TLS, preview environments, and a Studio dashboard built in. No infrastructure to wire up, no YAML sprawl to maintain.
-- Tech: Go, Gin, Cobra, CloudNativePG, PostgreSQL, Pulumi, GCP/Azure, Docker, Infisical, and a Next.js Studio dashboard.
+- Hostess turns a single declarative stack file into a production deployment on Kubernetes. I built the end-to-end platform: a Go CLI and API that compile hostess.yml into multi-service workloads, a controller that reconciles database connection secrets after operators provision passwords, multi-cloud image builds (BuildKit / Cloud Build / ACR Tasks), GitHub App deploy-on-push with isolated PR preview environments, TLS-terminated external database access, Infisical-backed secrets, RBAC, and a Next.js Studio with service-specific metrics, traces, OpenAPI playground, and database admin.
+- Tech: Go, Gin, Cobra, controller-runtime, Kubernetes, CloudNativePG, HoWL Redis Operator, BuildKit, Pulumi, GCP/Azure, Infisical, Prometheus/OTel/Tempo, Next.js
 - [Live](https://hostess.sh)
 - Status: Completed
 

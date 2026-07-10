@@ -101,15 +101,21 @@ const Projects = () => {
     {
       title: "Hostess",
       description:
-        "Docker Compose for Production. Declare your whole stack in one hostess.yml, run hostess deploy, and your entire app ships to the cloud — service discovery, managed databases, TLS, and preview environments built in.",
+        "Docker Compose for Production: a declarative stack config is compiled into production K8s, with automated builds, service discovery, managed databases, secrets, Git-native previews, and framework-aware observability.",
       technologies: [
         "Go",
-        "Gin",
+        "controller-runtime",
         "Kubernetes",
-        "PostgreSQL",
-        "Pulumi",
+        "CloudNativePG",
+        "BuildKit",
         "Docker",
-        "Next.js",
+        "Prometheus",
+        "Grafana",
+        "OTel",
+        "Tempo",
+        "Pulumi",
+        "Azure",
+        "GCP"
       ],
       liveUrl: "https://hostess.sh",
       status: "Completed",
@@ -158,25 +164,10 @@ const Projects = () => {
       status: "Completed",
     },
     {
-      title: "Matchbox",
-      description:
-        "An AI-powered research matching platform that connects university students with labs using semantic search and LLM-based fit scoring. Streamlines the application process with a centralized portal, replacing fragmented email workflows with automated candidate discovery, resume parsing, and compatibility ranking.",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "FastAPI",
-        "Google Cloud Platform",
-        "ChromaDB",
-        "OpenAI API",
-      ],
-      liveUrl: "https://matchbox.eduspheretech.com",
-      status: "Completed",
-    },
-    {
       title: "Grok Review",
       description:
-        "Turns any public GitHub PR URL into a streaming AI code review powered by Grok-4. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.",
-      technologies: ["Next.js", "TypeScript", "Grok API", "GitHub API"],
+        "Turns any public GitHub PR URL into a streaming AI code review powered by Grok 4.5. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.",
+      technologies: ["Next.js", "TypeScript", "Grok API", "GitHub API", "PostgreSQL"],
       githubUrl: "https://github.com/immanuel-peter/grok-review",
       liveUrl: "https://grokreq.com",
       status: "Completed",

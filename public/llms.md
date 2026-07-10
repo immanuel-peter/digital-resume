@@ -8,9 +8,9 @@ Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
 
 **I'm a Member of Technical Staff Intern at Tensormesh!**
 
-My Hugging Face datasets have over **9,000** downloads.
+My Hugging Face datasets have over **15,000** downloads.
 
-Need a quick crash course on me? Check out my [resume](http://localhost:3003/resume.pdf).
+Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume.pdf).
 
 ---
 
@@ -19,8 +19,10 @@ Need a quick crash course on me? Check out my [resume](http://localhost:3003/res
 ### Member of Technical Staff Intern
 **Tensormesh** · March 2026 – Present · Foster City, CA
 
-- Tensormesh, the team behind LMCache, helps enterprises cut GPU costs by offloading KV caches to external storage for reusability during inference.
-- LMCache is used by teams at Nvidia, Google, Redis, AWS, Red Hat, Cohere, and more.
+- Integrated Phoenix into Tensormesh's observability stack, adding OpenInference LLM traces/spans for router traffic.
+- Built SDK and CLI support for inspecting Phoenix traces and spans, with sync/async clients, docs, generated references, and tests.
+- Helped productionize Phoenix through Terraform, Secret Manager, and Cloud Run configuration across all environments.
+- Contributed vLLM Production Stack fixes for NVIDIA runtime defaults and router volume customization.
 
 ---
 
@@ -48,9 +50,9 @@ Need a quick crash course on me? Check out my [resume](http://localhost:3003/res
 ### [Hostess](https://hostess.sh/)
 > Docker Compose for Production.
 
-Declare your whole stack — frontends, APIs, databases, caches, and workers — in one hostess.yml, run hostess deploy, and your entire app ships to the cloud with service discovery, managed databases, TLS, preview environments, and a Studio dashboard built in. No infrastructure to wire up, no YAML sprawl to maintain.
+Hostess turns a single declarative stack file into a production deployment on Kubernetes. I built the end-to-end platform: a Go CLI and API that compile hostess.yml into multi-service workloads, a controller that reconciles database connection secrets after operators provision passwords, multi-cloud image builds (BuildKit / Cloud Build / ACR Tasks), GitHub App deploy-on-push with isolated PR preview environments, TLS-terminated external database access, Infisical-backed secrets, RBAC, and a Next.js Studio with service-specific metrics, traces, OpenAPI playground, and database admin.
 
-`Go` `Gin` `Cobra CLI` `Kubernetes` `CloudNativePG` `PostgreSQL` `Pulumi` `GKE` `AKS` `Docker` `Next.js` · **Completed** · [Live Demo](https://hostess.sh)
+`Go` `Gin` `Cobra` `controller-runtime` `Kubernetes` `CloudNativePG` `Redis Operator` `BuildKit` `Cloud Build` `ACR Tasks` `Infisical` `Prometheus` `OpenTelemetry` `Tempo` `Next.js` `Pulumi` `GCP` `Azure` · **Completed** · [Live Demo](https://hostess.sh)
 
 ---
 
