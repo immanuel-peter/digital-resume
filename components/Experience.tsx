@@ -55,18 +55,6 @@ const Experience = () => {
       boldDetails: [0],
     },
     {
-      position: "Open Source Contributor",
-      company: "Meta",
-      startDate: "October 2025",
-      endDate: "October 2025",
-      location: "Remote",
-      details: [
-        "Contributed to Pyrefly, Meta's high-performance Python type checker and language server written in Rust.",
-        "Refactored the error summarization subsystem by enforcing standard naming conventions across module definitions and import paths.",
-      ],
-      boldDetails: [0],
-    },
-    {
       position: "Software Engineer Intern",
       company: "Quantum Rings",
       startDate: "June 2025",

@@ -51,21 +51,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - [Source](https://github.com/immanuel-peter/self-driving-model)
 - Status: Paused
 
-**4. Launchpad**
-- AI-powered student–startup matching platform. Uses pgvector for semantic search across student profiles and startup listings, with async BullMQ scoring pipelines that rank candidates by fit.
-- Helps early-stage startups find talent and students discover opportunities aligned with their skills.
-- [Live](https://trylaunchpad.xyz)
-- Status: Completed
-
-**5. Matchbox**
-- AI-powered research matching platform that connects university students with labs using semantic search and LLM-based fit scoring.
-- Architected on Google Cloud Platform (Cloud Run, Terraform IaC) with a Next.js frontend, FastAPI backend, ChromaDB for vector retrieval, and Firestore for structured data.
-- Implements a data pipeline that parses student resumes, generates vector embeddings, and uses OpenAI to produce reasoned fit scores for researchers.
-- Piloted at the University of Chicago and UChicago Booth School of Business.
-- [Live](https://matchbox.eduspheretech.com)
-- Status: Completed
-
-**6. Grok Review**
+**4. Grok Review**
 - Turns any public GitHub PR URL into a streaming AI code review powered by Grok-4. Paste a PR link and get instant, line-by-line feedback on logic, style, and potential bugs—streamed in real time.
 - [Live](https://grokreq.com) | [Source](https://github.com/immanuel-peter/grok-review)
 - Status: Completed
@@ -76,11 +62,6 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Integrated Phoenix into Tensormesh's observability stack, turning router traffic into OpenInference-compatible LLM traces and spans.
 - Built the supporting SDK and CLI surfaces for inspecting Phoenix traces and spans, including sync/async client support, docs, generated references, and tests.
 - Helped productionize the Phoenix rollout path across Terraform, Secret Manager, and Cloud Run, with deployment validation and environment configuration across all environments.
-- Contributed upstream vLLM Production Stack fixes for NVIDIA runtime defaults and router volume customization.
-
-**Open Source Contributor, Meta (October 2025)**
-- Contributed to Pyrefly, Meta's high-performance Python type checker and language server written in Rust.
-- Refactored the error summarization subsystem by enforcing standard naming conventions across module definitions and import paths.
 
 **Software Engineer Intern, Quantum Rings (Summer 2025)**
 - Delivered 19 PRs, 43 contributions, and 15 completed GitHub issues across the internship, adding ~15K LOC and removing ~3.6K LOC while reviewing code and driving schema refactors.
@@ -88,6 +69,17 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Implemented a telemetry aggregation background worker (AWS SQS + TypeORM) to asynchronously roll up user execution activity, improving scalability and simplifying downstream analytics queries.
 - Designed and deployed queue-driven execution processing to decouple heavy telemetry operations from the API, reducing request latency and enabling horizontal scaling.
 - Built full-stack admin analytics dashboards with NestJS, Next.js, and Recharts, integrating SQL time-bucket aggregation and timezone-safe filtering to track user growth, active usage, and execution volume.
+
+## Open Source Contributions
+
+**Brev CLI — Go**
+- Authored the core rsync-first file-transfer implementation with automatic SCP fallback and unit coverage. The original commits in [PR #297](https://github.com/brevdev/brev-cli/pull/297) were preserved in the maintainer-approved [continuation PR #423](https://github.com/brevdev/brev-cli/pull/423).
+
+**Pyrefly — Rust**
+- Submitted an upstream Rust cleanup in [Pyrefly PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from \`summarise\` to \`summarize\`.
+
+**vLLM Production Stack — Kubernetes / Helm**
+- Added router volume and mount configuration for read-only root filesystems in merged [PR #975](https://github.com/vllm-project/production-stack/pull/975); corrected the default NVIDIA runtime class and regenerated its CRD in merged [PR #974](https://github.com/vllm-project/production-stack/pull/974).
 
 ## Technical Skills
 - Languages: Python, Go, C++, JavaScript/TypeScript, Rust, SQL

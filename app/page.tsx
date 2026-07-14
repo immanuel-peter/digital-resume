@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import About from "@/components/About";
 import Experience from "@/components/Experience";
+import OpenSource from "@/components/OpenSource";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
 // import Contact from "@/components/Contact";
@@ -26,6 +27,7 @@ export default async function App() {
       <div className="pt-24">
         <About totalDownloadsAllTime={totalDownloadsAllTime} />
         <Experience />
+        <OpenSource />
         <Projects />
         <Education />
         {/* <Certifications /> */}

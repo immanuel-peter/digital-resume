@@ -12,6 +12,7 @@ const Navbar = () => {
   const sections = [
     "about",
     "experience",
+    "open-source",
     "projects",
     "education",
     // "certifications",
@@ -88,7 +89,9 @@ const Navbar = () => {
                     : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                 }`}
               >
-                {sec.charAt(0).toUpperCase() + sec.slice(1)}
+                {sec === "open-source"
+                  ? "Open Source"
+                  : sec.charAt(0).toUpperCase() + sec.slice(1)}
               </button>
             </li>
           ))}
@@ -131,7 +134,9 @@ const Navbar = () => {
                       : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                   }`}
                 >
-                  {sec.charAt(0).toUpperCase() + sec.slice(1)}
+                  {sec === "open-source"
+                    ? "Open Source"
+                    : sec.charAt(0).toUpperCase() + sec.slice(1)}
                 </button>
               </li>
             ))}

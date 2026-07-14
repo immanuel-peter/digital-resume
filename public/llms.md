@@ -22,15 +22,6 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 - Integrated Phoenix into Tensormesh's observability stack, adding OpenInference LLM traces/spans for router traffic.
 - Built SDK and CLI support for inspecting Phoenix traces and spans, with sync/async clients, docs, generated references, and tests.
 - Helped productionize Phoenix through Terraform, Secret Manager, and Cloud Run configuration across all environments.
-- Contributed vLLM Production Stack fixes for NVIDIA runtime defaults and router volume customization.
-
----
-
-### Open Source Contributor
-**Meta** · October 2025 · Remote
-
-- Contributed to Pyrefly, Meta's high-performance Python type checker and language server written in Rust.
-- Refactored the error summarization subsystem by enforcing standard naming conventions across module definitions and import paths.
 
 ---
 
@@ -42,6 +33,28 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 - Implemented a telemetry aggregation background worker (AWS SQS + TypeORM) to asynchronously roll up user execution activity, improving scalability and simplifying downstream analytics queries.
 - Designed and deployed queue-driven execution processing to decouple heavy telemetry operations from the API, reducing request latency and enabling horizontal scaling.
 - Built full-stack admin analytics dashboards with NestJS, Next.js, and Recharts, integrating SQL time-bucket aggregation and timezone-safe filtering to track user growth, active usage, and execution volume.
+
+---
+
+## Open Source Contributions
+
+### [Brev CLI](https://github.com/brevdev/brev-cli)
+
+- Authored the core rsync-first file-transfer implementation with automatic SCP fallback and unit coverage.
+- The original commits in [PR #297](https://github.com/brevdev/brev-cli/pull/297) were preserved in the maintainer-approved [continuation PR #423](https://github.com/brevdev/brev-cli/pull/423).
+
+---
+
+### [Pyrefly](https://github.com/facebook/pyrefly)
+
+- Submitted an upstream Rust cleanup in [PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from `summarise` to `summarize`.
+
+---
+
+### [vLLM Production Stack](https://github.com/vllm-project/production-stack)
+
+- Added router volume and mount configuration for read-only root filesystems in merged [PR #975](https://github.com/vllm-project/production-stack/pull/975).
+- Corrected the default NVIDIA runtime class and regenerated its CRD in merged [PR #974](https://github.com/vllm-project/production-stack/pull/974).
 
 ---
 
@@ -67,20 +80,6 @@ A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone,
 A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. Uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.
 
 `Python` `PyTorch` `CUDA` `CARLA` `Hugging Face` · **Paused** · [GitHub](https://github.com/immanuel-peter/self-driving-model) · [Datasets](https://huggingface.co/immanuelpeter) 
-
----
-
-### [Launchpad](https://trylaunchpad.xyz/)
-AI-powered student–startup matching platform. Uses pgvector for semantic search across student profiles and startup listings, with async BullMQ scoring pipelines that rank candidates by fit. Helps early-stage startups find talent and students discover opportunities aligned with their skills.
-
-`Next.js` `TypeScript` `FastAPI` `pgvector` `BullMQ` `PostgreSQL` · **Completed** · [Live Demo](https://trylaunchpad.xyz/)
-
----
-
-### [Matchbox](https://matchbox.eduspheretech.com/)
-An AI-powered research matching platform that connects university students with labs using semantic search and LLM-based fit scoring. Streamlines the application process with a centralized portal, replacing fragmented email workflows with automated candidate discovery, resume parsing, and compatibility ranking.
-
-`Next.js` `TypeScript` `FastAPI` `Google Cloud Platform` `ChromaDB` `OpenAI API` · **Completed** · [Live Demo](https://matchbox.eduspheretech.com/)
 
 ---
 

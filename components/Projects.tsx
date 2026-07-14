@@ -149,21 +149,6 @@ const Projects = () => {
       status: "Paused",
     },
     {
-      title: "Launchpad",
-      description:
-        "AI-powered student–startup matching platform. Uses pgvector for semantic search across student profiles and startup listings, with async BullMQ scoring pipelines that rank candidates by fit. Helps early-stage startups find talent and students discover opportunities aligned with their skills.",
-      technologies: [
-        "Next.js",
-        "TypeScript",
-        "FastAPI",
-        "pgvector",
-        "BullMQ",
-        "PostgreSQL",
-      ],
-      liveUrl: "https://trylaunchpad.xyz",
-      status: "Completed",
-    },
-    {
       title: "Grok Review",
       description:
         "Turns any public GitHub PR URL into a streaming AI code review powered by Grok 4.5. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.",
