@@ -1,1 +1,1 @@
-export { register, onRequestError } from "@hostess/nextjs";
+export { register, onRequestError } from "@hostess/nextjs/server";
