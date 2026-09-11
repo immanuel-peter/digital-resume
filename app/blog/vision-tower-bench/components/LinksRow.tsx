@@ -28,23 +28,42 @@ export default function LinksRow({
 }) {
   return (
     <div className="mb-[76px] flex flex-wrap gap-3">
-      {version.links.map((link) => (
-        <a
-          key={link.label}
-          href={link.href}
-          {...(link.href.startsWith("http")
-            ? { target: "_blank", rel: "noopener noreferrer" }
-            : {})}
-          className="font-display inline-flex items-center gap-[9px] rounded-full border-b-0 bg-vtb-ink px-5 py-2.5 text-[0.9rem] font-semibold text-white"
-        >
-          {link.label === "Paper" && <PaperIcon />}
-          {link.label === "Repo" && <RepoIcon />}
-          {link.emoji && (
-            <span className="text-[1.05rem] leading-none">{link.emoji}</span>
-          )}
-          {link.label}
-        </a>
-      ))}
+      {version.links.map((link) =>
+        link.label === "Paper" ? (
+          <span
+            key="Paper"
+            tabIndex={0}
+            aria-disabled="true"
+            aria-label="Paper (Coming soon)"
+            title="Coming soon"
+            className="font-display group relative inline-flex cursor-not-allowed items-center gap-[9px] rounded-full bg-vtb-ink px-5 py-2.5 text-[0.9rem] font-semibold text-white opacity-80"
+          >
+            <PaperIcon />
+            Paper
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 rounded-md bg-vtb-ink px-2.5 py-1 text-xs font-semibold whitespace-nowrap text-white opacity-0 shadow-lg transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+            >
+              Coming soon
+            </span>
+          </span>
+        ) : (
+          <a
+            key={link.label}
+            href={link.href}
+            {...(link.href.startsWith("http")
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+            className="font-display inline-flex items-center gap-[9px] rounded-full border-b-0 bg-vtb-ink px-5 py-2.5 text-[0.9rem] font-semibold text-white"
+          >
+            {link.label === "Repo" && <RepoIcon />}
+            {link.emoji && (
+              <span className="text-[1.05rem] leading-none">{link.emoji}</span>
+            )}
+            {link.label}
+          </a>
+        ),
+      )}
       <div className="ml-auto flex items-center gap-2.5">
         <span className="font-display text-[0.68rem] tracking-[0.13em] text-vtb-mute uppercase">
           Version
