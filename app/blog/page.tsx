@@ -3,6 +3,11 @@ import React from 'react';
 
 const posts = [
   {
+    slug: 'vision-tower-bench',
+    title: 'Vision Tower Bench',
+    description: 'Choosing a vision tower for a text-only LLM',
+    date: '2026',
+  },  {
     slug: 'matchbox',
     title: 'Inside the Architecture of Matchbox',
     description: 'An AI-Powered Research Matching Platform',
