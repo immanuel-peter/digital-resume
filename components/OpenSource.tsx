@@ -51,9 +51,28 @@ const OpenSourceItem = ({
 const OpenSource = () => {
   const contributions = [
     {
+      project: "LMCache",
+      repository: "LMCache/LMCache",
+      technologies: "Python",
+      details: [
+        "Added a coordinator endpoint for listing pinned cache entries.",
+        "Added per-key access tracking to the coordinator key directory.",
+      ],
+      links: [
+        {
+          label: "PR #4960",
+          url: "https://github.com/LMCache/LMCache/pull/4960",
+        },
+        {
+          label: "PR #4873",
+          url: "https://github.com/LMCache/LMCache/pull/4873",
+        },
+      ],
+    },
+    {
       project: "Brev CLI",
       repository: "brevdev/brev-cli",
-      technologies: "Go · CLI",
+      technologies: "Go",
       details: [
         "Authored the core rsync-first file-transfer implementation with automatic SCP fallback and unit coverage",
       ],
@@ -63,7 +82,7 @@ const OpenSource = () => {
           url: "https://github.com/brevdev/brev-cli/pull/297",
         },
         {
-          label: "Continuation PR #423",
+          label: "Merged PR #423",
           url: "https://github.com/brevdev/brev-cli/pull/423",
         },
       ],
@@ -71,7 +90,7 @@ const OpenSource = () => {
     {
       project: "Pyrefly",
       repository: "facebook/pyrefly",
-      technologies: "Rust · Python type checker",
+      technologies: "Rust · Python",
       details: [
         "Submitted an upstream Rust cleanup standardizing the error-summary module and imports from 'summarise' to 'summarize'.",
       ],

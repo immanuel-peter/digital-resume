@@ -1,6 +1,6 @@
 # Immanuel Peter
 
-Member of Technical Staff Intern @ Tensormesh · CS & Physics @ UChicago '28
+Member of Technical Staff Intern @ Tensormesh · CS, Physics & Math @ UChicago '28
 
 [Email](mailto:hello@ipeter.dev) · [LinkedIn](https://www.linkedin.com/in/immanuel-peter) · [GitHub](https://github.com/immanuel-peter) · [Twitter/X](https://x.com/moby763canary21)
 
@@ -19,9 +19,13 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 ### Member of Technical Staff Intern
 **Tensormesh** · March 2026 – Present · Foster City, CA
 
-- Integrated Phoenix into Tensormesh's observability stack, adding OpenInference LLM traces/spans for router traffic.
-- Built SDK and CLI support for inspecting Phoenix traces and spans, with sync/async clients, docs, generated references, and tests.
-- Helped productionize Phoenix through Terraform, Secret Manager, and Cloud Run configuration across all environments.
+- Contributed upstream to LMCache, adding a coordinator endpoint for listing pinned cache entries and per-key access tracking in the key directory.
+- Shipped 35 PRs and 100+ commits across 9 company repos spanning various services.
+- Integrated Arize Phoenix into Tensormesh's observability stack, emitting OpenInference LLM traces from the router for all requests, and shipped SDK and CLI tooling for inspecting traces and spans.
+- Reworked the Prometheus metrics for TTFT, throughput, and other rollups that power the serverless observability dashboards.
+- Built an orchestrator microservice that pins prompts in LMCache asynchronously during inference, and exposed pin management through the API, SDK, and CLI.
+- Built a KV cache discovery interface on top of the LMCache Coordinator API to browse cached keys, tokens, and utilization across engines.
+- Led an internal research effort on key weighting for long-context inference, from evals to writeups.
 
 ---
 
@@ -38,10 +42,17 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 
 ## Open Source Contributions
 
+### [LMCache](https://github.com/LMCache/LMCache)
+
+- Added a coordinator endpoint for listing pinned cache entries in merged [PR #4960](https://github.com/LMCache/LMCache/pull/4960).
+- Added per-key access tracking to the coordinator key directory in merged [PR #4873](https://github.com/LMCache/LMCache/pull/4873).
+
+---
+
 ### [Brev CLI](https://github.com/brevdev/brev-cli)
 
 - Authored the core rsync-first file-transfer implementation with automatic SCP fallback and unit coverage.
-- The original commits in [PR #297](https://github.com/brevdev/brev-cli/pull/297) were preserved in the maintainer-approved [continuation PR #423](https://github.com/brevdev/brev-cli/pull/423).
+- The original commits in [PR #297](https://github.com/brevdev/brev-cli/pull/297) were preserved in the maintainer-approved [merged PR #423](https://github.com/brevdev/brev-cli/pull/423).
 
 ---
 
@@ -59,6 +70,20 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 ---
 
 ## Projects
+
+### [Vision Tower Bench](https://ipeter.dev/blog/vision-tower-bench)
+A benchmark that isolates the vision Tower from the rest of a VLM. Probes six frozen Towers (DINOv2, SigLIP2, and four extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
+
+`Python` `PyTorch` `Hugging Face` `uv` · **Completed** · [GitHub](https://github.com/immanuel-peter/vision-tower-bench) · [Report](https://ipeter.dev/blog/vision-tower-bench) · [Towers](https://huggingface.co/collections/immanuelpeter/vision-towers)
+
+---
+
+### [Postplan](https://github.com/immanuel-peter/postplan)
+A publishing service for HTML documents built for agents. Each document gets its own subdomain and an append-only version history via a token-authenticated API, with S3-compatible storage and Cloudflared tunneling.
+
+`TypeScript` `Fastify` `Drizzle` `PostgreSQL` `S3` `Garage` `Cloudflared` · **Completed** · [GitHub](https://github.com/immanuel-peter/postplan)
+
+---
 
 ### [Hostess](https://hostess.sh/)
 > Docker Compose for Production.
@@ -79,14 +104,14 @@ A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone,
 ### [AutoMoE](https://github.com/immanuel-peter/self-driving-model)
 A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. Uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.
 
-`Python` `PyTorch` `CUDA` `CARLA` `Hugging Face` · **Paused** · [GitHub](https://github.com/immanuel-peter/self-driving-model) · [Datasets](https://huggingface.co/immanuelpeter) 
+`Python` `PyTorch` `CUDA` `CARLA` `Hugging Face` · **Completed** · [GitHub](https://github.com/immanuel-peter/self-driving-model) · [Datasets](https://huggingface.co/immanuelpeter) 
 
 ---
 
 ### [Grok Review](https://grokreq.com/)
-Turns any public GitHub PR URL into a streaming AI code review powered by Grok-4. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.
+Turns any public GitHub PR URL into a streaming AI code review powered by Grok 4.5. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.
 
-`Next.js` `TypeScript` `Grok API` `GitHub API` · **Completed** · [GitHub](https://github.com/immanuel-peter/grok-review) · [Live Demo](https://grokreq.com/)
+`Next.js` `TypeScript` `Grok API` `GitHub API` `PostgreSQL` · **Completed** · [GitHub](https://github.com/immanuel-peter/grok-review) · [Live Demo](https://grokreq.com/)
 
 ---
 
@@ -118,3 +143,18 @@ Turns any public GitHub PR URL into a streaming AI code review powered by Grok-4
 - Intermediate Mechanics
 - Quantum Mechanics I
 - Quantum Mechanics II
+- Statistical and Thermal Physics
+- Experimental Physics I
+
+---
+
+### Mathematics — Bachelor of Arts
+**University of Chicago** · September 2024 – June 2028
+
+**Relevant Courses:**
+- Introduction to Proofs in Analysis
+- Abstract Linear Algebra
+- Analysis in Rn I
+- Analysis in Rn II
+- Analysis in Rn III
+- Basic Algebra I

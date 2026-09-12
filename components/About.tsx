@@ -24,7 +24,7 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
             Immanuel Peter
           </h1>
           <p className="text-base text-gray-500 dark:text-gray-400">
-            MTS Intern @ Tensormesh · CS & Physics @ UChicago &apos;28
+            MTS Intern @ Tensormesh · CS, Physics, Math @ UChicago &apos;28
           </p>
 
           {/* Contact icons */}
@@ -69,7 +69,7 @@ const About = ({ totalDownloadsAllTime }: AboutProps) => {
             I'm a Member of Technical Staff Intern at Tensormesh!
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
-            Check out my new blog post - <a href="/blog/vision-tower-bench" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline dark:text-blue-400">Vision Tower Bench</a>.
+            Check out my latest work - <a href="/blog/vision-tower-bench" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline dark:text-blue-400">Vision Tower Bench</a>.
           </p>
           <p className="text-lg text-gray-700 dark:text-gray-300">
             My Hugging Face datasets have a total of{" "}

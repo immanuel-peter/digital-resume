@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       }));
 
     const createPayload = {
-      model: "gpt-5.4-nano",
+      model: "gpt-5.6-luna",
       store: true,
       include: ["reasoning.encrypted_content", "web_search_call.action.sources"],
       reasoning: { effort: "low", summary: "auto" },

@@ -99,6 +99,23 @@ const ProjectCard = ({
 const Projects = () => {
   const projects = [
     {
+      title: "Vision Tower Bench",
+      description:
+        "A benchmark that isolates the vision Tower from the rest of a VLM. Probes frozen Towers across recognition, geometry, correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.",
+      technologies: ["Python", "PyTorch", "Hugging Face", "uv"],
+      githubUrl: "https://github.com/immanuel-peter/vision-tower-bench",
+      liveUrl: "/blog/vision-tower-bench",
+      status: "Completed",
+    },
+    {
+      title: "Postplan",
+      description:
+        "A publishing service for HTML documents built for agents. Each document gets its own subdomain and an append-only version history via a token-authenticated API, with S3-compatible storage and Cloudflared tunneling.",
+      technologies: ["TypeScript", "Fastify", "Drizzle", "PostgreSQL", "S3", "Garage", "Cloudflared"],
+      githubUrl: "https://github.com/immanuel-peter/postplan",
+      status: "Completed",
+    },
+    {
       title: "Hostess",
       description:
         "Docker Compose for Production: a declarative stack config is compiled into production K8s, with automated builds, service discovery, managed databases, secrets, Git-native previews, and framework-aware observability.",
@@ -146,7 +163,7 @@ const Projects = () => {
         "Hugging Face",
       ],
       githubUrl: "https://github.com/immanuel-peter/self-driving-model",
-      status: "Paused",
+      status: "Completed",
     },
     {
       title: "Grok Review",

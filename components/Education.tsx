@@ -90,9 +90,26 @@ const Education = () => {
         "Intermediate Mechanics",
         "Quantum Mechanics I",
         "Quantum Mechanics II",
+        "Statistical and Thermal Physics",
+        "Experimental Physics I",
       ],
       sealImage: SEAL_IMAGES["University of Chicago"],
     },
+    {
+      institution: "University of Chicago",
+      degree: "Bachelor of Arts",
+      fieldOfStudy: "Mathematics",
+      year: "September 2024 - June 2028",
+      classes: [
+        "Introduction to Proofs in Analysis",
+        "Abstract Linear Algebra",
+        "Analysis in Rn I",
+        "Analysis in Rn II",
+        "Analysis in Rn III",
+        "Basic Algebra I",
+      ],
+      sealImage: SEAL_IMAGES["University of Chicago"],
+    }
   ];
 
   return (

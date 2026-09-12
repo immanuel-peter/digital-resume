@@ -49,10 +49,15 @@ const Experience = () => {
       endDate: "Present",
       location: "Foster City, CA",
       details: [
-        "Integrated Phoenix into Tensormesh's observability stack, adding OpenInference LLM tracing across router traffic and SDK/CLI surfaces for inspecting traces and spans.",
-        "Shipped the production rollout path across Terraform, Secret Manager, and Cloud Run, with focused tests and docs for instrumentation, clients, and deployment config.",
+        "Contributed upstream to LMCache, adding a coordinator endpoint for listing pinned cache entries and per-key access tracking in the key directory.",
+        "Shipped 35 PRs and 100+ commits across 9 company repos spanning various services.",
+        "Integrated Arize Phoenix into Tensormesh's observability stack, emitting OpenInference LLM traces from the router for all requests, and shipped SDK and CLI tooling for inspecting traces and spans.",
+        "Reworked the Prometheus metrics for TTFT, throughput, and other rollups that power the serverless observability dashboards.",
+        "Built an orchestrator microservice that pins prompts in LMCache asynchronously during inference, and exposed pin management through the API, SDK, and CLI.",
+        "Built a KV cache discovery interface on top of the LMCache Coordinator API to browse cached keys, tokens, and utilization across engines.",
+        "Led an internal research effort on key weighting for long-context inference, from evals to writeups.",
       ],
-      boldDetails: [0],
+      boldDetails: [0, 1],
     },
     {
       position: "Software Engineer Intern",
