@@ -12,6 +12,9 @@ environments:
     branch: master
     domains: 
       app: [ipeter.dev,www.ipeter.dev]
+    services:
+      app:
+        replicas: 1
   preview:
     ephemeral: true
     ttl: 24h
