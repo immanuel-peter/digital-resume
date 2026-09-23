@@ -1,16 +1,15 @@
-## Learned User Preferences
+# Project
 
-- Public README/profile-style documentation should target engineers and technical recruiters.
-- Project blurbs and descriptions should be grounded in the real repository or other verified sources, not invented positioning.
-- When cleaning a branch, remove AI-style slop: gratuitous comments, unnecessary defensive checks, and inconsistent `as any` casts relative to surrounding code.
-- Omit local dev/setup blocks from README/profile unless explicitly requested.
+This is Immanuel Peter's portfolio at ipeter.dev, built with Next.js and hosted on Hostess. Its primary audience is engineers and technical recruiters.
 
-## Learned Workspace Facts
+# Portfolio content
 
-- This repo is the Next.js portfolio app for `ipeter.dev` (homepage, technical blog, embedded chat assistant).
-- Production container image: `ghcr.io/immanuel-peter/digital-resume`, using Next.js standalone output.
-- Default branch is `master` (not `main`); CI branch filters and triggers should match.
-- The OpenAI client is lazy-initialized so `next build` and Docker image builds do not require `OPENAI_API_KEY` at module import; set the key at container/runtime where the chat API runs.
-- CI builds multi-arch images (`linux/amd64`, `linux/arm64`, typically with QEMU on amd64 runners) and tags include `latest` and `sha-` plus a short SHA; GitHub Actions expressions have no `substring`—use a shell step and `GITHUB_OUTPUT` for the short SHA.
-- Docker and GitHub Actions do not replace Vercel’s normal git-webhook deployment; they run alongside it unless the project is explicitly configured otherwise.
-- `public/biography.js` is used as context for the chat route; keep it aligned with About, Experience, and Education when those sections change.
+Treat Immanuel's latest instructions as the source of truth for his background and projects. Existing site copy and external sources may be out of date. Ask when a missing detail would require guessing.
+
+When app content changes, review `public/biography.js`, `public/llms.txt`, and `public/llms.md` for affected facts, descriptions, and links. Update the affected copy in the same change. Keep `llms.txt` and `llms.md` identical. Visual-only changes need no copy update.
+
+# Verification
+
+For page, styling, or interaction changes, run the Next.js dev server with `npm run dev`. Open the affected pages in Chrome DevTools, exercise changed interactions, and check for browser errors. Check a narrow viewport when layout changes. Stop the dev server when finished.
+
+For other changes, run the relevant lint or build checks.
