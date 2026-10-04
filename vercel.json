@@ -1,8 +1,4 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
-  "redirects": [
-    { "source": "/matchbox", "destination": "/blog/matchbox", "permanent": true },
-    { "source": "/moe-self-driving", "destination": "/blog/moe-self-driving", "permanent": true }
-  ]
+  "framework": "nextjs"
 }
