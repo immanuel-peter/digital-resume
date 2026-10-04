@@ -52,3 +52,36 @@ export async function getAllDatasetDownloadsAllTime() {
     totalDownloadsAllTime: multimodalDownloadsAllTime + imagesDownloadsAllTime,
   };
 }
+
+const MODELS_URL =
+  "https://huggingface.co/api/models?author=immanuelpeter&limit=100&expand[]=downloadsAllTime";
+
+export async function getModelDownloadsAllTime() {
+  const response = await fetch(MODELS_URL, { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch model stats: ${response.status}`);
+  }
+
+  const models = (await response.json()) as { downloadsAllTime?: unknown }[];
+
+  return models.reduce((total, model) => {
+    const downloads = Number(model.downloadsAllTime);
+    return total + (Number.isFinite(downloads) ? downloads : 0);
+  }, 0);
+}
+
+export type HuggingFaceDownloads = {
+  datasets: number;
+  models: number;
+  total: number;
+};
+
+export async function getHuggingFaceDownloadsAllTime(): Promise<HuggingFaceDownloads> {
+  const [{ totalDownloadsAllTime: datasets }, models] = await Promise.all([
+    getAllDatasetDownloadsAllTime(),
+    getModelDownloadsAllTime(),
+  ]);
+
+  return { datasets, models, total: datasets + models };
+}
