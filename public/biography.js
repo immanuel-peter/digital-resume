@@ -29,6 +29,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 ## Current Focus
 - Member of Technical Staff Intern at Tensormesh (team behind LMCache), March 2026 - present (Foster City, CA).
 - Interested in technically challenging software engineering, systems, and AI/ML infrastructure work.
+- Interests: Vision, Multimodal, World Models, Physical AI.
 
 ## Projects
 
@@ -72,7 +73,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 
 **Member of Technical Staff Intern, Tensormesh (March 2026 - Present, Foster City, CA)**
 - Contributed upstream to LMCache, adding a coordinator endpoint for listing pinned cache entries and per-key access tracking in the key directory.
-- Shipped 35 PRs and 100+ commits across 9 company repos spanning various services.
+- Shipped 35 PRs and 100+ commits across 9 company repos spanning LLM observability and inference optimization.
 - Integrated Arize Phoenix into Tensormesh's observability stack, emitting OpenInference LLM traces from the router for all requests, and shipped SDK and CLI tooling for inspecting traces and spans.
 - Reworked the Prometheus metrics for TTFT, throughput, and other rollups that power the serverless observability dashboards.
 - Built an orchestrator microservice that pins prompts in LMCache asynchronously during inference, and exposed pin management through the API, SDK, and CLI.
@@ -95,7 +96,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Authored the core rsync-first file-transfer implementation with automatic SCP fallback and unit coverage. The original commits in [PR #297](https://github.com/brevdev/brev-cli/pull/297) were preserved in the maintainer-approved [merged PR #423](https://github.com/brevdev/brev-cli/pull/423).
 
 **Pyrefly — Rust · Python**
-- Submitted an upstream Rust cleanup in [Pyrefly PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from \`summarise\` to \`summarize\`.
+- Contributed an upstream Rust cleanup in merged [Pyrefly PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from \`summarise\` to \`summarize\`.
 
 **vLLM Production Stack — Kubernetes / Helm**
 - Added router volume and mount configuration for read-only root filesystems in merged [PR #975](https://github.com/vllm-project/production-stack/pull/975); corrected the default NVIDIA runtime class and regenerated its CRD in merged [PR #974](https://github.com/vllm-project/production-stack/pull/974).
