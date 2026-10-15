@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="1000" height="650" role="img" aria-label="Fencing-first failover sequence in the Redis operator. The operator detects the primary is unreachable, fences it, picks the replica with the smallest replication lag, promotes it, repoints the leader service, records the new primary, clears the fence, and the former primary restarts as a replica.">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0.8 L9.2 5 L0 9.2 Z" fill="#4B5563"/>
+    </marker>
+    <marker id="ahf" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0.8 L9.2 5 L0 9.2 Z" fill="#D9480F"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="650" fill="#FFFFFF"/>
+
+  <!-- lane headers -->
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" text-anchor="middle">
+    <rect x="50" y="20" width="180" height="46" rx="8" fill="#F3F5F8" stroke="#C7CFDA"/>
+    <text x="140" y="40" font-size="13.5" font-weight="700" fill="#14171C">Operator</text>
+    <text x="140" y="57" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470">controller-manager</text>
+
+    <rect x="310" y="20" width="180" height="46" rx="8" fill="#F3F5F8" stroke="#C7CFDA"/>
+    <text x="400" y="40" font-size="13.5" font-weight="700" fill="#14171C">Former primary</text>
+    <text x="400" y="57" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470">pod, unreachable</text>
+
+    <rect x="570" y="20" width="180" height="46" rx="8" fill="#F3F5F8" stroke="#C7CFDA"/>
+    <text x="660" y="40" font-size="13.5" font-weight="700" fill="#14171C">Replica</text>
+    <text x="660" y="57" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470">smallest replication lag</text>
+
+    <rect x="810" y="20" width="180" height="46" rx="8" fill="#F3F5F8" stroke="#C7CFDA"/>
+    <text x="900" y="40" font-size="13.5" font-weight="700" fill="#14171C">Service</text>
+    <text x="900" y="57" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470">&lt;name&gt;-leader</text>
+  </g>
+
+  <!-- lifelines -->
+  <g stroke="#C2CAD4" stroke-width="1.2" stroke-dasharray="4 5">
+    <line x1="140" y1="66" x2="140" y2="606"/>
+    <line x1="400" y1="66" x2="400" y2="606"/>
+    <line x1="660" y1="66" x2="660" y2="606"/>
+    <line x1="900" y1="66" x2="900" y2="606"/>
+  </g>
+
+  <!-- 1: poll fails -->
+  <line x1="152" y1="112" x2="372" y2="112" stroke="#4B5563" stroke-width="1.6"/>
+  <path d="M378 105 L392 119 M392 105 L378 119" stroke="#B42318" stroke-width="2.2" stroke-linecap="round"/>
+  <text x="265" y="102" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#14171C" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">poll instance status → timeout</text>
+
+  <!-- 2: fence -->
+  <line x1="152" y1="168" x2="396" y2="168" stroke="#D9480F" stroke-width="1.8" marker-end="url(#ahf)"/>
+  <text x="274" y="158" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#D9480F" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">fence the former primary</text>
+  <text x="274" y="186" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470">annotation on RedisCluster</text>
+
+  <!-- 3: choose replica -->
+  <line x1="152" y1="224" x2="656" y2="224" stroke="#4B5563" stroke-width="1.6" marker-end="url(#ah)"/>
+  <text x="404" y="214" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#14171C" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">pick the replica with the smallest lag</text>
+  <text x="404" y="242" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">INFO replication offset</text>
+
+  <!-- 4: promote -->
+  <line x1="152" y1="280" x2="656" y2="280" stroke="#4B5563" stroke-width="1.6" marker-end="url(#ah)"/>
+  <text x="404" y="270" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12.5" fill="#14171C" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">POST /v1/promote</text>
+
+  <!-- 5: replica self -->
+  <path d="M672 336 H708 V352 H674" fill="none" stroke="#4B5563" stroke-width="1.6" marker-end="url(#ah)"/>
+  <text x="720" y="348" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#14171C">REPLICAOF NO ONE</text>
+
+  <!-- 6: repoint service -->
+  <line x1="152" y1="392" x2="896" y2="392" stroke="#4B5563" stroke-width="1.6" marker-end="url(#ah)"/>
+  <text x="524" y="382" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#14171C" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">repoint the -leader selector to the new primary</text>
+
+  <!-- 7: operator self -->
+  <path d="M152 448 H188 V464 H154" fill="none" stroke="#4B5563" stroke-width="1.6" marker-end="url(#ah)"/>
+  <text x="200" y="460" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#14171C" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">status.currentPrimary = replica</text>
+
+  <!-- 8: unfence -->
+  <line x1="152" y1="504" x2="396" y2="504" stroke="#D9480F" stroke-width="1.8" marker-end="url(#ahf)"/>
+  <text x="274" y="494" text-anchor="middle" font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" fill="#D9480F" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">clear the fence</text>
+  <text x="274" y="522" text-anchor="middle" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="10.5" fill="#5B6470">remove annotation</text>
+
+  <!-- 9: former primary self -->
+  <path d="M412 560 H448 V576 H414" fill="none" stroke="#4B5563" stroke-width="1.6" marker-end="url(#ah)"/>
+  <text x="460" y="572" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="12" fill="#14171C" paint-order="stroke" stroke="#FFFFFF" stroke-width="5" stroke-linejoin="round">restart as replica of currentPrimary</text>
+
+  <!-- step badges -->
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="middle" fill="#14171C">
+    <circle cx="140" cy="112" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="140" y="116">1</text>
+    <circle cx="140" cy="168" r="11" fill="#FFFFFF" stroke="#D9480F" stroke-width="1.6"/><text x="140" y="172" fill="#D9480F">2</text>
+    <circle cx="140" cy="224" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="140" y="228">3</text>
+    <circle cx="140" cy="280" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="140" y="284">4</text>
+    <circle cx="660" cy="336" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="660" y="340">5</text>
+    <circle cx="140" cy="392" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="140" y="396">6</text>
+    <circle cx="140" cy="448" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="140" y="452">7</text>
+    <circle cx="140" cy="504" r="11" fill="#FFFFFF" stroke="#D9480F" stroke-width="1.6"/><text x="140" y="508" fill="#D9480F">8</text>
+    <circle cx="400" cy="560" r="11" fill="#FFFFFF" stroke="#14171C" stroke-width="1.4"/><text x="400" y="564">9</text>
+  </g>
+
+  <!-- legend -->
+  <circle cx="38" cy="632" r="5" fill="#D9480F"/>
+  <text x="52" y="636" font-family="ui-monospace, 'SF Mono', Menlo, Consolas, monospace" font-size="11.5" fill="#5B6470">fencing first: the old primary is stopped before anything is promoted</text>
+</svg>

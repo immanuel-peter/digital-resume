@@ -5,7 +5,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/blog",
     "/blog/vision-tower-bench",
-    "/blog/matchbox",
-    "/blog/moe-self-driving",
   ].map((path) => ({ url: `https://www.ipeter.dev${path}` }));
 }

@@ -2,15 +2,13 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Navbar from "./Navbar";
 import { FaArrowLeft } from "react-icons/fa";
 
 export default function ConditionalNav() {
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
 
-  if (isHomePage) {
-    return <Navbar />;
+  if (pathname === "/" || pathname === "/blog") {
+    return null;
   }
 
   return (
