@@ -6,7 +6,7 @@ Member of Technical Staff Intern @ Tensormesh · CS, Physics & Math @ UChicago '
 
 ---
 
-**I like Artificial Intelligence.**
+**I work on multimodal and physical AI.**
 
 - **Work:** Member of Technical Staff Intern at Tensormesh
 - **Study:** CS, Physics, & Math at UChicago

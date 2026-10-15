@@ -171,20 +171,20 @@ const ImmanuelAI = () => {
     <>
       {/* Chat Widget */}
       <div
-        className={`fixed bottom-24 right-6 z-50 w-80 sm:w-96 h-[480px] rounded-2xl shadow-2xl flex flex-col bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 transition-all duration-300 ${
+        className={`fixed bottom-24 right-6 z-50 w-80 sm:w-96 h-[480px] rounded-2xl shadow-2xl flex flex-col bg-white border border-gray-200 transition-all duration-300 ${
           isOpen
             ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-4 pointer-events-none"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-          <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200">
+          <span className="text-sm font-semibold text-gray-900">
             ImmanuelAI
           </span>
           <button
             onClick={() => setIsOpen(false)}
-            className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors cursor-pointer"
+            className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
             aria-label="Close chat"
           >
             <FaTimes size={14} />
@@ -201,25 +201,25 @@ const ImmanuelAI = () => {
               <div
                 className={`max-w-[80%] px-3 py-2 rounded-xl text-sm ${
                   msg.role === "user"
-                    ? "bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900"
-                    : "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                    ? "bg-gray-900 text-white"
+                    : "bg-gray-100 text-gray-800"
                 }`}
               >
                 {msg.role === "assistant" ? (
                   <>
                     {msg.reasoning && (
                       <details className="mb-1">
-                        <summary className="cursor-pointer select-none text-xs text-gray-500 dark:text-gray-400">
+                        <summary className="cursor-pointer select-none text-xs text-gray-500">
                           Show reasoning
                         </summary>
-                        <div className="mt-1 prose prose-sm dark:prose-invert text-xs italic">
+                        <div className="mt-1 prose prose-sm text-xs italic">
                           <ReactMarkdown remarkPlugins={[remarkGfm]}>
                             {msg.reasoning}
                           </ReactMarkdown>
                         </div>
                       </details>
                     )}
-                    <div className="prose prose-sm dark:prose-invert">
+                    <div className="prose prose-sm">
                       <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {msg.content}
                       </ReactMarkdown>
@@ -234,7 +234,7 @@ const ImmanuelAI = () => {
 
           {loading && (
             <div className="flex justify-start">
-              <div className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 px-3 py-2 rounded-xl text-sm">
+              <div className="bg-gray-100 text-gray-800 px-3 py-2 rounded-xl text-sm">
                 Thinking...
               </div>
             </div>
@@ -244,9 +244,9 @@ const ImmanuelAI = () => {
         </div>
 
         {/* Input */}
-        <div className="flex items-end gap-2 px-3 py-3 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex items-end gap-2 px-3 py-3 border-t border-gray-200">
           <textarea
-            className="flex-grow p-2 text-sm border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-1 focus:ring-gray-400 dark:focus:ring-gray-500 resize-none"
+            className="flex-grow p-2 text-sm border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-1 focus:ring-gray-400 resize-none"
             rows={1}
             placeholder="Ask me anything..."
             value={userInput}
@@ -259,7 +259,7 @@ const ImmanuelAI = () => {
           <button
             onClick={handleSendMessage}
             disabled={loading}
-            className="p-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg cursor-pointer hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors disabled:opacity-50"
+            className="p-2 bg-gray-900 text-white rounded-lg cursor-pointer hover:bg-gray-700 transition-colors disabled:opacity-50"
             aria-label="Send message"
           >
             <FaPaperPlane size={14} />
@@ -270,7 +270,7 @@ const ImmanuelAI = () => {
       {/* FAB */}
       <button
         onClick={() => setIsOpen((o) => !o)}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 shadow-lg flex items-center justify-center hover:bg-gray-700 dark:hover:bg-gray-300 transition-colors cursor-pointer"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gray-900 text-white shadow-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer"
         aria-label="Open ImmanuelAI chat"
       >
         <FaCommentDots size={22} />

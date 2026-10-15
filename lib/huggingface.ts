@@ -1,74 +1,43 @@
 import "server-only";
 
-const ALLOWED_DATASETS = [
-  "carla-autopilot-multimodal-dataset",
-  "carla-autopilot-images",
-] as const;
-
-const DATASET_URLS: Record<AllowedDatasetName, string> = {
-  "carla-autopilot-multimodal-dataset":
-    "https://huggingface.co/api/datasets/immanuelpeter/carla-autopilot-multimodal-dataset/revision/HEAD?expand=downloads&expand=downloadsAllTime",
-  "carla-autopilot-images":
-    "https://huggingface.co/api/datasets/immanuelpeter/carla-autopilot-images/revision/HEAD?expand=downloads&expand=downloadsAllTime",
-};
-
-export type AllowedDatasetName = (typeof ALLOWED_DATASETS)[number];
-
-export const isAllowedDatasetName = (
-  value: unknown
-): value is AllowedDatasetName =>
-  typeof value === "string" &&
-  ALLOWED_DATASETS.includes(value as AllowedDatasetName);
-
-export async function getDatasetDownloadsAllTime(
-  datasetName: AllowedDatasetName
-) {
-  const response = await fetch(DATASET_URLS[datasetName], {
-    cache: 'no-store',
-  });
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch dataset stats for ${datasetName}: ${response.status}`
-    );
-  }
-
-  const data = (await response.json()) as { downloadsAllTime?: unknown };
-  const downloadsAllTime = Number(data.downloadsAllTime);
-
-  return Number.isFinite(downloadsAllTime) ? downloadsAllTime : 0;
-}
-
-export async function getAllDatasetDownloadsAllTime() {
-  const [multimodalDownloadsAllTime, imagesDownloadsAllTime] =
-    await Promise.all([
-      getDatasetDownloadsAllTime("carla-autopilot-multimodal-dataset"),
-      getDatasetDownloadsAllTime("carla-autopilot-images"),
-    ]);
-
-  return {
-    multimodalDownloadsAllTime,
-    imagesDownloadsAllTime,
-    totalDownloadsAllTime: multimodalDownloadsAllTime + imagesDownloadsAllTime,
-  };
-}
+const DATASETS = ["carla-autopilot-multimodal-dataset", "carla-autopilot-images"];
 
 const MODELS_URL =
   "https://huggingface.co/api/models?author=immanuelpeter&limit=100&expand[]=downloadsAllTime";
 
-export async function getModelDownloadsAllTime() {
-  const response = await fetch(MODELS_URL, { cache: "no-store" });
+const REVALIDATE_SECONDS = 3600;
+
+const toCount = (value: unknown) => {
+  const count = Number(value);
+  return Number.isFinite(count) ? count : 0;
+};
+
+async function fetchJson<T>(url: string): Promise<T> {
+  const response = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch model stats: ${response.status}`);
+    throw new Error(`Failed to fetch ${url}: ${response.status}`);
   }
 
-  const models = (await response.json()) as { downloadsAllTime?: unknown }[];
+  return response.json() as Promise<T>;
+}
 
-  return models.reduce((total, model) => {
-    const downloads = Number(model.downloadsAllTime);
-    return total + (Number.isFinite(downloads) ? downloads : 0);
-  }, 0);
+async function getDatasetDownloadsAllTime() {
+  const datasets = await Promise.all(
+    DATASETS.map((name) =>
+      fetchJson<{ downloadsAllTime?: unknown }>(
+        `https://huggingface.co/api/datasets/immanuelpeter/${name}/revision/HEAD?expand=downloadsAllTime`
+      )
+    )
+  );
+
+  return datasets.reduce((total, dataset) => total + toCount(dataset.downloadsAllTime), 0);
+}
+
+async function getModelDownloadsAllTime() {
+  const models = await fetchJson<{ downloadsAllTime?: unknown }[]>(MODELS_URL);
+
+  return models.reduce((total, model) => total + toCount(model.downloadsAllTime), 0);
 }
 
 export type HuggingFaceDownloads = {
@@ -77,11 +46,16 @@ export type HuggingFaceDownloads = {
   total: number;
 };
 
-export async function getHuggingFaceDownloadsAllTime(): Promise<HuggingFaceDownloads> {
-  const [{ totalDownloadsAllTime: datasets }, models] = await Promise.all([
-    getAllDatasetDownloadsAllTime(),
-    getModelDownloadsAllTime(),
-  ]);
+export async function getHuggingFaceDownloadsAllTime(): Promise<HuggingFaceDownloads | null> {
+  try {
+    const [datasets, models] = await Promise.all([
+      getDatasetDownloadsAllTime(),
+      getModelDownloadsAllTime(),
+    ]);
 
-  return { datasets, models, total: datasets + models };
+    return { datasets, models, total: datasets + models };
+  } catch (error) {
+    console.error("Error fetching Hugging Face downloads:", error);
+    return null;
+  }
 }

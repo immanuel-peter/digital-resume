@@ -84,7 +84,7 @@ const compact: CompactProject[] = [
   {
     title: "Hostess",
     year: "2026",
-    description: "Docker Compose of Production",
+    description: "Docker Compose for Production",
     image: { src: "https://assets.postplan.link/01M42QZ085ZS18A7X6JW8G1MHG.png", alt: "Hostess Studio trace waterfall with labeled spans and durations", position: "left-top" },
     links: [{ label: "hostess.sh", href: "https://hostess.sh" }],
     tech: ["go", "kubernetes", "opentelemetry", "prometheus"],

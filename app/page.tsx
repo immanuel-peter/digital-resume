@@ -12,7 +12,7 @@ import SiteHeader from "@/components/SiteHeader";
 import { getHuggingFaceDownloadsAllTime } from "@/lib/huggingface";
 import { instrumentSans } from "./fonts";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export default async function App() {
   const downloads = await getHuggingFaceDownloadsAllTime();

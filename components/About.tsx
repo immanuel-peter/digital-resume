@@ -12,10 +12,10 @@ function Fact({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-const About = ({ downloads }: { downloads: HuggingFaceDownloads }) => (
+const About = ({ downloads }: { downloads: HuggingFaceDownloads | null }) => (
   <div className="pt-[104px]">
     <h1 className="max-w-[900px] text-[clamp(40px,5.4vw,76px)] leading-[1.04] font-medium tracking-[-0.035em]">
-      I like Artificial Intelligence.
+      I work on multimodal and physical AI.
     </h1>
     <dl className="mt-[72px] max-w-[820px] border-b border-[#e8e8e5]">
       <Fact label="Work">MTS Intern at Tensormesh</Fact>
@@ -26,19 +26,21 @@ const About = ({ downloads }: { downloads: HuggingFaceDownloads }) => (
           Vision Tower Bench
         </a>
       </Fact>
-      <Fact label="Hugging Face">
-        <a
-          href="https://huggingface.co/immanuelpeter"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mn-link"
-        >
-          {formatNumber(downloads.total)} downloads
-        </a>{" "}
-        <span className="text-[#74746f]">
-          · {formatNumber(downloads.datasets)} on datasets, {formatNumber(downloads.models)} on models
-        </span>
-      </Fact>
+      {downloads && (
+        <Fact label="Hugging Face">
+          <a
+            href="https://huggingface.co/immanuelpeter"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mn-link"
+          >
+            {formatNumber(downloads.total)} downloads
+          </a>{" "}
+          <span className="text-[#74746f]">
+            · {formatNumber(downloads.datasets)} on datasets, {formatNumber(downloads.models)} on models
+          </span>
+        </Fact>
+      )}
     </dl>
   </div>
 );
