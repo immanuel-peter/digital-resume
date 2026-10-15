@@ -63,12 +63,12 @@ const featured: FeaturedProject[] = [
     description: "A MoE self-driving model in PyTorch",
     images: [
       {
-        src: "/home/automoe-architecture.svg",
-        alt: "AutoMoE architecture: four experts, a top-2 gate with context, and a trajectory head producing ten waypoints and speed",
+        src: "https://assets.postplan.link/01M4EVN85S3Z77H29RZ5E2M4Q8.png",
+        alt: "CARLA autopilot front-camera view with ego speed, throttle, brake, and steering telemetry",
       },
     ],
     caption:
-      "Four experts feed a context-conditioned gate that keeps the top two. The gate weights drawn are illustrative.",
+      "A frame from the CARLA autopilot dataset AutoMoE trains on, with the recorded speed, throttle, brake, and steering.",
     links: [
       { label: "Code", href: "https://github.com/immanuel-peter/self-driving-model" },
       {
@@ -85,7 +85,7 @@ const compact: CompactProject[] = [
     title: "Hostess",
     year: "2026",
     description: "Docker Compose of Production",
-    image: { src: "/home/hostess-trace.webp", alt: "Hostess Studio trace waterfall", position: "left-top" },
+    image: { src: "https://assets.postplan.link/01M42QZ085ZS18A7X6JW8G1MHG.png", alt: "Hostess Studio trace waterfall with labeled spans and durations", position: "left-top" },
     links: [{ label: "hostess.sh", href: "https://hostess.sh" }],
     tech: ["go", "kubernetes", "opentelemetry", "prometheus"],
   },
@@ -93,7 +93,7 @@ const compact: CompactProject[] = [
     title: "Redis Operator",
     year: "2026",
     description: "CloudNativePG for Redis",
-    image: { src: "/home/redis-failover.svg", alt: "Fencing-first failover sequence in the Redis operator", position: "top" },
+    image: { src: "https://assets.postplan.link/01M4YTJ1H0HEYAE710MMG80GRC.svg", alt: "Fencing-first failover sequence in the Redis operator", position: "top" },
     links: [{ label: "Code", href: "https://github.com/howl-cloud/redis-operator" }],
     tech: ["go", "kubernetes", "redis"],
   },
@@ -101,7 +101,7 @@ const compact: CompactProject[] = [
     title: "Postplan",
     year: "2026",
     description: "Easy toolchain to upload static files",
-    image: { src: "/home/postplan-dashboard.svg", alt: "Illustration of the Postplan dashboard", position: "left-top" },
+    image: { src: "https://assets.postplan.link/01M4JB1CYY7G69RYB8CC9K8V3V.png", alt: "Postplan assets page with the upload bar and asset table", position: "left-top" },
     links: [{ label: "Code", href: "https://github.com/immanuel-peter/postplan" }],
     tech: ["typescript", "fastify", "postgresql", "cloudflare"],
   },
@@ -109,7 +109,7 @@ const compact: CompactProject[] = [
     title: "Grok Review",
     year: "2026",
     description: "Review your PRs with Grok",
-    image: { src: "/home/grok-review.svg", alt: "Illustration of the Grok Review page", position: "left-top" },
+    image: { src: "https://assets.postplan.link/01M4JEM46E8KKCNZDVPD1PBNX0.png", alt: "Grok Review verdict on LMCache pull request 5568", position: "left-top" },
     links: [
       { label: "grokreq.com", href: "https://grokreq.com" },
       { label: "Code", href: "https://github.com/immanuel-peter/grok-review" },
