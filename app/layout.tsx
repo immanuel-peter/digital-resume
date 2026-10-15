@@ -11,7 +11,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ipeter.dev"),
+  metadataBase: new URL("https://www.ipeter.dev"),
   title: "Immanuel Peter",
   description: "Immanuel Peter's personal website",
   keywords: [
@@ -42,9 +42,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Immanuel Peter",
     description: "Immanuel Peter's personal website",
-    url: "https://ipeter.dev",
+    url: "/",
     siteName: "Immanuel Peter",
-    images: ["https://ipeter.dev/opengraph-image.png"],
     type: "website",
   },
   twitter: {
@@ -52,7 +51,6 @@ export const metadata: Metadata = {
     title: "Immanuel Peter",
     description: "Immanuel Peter's personal website",
     creator: "@moby763canary21",
-    images: ["https://ipeter.dev/twitter-image.png"],
   },
   icons: {
     icon: "/favicon.ico",
