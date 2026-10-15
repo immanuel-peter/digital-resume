@@ -1,196 +1,201 @@
-"use client";
+import Link from "next/link";
+import { POSTPLAN_ASSETS } from "@/app/blog/vision-tower-bench/versions";
+import Section from "./Section";
+import TechIcons, { type TechKey } from "./TechIcons";
 
-import React, { useState } from "react";
-import {
-  FaGithub,
-  FaExternalLinkAlt,
-  FaChevronDown,
-  FaChevronUp,
-} from "react-icons/fa";
+type ProjectLink = { label: string; href: string };
 
-type ProjectCardProps = {
+type FeaturedProject = {
+  id: string;
   title: string;
+  year: string;
   description: string;
-  technologies: string[];
-  githubUrl?: string;
-  liveUrl?: string;
-  status: string;
+  images: { src: string; alt: string; pixelated?: boolean }[];
+  caption: string;
+  links: ProjectLink[];
+  tech: TechKey[];
 };
 
-const ProjectCard = ({
-  title,
-  description,
-  technologies,
-  githubUrl,
-  liveUrl,
-  status,
-}: ProjectCardProps) => {
-  const [expanded, setExpanded] = useState(false);
+type CompactProject = {
+  title: string;
+  year: string;
+  description: string;
+  image: { src: string; alt: string; position?: "top" | "left-top" };
+  links: ProjectLink[];
+  tech: TechKey[];
+};
 
+const featured: FeaturedProject[] = [
+  {
+    id: "vtb",
+    title: "Vision Tower Bench",
+    year: "2026",
+    description: "A benchmark for evaluating vision head capabilities",
+    images: [
+      {
+        src: POSTPLAN_ASSETS.explorerSource,
+        alt: "Photo of a bald eagle used as the probe input",
+      },
+      {
+        src: POSTPLAN_ASSETS.plateDinov2,
+        alt: "PCA of DINOv2 patch tokens: the eagle separates as one region",
+        pixelated: true,
+      },
+      {
+        src: POSTPLAN_ASSETS.plateMuseGlimmer,
+        alt: "PCA of Muse Glimmer patch tokens: near-uniform speckle",
+        pixelated: true,
+      },
+    ],
+    caption:
+      "One photo through two frozen towers. DINOv2 separates the bird as one region; Muse Glimmer shows no subject.",
+    links: [
+      { label: "Report", href: "/blog/vision-tower-bench" },
+      { label: "Code", href: "https://github.com/immanuel-peter/vision-tower-bench" },
+      { label: "Towers", href: "https://huggingface.co/collections/immanuelpeter/vision-towers" },
+    ],
+    tech: ["python", "pytorch", "huggingface", "uv"],
+  },
+  {
+    id: "automoe",
+    title: "AutoMoE",
+    year: "2025",
+    description: "A MoE self-driving model in PyTorch",
+    images: [
+      {
+        src: "https://assets.postplan.link/01M4EVN85S3Z77H29RZ5E2M4Q8.png",
+        alt: "CARLA autopilot front-camera view with ego speed, throttle, brake, and steering telemetry",
+      },
+    ],
+    caption:
+      "A frame from the CARLA autopilot dataset AutoMoE trains on, with the recorded speed, throttle, brake, and steering.",
+    links: [
+      { label: "Code", href: "https://github.com/immanuel-peter/self-driving-model" },
+      {
+        label: "Data",
+        href: "https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset",
+      },
+    ],
+    tech: ["python", "pytorch", "cuda", "huggingface"],
+  },
+];
+
+const compact: CompactProject[] = [
+  {
+    title: "Hostess",
+    year: "2026",
+    description: "Docker Compose for Production",
+    image: { src: "https://assets.postplan.link/01M42QZ085ZS18A7X6JW8G1MHG.png", alt: "Hostess Studio trace waterfall with labeled spans and durations", position: "left-top" },
+    links: [{ label: "hostess.sh", href: "https://hostess.sh" }],
+    tech: ["go", "kubernetes", "opentelemetry", "prometheus"],
+  },
+  {
+    title: "Redis Operator",
+    year: "2026",
+    description: "CloudNativePG for Redis",
+    image: { src: "https://assets.postplan.link/01M4YTJ1H0HEYAE710MMG80GRC.svg", alt: "Fencing-first failover sequence in the Redis operator", position: "top" },
+    links: [{ label: "Code", href: "https://github.com/howl-cloud/redis-operator" }],
+    tech: ["go", "kubernetes", "redis"],
+  },
+  {
+    title: "Postplan",
+    year: "2026",
+    description: "Easy toolchain to upload static files",
+    image: { src: "https://assets.postplan.link/01M4JB1CYY7G69RYB8CC9K8V3V.png", alt: "Postplan assets page with the upload bar and asset table", position: "left-top" },
+    links: [{ label: "Code", href: "https://github.com/immanuel-peter/postplan" }],
+    tech: ["typescript", "fastify", "postgresql", "cloudflare"],
+  },
+  {
+    title: "Grok Review",
+    year: "2026",
+    description: "Review your PRs with Grok",
+    image: { src: "https://assets.postplan.link/01M4JEM46E8KKCNZDVPD1PBNX0.png", alt: "Grok Review verdict on LMCache pull request 5568", position: "left-top" },
+    links: [
+      { label: "grokreq.com", href: "https://grokreq.com" },
+      { label: "Code", href: "https://github.com/immanuel-peter/grok-review" },
+    ],
+    tech: ["nextjs", "typescript", "postgresql", "github"],
+  },
+];
+
+const THUMB_POSITION = {
+  top: "object-top",
+  "left-top": "object-left-top",
+};
+
+function ProjectLinks({ links }: { links: ProjectLink[] }) {
   return (
-    <div className="rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 flex flex-col bg-slate-100 dark:bg-gray-800">
-      <div className="p-4 flex-grow">
-        <h3 className="text-2xl font-semibold text-gray-800 dark:text-white mb-2">
-          {title}
-        </h3>
-        <p
-          className={`text-gray-600 dark:text-gray-300 ${
-            expanded ? "" : "line-clamp-3"
-          }`}
-        >
-          {description}
-        </p>
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 mt-2 flex items-center transition-colors duration-200 cursor-pointer"
-        >
-          {expanded ? (
-            <>
-              Less <FaChevronUp className="ml-1" />
-            </>
-          ) : (
-            <>
-              More <FaChevronDown className="ml-1" />
-            </>
-          )}
-        </button>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <span
-            className="inline-block px-2 py-1 rounded-full text-xs font-medium bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
-          >
-            {status}
-          </span>
-          {technologies.map((tech: string, index: number) => (
-            <span
-              key={index}
-              className="bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 px-3 py-1 rounded-full text-xs font-medium shadow-sm"
-            >
-              {tech}
-            </span>
+    <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-[14.5px]">
+      {links.map(({ label, href }) =>
+        href.startsWith("/") ? (
+          <Link key={label} href={href} className="mn-link">
+            {label}
+          </Link>
+        ) : (
+          <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="mn-link">
+            {label}
+          </a>
+        ),
+      )}
+    </div>
+  );
+}
+
+function ProjectFooter({ links, tech }: { links: ProjectLink[]; tech: TechKey[] }) {
+  return (
+    <div className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+      <ProjectLinks links={links} />
+      <TechIcons items={tech} />
+    </div>
+  );
+}
+
+const Projects = () => (
+  <Section id="work" label="Work">
+    {featured.map((project) => (
+      <article key={project.id} id={project.id} className="mb-[76px]">
+        <div className="flex gap-2">
+          {project.images.map((image) => (
+            <img
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
+              className={`mn-shot h-auto w-full min-w-0 flex-1 ${project.images.length > 1 ? "rounded-[10px]" : "rounded-xl"} ${image.pixelated ? "[image-rendering:pixelated]" : ""}`}
+            />
           ))}
         </div>
-      </div>
-      <div className="mt-4 flex justify-between p-4 border-t border-gray-300 dark:border-gray-700">
-        {githubUrl && (
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:text-white cursor-pointer"
-          >
-            <FaGithub className="mr-2" /> GitHub
-          </a>
-        )}
-        {liveUrl && (
-          <a
-            href={liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center text-gray-600 hover:text-gray-900 transition-colors duration-200 dark:text-gray-300 dark:hover:text-white cursor-pointer"
-          >
-            <FaExternalLinkAlt className="mr-2" /> Live Demo
-          </a>
-        )}
-      </div>
-    </div>
-  );
-};
+        <p className="mt-2.5 text-[13px] leading-normal text-[#8c8c88]">{project.caption}</p>
+        <div className="mt-[22px] flex items-baseline justify-between gap-3">
+          <h3 className="text-2xl leading-[1.2] font-semibold tracking-[-0.02em]">{project.title}</h3>
+          <span className="tabular-nums text-[#74746f]">{project.year}</span>
+        </div>
+        <p className="mt-1 text-[17px] text-[#74746f]">{project.description}</p>
+        <ProjectFooter links={project.links} tech={project.tech} />
+      </article>
+    ))}
 
-const Projects = () => {
-  const projects = [
-    {
-      title: "Vision Tower Bench",
-      description:
-        "A benchmark that isolates the vision Tower from the rest of a VLM. Probes frozen Towers across recognition, geometry, correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.",
-      technologies: ["Python", "PyTorch", "Hugging Face", "uv"],
-      githubUrl: "https://github.com/immanuel-peter/vision-tower-bench",
-      liveUrl: "/blog/vision-tower-bench",
-      status: "Completed",
-    },
-    {
-      title: "Postplan",
-      description:
-        "A publishing service for HTML documents built for agents. Each document gets its own subdomain and an append-only version history via a token-authenticated API, with S3-compatible storage and Cloudflared tunneling.",
-      technologies: ["TypeScript", "Fastify", "Drizzle", "PostgreSQL", "S3", "Garage", "Cloudflared"],
-      githubUrl: "https://github.com/immanuel-peter/postplan",
-      status: "Completed",
-    },
-    {
-      title: "Hostess",
-      description:
-        "Docker Compose for Production: a declarative stack config is compiled into production K8s, with automated builds, service discovery, managed databases, secrets, Git-native previews, and framework-aware observability.",
-      technologies: [
-        "Go",
-        "controller-runtime",
-        "Kubernetes",
-        "CloudNativePG",
-        "BuildKit",
-        "Docker",
-        "Prometheus",
-        "Grafana",
-        "OTel",
-        "Tempo",
-        "Pulumi",
-        "Azure",
-        "GCP"
-      ],
-      liveUrl: "https://hostess.sh",
-      status: "Completed",
-    },
-    {
-      title: "Redis Operator",
-      description:
-        "A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone, sentinel, and cluster modes with direct pod and PVC management. Implements a fencing-first failover strategy to prevent split-brain scenarios and ensure data consistency during node failures.",
-      technologies: [
-        "Go",
-        "Kubernetes",
-        "Redis",
-        "Operator SDK",
-        "Sentinel",
-      ],
-      githubUrl: "https://github.com/howl-cloud/redis-operator",
-      status: "Completed",
-    },
-    {
-      title: "AutoMoE",
-      description:
-        "A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. Uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.",
-      technologies: [
-        "Python",
-        "PyTorch",
-        "CUDA",
-        "CARLA",
-        "Hugging Face",
-      ],
-      githubUrl: "https://github.com/immanuel-peter/self-driving-model",
-      status: "Completed",
-    },
-    {
-      title: "Grok Review",
-      description:
-        "Turns any public GitHub PR URL into a streaming AI code review powered by Grok 4.5. Paste a PR link, and get instant, line-by-line feedback on logic, style, and potential bugs — streamed in real time.",
-      technologies: ["Next.js", "TypeScript", "Grok API", "GitHub API", "PostgreSQL"],
-      githubUrl: "https://github.com/immanuel-peter/grok-review",
-      liveUrl: "https://grokreq.com",
-      status: "Completed",
-    },
-  ];
-
-  return (
-    <div
-      id="projects"
-      className="py-10 px-6 md:px-16 bg-gray-50 dark:bg-gray-900"
-    >
-      <h1 className="text-4xl font-extrabold text-gray-800 dark:text-white mb-8 text-left">
-        Projects
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project: ProjectCardProps, index: number) => (
-          <ProjectCard key={index} {...project} />
-        ))}
-      </div>
+    <div className="border-b border-[#e8e8e5]">
+      {compact.map((project) => (
+        <article key={project.title} className="flex flex-wrap gap-x-6 gap-y-4 border-t border-[#e8e8e5] py-7">
+          <img
+            src={project.image.src}
+            alt={project.image.alt}
+            width={200}
+            height={126}
+            className={`mn-shot h-[126px] w-[200px] shrink-0 rounded-[10px] object-cover ${THUMB_POSITION[project.image.position ?? "left-top"]}`}
+          />
+          <div className="flex min-w-0 flex-[1_1_260px] flex-col">
+            <div className="flex items-baseline justify-between gap-3">
+              <h3 className="text-xl leading-[1.2] font-semibold tracking-[-0.02em]">{project.title}</h3>
+              <span className="tabular-nums text-[#74746f]">{project.year}</span>
+            </div>
+            <p className="mt-1 text-[15.5px] text-[#74746f]">{project.description}</p>
+            <ProjectFooter links={project.links} tech={project.tech} />
+          </div>
+        </article>
+      ))}
     </div>
-  );
-};
+  </Section>
+);
 
 export default Projects;

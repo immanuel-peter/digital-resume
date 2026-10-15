@@ -20,9 +20,9 @@ Portfolio and technical blog at [ipeter.dev](https://ipeter.dev). Built for engi
 
 ## What this site includes
 
-- **Portfolio homepage** — Bio, experience, projects, education, certifications, and resume
+- **Portfolio homepage** — Minimal single page: work, experience, open source, and education, with live Hugging Face download counts
 - **ImmanuelAI** — Embedded chat widget powered by the OpenAI Responses API for Q&A about my background and work
-- **Technical blog** — Architecture deep-dives on [Matchbox](https://ipeter.dev/blog/matchbox) (research matching, LLMs) and [AutoMoE](https://ipeter.dev/blog/moe-self-driving) (MoE self-driving)
+- **Technical blog** — [Vision Tower Bench](https://ipeter.dev/blog/vision-tower-bench), a report benchmarking frozen vision towers
 - **[llms.txt](https://ipeter.dev/llms.txt)** — LLM-friendly site summary for discovery
 
 ---
@@ -67,8 +67,7 @@ At Quantum Rings: 19 PRs, 43 contributions, schema refactors, telemetry aggregat
 |-------|-------------|
 | `/` | Homepage portfolio |
 | `/blog` | Technical writing index |
-| `/blog/matchbox` | Matchbox architecture deep-dive |
-| `/blog/moe-self-driving` | AutoMoE project write-up |
+| `/blog/vision-tower-bench` | Vision Tower Bench report |
 | `/resume.pdf` | Downloadable resume |
 | `/llms.txt` | LLM-friendly site summary |
 | `/api/chat` | Server route for ImmanuelAI |

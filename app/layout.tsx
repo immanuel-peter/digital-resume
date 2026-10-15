@@ -11,6 +11,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ipeter.dev"),
   title: "Immanuel Peter",
   description: "Immanuel Peter's personal website",
   keywords: [

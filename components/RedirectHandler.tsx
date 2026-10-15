@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation';
 // Whitelist of trusted domains allowed for redirects
 const ALLOWED_DOMAINS = [
   'eduspheretech.com',
-  'matchbox.eduspheretech.com',
 ];
 
 export default function RedirectHandler() {

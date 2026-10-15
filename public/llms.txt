@@ -6,9 +6,13 @@ Member of Technical Staff Intern @ Tensormesh · CS, Physics & Math @ UChicago '
 
 ---
 
-**I'm a Member of Technical Staff Intern at Tensormesh!**
+**I work on multimodal and physical AI.**
 
-My Hugging Face datasets have over **15,000** downloads.
+- **Work:** Member of Technical Staff Intern at Tensormesh
+- **Study:** CS, Physics, & Math at UChicago
+- **Interests:** Vision, Multimodal, World Models, Physical AI
+- **Current:** [Vision Tower Bench](https://ipeter.dev/blog/vision-tower-bench)
+- **Hugging Face:** over **19,000** downloads across [datasets and models](https://huggingface.co/immanuelpeter)
 
 Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume.pdf).
 
@@ -20,7 +24,7 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 **Tensormesh** · March 2026 – Present · Foster City, CA
 
 - Contributed upstream to LMCache, adding a coordinator endpoint for listing pinned cache entries and per-key access tracking in the key directory.
-- Shipped 35 PRs and 100+ commits across 9 company repos spanning various services.
+- Shipped 35 PRs and 100+ commits across 9 company repos spanning LLM observability and inference optimization.
 - Integrated Arize Phoenix into Tensormesh's observability stack, emitting OpenInference LLM traces from the router for all requests, and shipped SDK and CLI tooling for inspecting traces and spans.
 - Reworked the Prometheus metrics for TTFT, throughput, and other rollups that power the serverless observability dashboards.
 - Built an orchestrator microservice that pins prompts in LMCache asynchronously during inference, and exposed pin management through the API, SDK, and CLI.
@@ -58,7 +62,7 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 
 ### [Pyrefly](https://github.com/facebook/pyrefly)
 
-- Submitted an upstream Rust cleanup in [PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from `summarise` to `summarize`.
+- Contributed an upstream Rust cleanup in merged [PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from `summarise` to `summarize`.
 
 ---
 
@@ -104,7 +108,7 @@ A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone,
 ### [AutoMoE](https://github.com/immanuel-peter/self-driving-model)
 A modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture. Uses specialized neural networks for specific perception tasks and a gating network to combine their outputs, aiming for a more modular, interpretable, and efficient model for navigating complex environments.
 
-`Python` `PyTorch` `CUDA` `CARLA` `Hugging Face` · **Completed** · [GitHub](https://github.com/immanuel-peter/self-driving-model) · [Datasets](https://huggingface.co/immanuelpeter) 
+`Python` `PyTorch` `CUDA` `CARLA` `Hugging Face` · **Completed** · [GitHub](https://github.com/immanuel-peter/self-driving-model) · [Dataset](https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset)
 
 ---
 

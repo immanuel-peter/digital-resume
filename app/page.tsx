@@ -1,20 +1,21 @@
 import { Suspense } from "react";
 import About from "@/components/About";
+import Education from "@/components/Education";
 import Experience from "@/components/Experience";
+import HomeChrome from "@/components/HomeChrome";
+import ImmanuelAI from "@/components/ImmanuelAI";
 import OpenSource from "@/components/OpenSource";
 import Projects from "@/components/Projects";
-import Education from "@/components/Education";
-// import Contact from "@/components/Contact";
 import RedirectHandler from "@/components/RedirectHandler";
-import ImmanuelAI from "@/components/ImmanuelAI";
-import { getAllDatasetDownloadsAllTime } from "@/lib/huggingface";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
+import { getHuggingFaceDownloadsAllTime } from "@/lib/huggingface";
+import { instrumentSans } from "./fonts";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600;
 
 export default async function App() {
-  const {
-    totalDownloadsAllTime,
-  } = await getAllDatasetDownloadsAllTime();
+  const downloads = await getHuggingFaceDownloadsAllTime();
 
   return (
     <>
@@ -24,14 +25,17 @@ export default async function App() {
       <Suspense fallback={null}>
         <ImmanuelAI />
       </Suspense>
-      <div className="pt-24">
-        <About totalDownloadsAllTime={totalDownloadsAllTime} />
-        <Experience />
-        <OpenSource />
-        <Projects />
-        <Education />
-        {/* <Certifications /> */}
-        {/* <Contact /> */}
+      <div className={`mn ${instrumentSans.variable} min-h-screen`}>
+        <HomeChrome />
+        <div className="mx-auto max-w-[1000px] px-[clamp(20px,5vw,48px)]">
+          <SiteHeader />
+          <About downloads={downloads} />
+          <Projects />
+          <Experience />
+          <OpenSource />
+          <Education />
+          <SiteFooter />
+        </div>
       </div>
     </>
   );
