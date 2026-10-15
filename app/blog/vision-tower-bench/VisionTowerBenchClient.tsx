@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import CapabilityTable from "./components/CapabilityTable";
 import Changelog from "./components/Changelog";
 import Explorer from "./components/Explorer";
@@ -13,12 +13,11 @@ import Lightbox, { type LightboxImage } from "./components/Lightbox";
 import Method from "./components/Method";
 import ProgressBar from "./components/ProgressBar";
 import { ResultSection, ResultsHeading } from "./components/ResultSection";
-import Toc, { TOC_SECTIONS } from "./components/Toc";
+import Choose from "./components/Choose";
+import Toc, { tocSections } from "./components/Toc";
 import { useVtbChrome } from "./components/useVtbChrome";
 import { Why, Axes } from "./components/WhyAxes";
 import { VTB_DEFAULT_VERSION, VTB_VERSIONS, getVTBVersion } from "./versions";
-
-const TOC_IDS = TOC_SECTIONS.map((s) => s.id);
 
 export default function VisionTowerBenchClient({
   initialVersionId,
@@ -29,7 +28,9 @@ export default function VisionTowerBenchClient({
   const version = getVTBVersion(versionId);
   const [towerKey, setTowerKey] = useState(version.defaultTower);
   const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
-  const { barRef, activeId } = useVtbChrome(TOC_IDS, versionId);
+  const sections = useMemo(() => tocSections(version), [version]);
+  const tocIds = useMemo(() => sections.map((s) => s.id), [sections]);
+  const { barRef, activeId } = useVtbChrome(tocIds, versionId);
 
   const onVersionChange = (id: string) => {
     const next = getVTBVersion(id);
@@ -46,7 +47,7 @@ export default function VisionTowerBenchClient({
   return (
     <div className="vtb min-h-screen bg-vtb-paper font-vtbody text-[17px] leading-[1.62] text-vtb-ink">
       <ProgressBar barRef={barRef} />
-      <Toc activeId={activeId} />
+      <Toc sections={sections} activeId={activeId} />
 
       <div className="mx-auto max-w-[1180px] px-5 pb-20 sm:px-14 sm:pb-[120px]">
         <Hero version={version} />
@@ -65,6 +66,7 @@ export default function VisionTowerBenchClient({
         {version.results.map((result) => (
           <ResultSection key={result.id} result={result} onZoom={setLightbox} />
         ))}
+        {version.choose && <Choose choose={version.choose} />}
         <Limits version={version} />
         <Explorer
           version={version}

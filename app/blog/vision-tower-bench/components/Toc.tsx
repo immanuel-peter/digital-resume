@@ -1,16 +1,29 @@
-export const TOC_SECTIONS = [
-  { id: "why", label: "Why" },
-  { id: "table", label: "Capabilities" },
-  { id: "method", label: "Method" },
-  { id: "results", label: "Results" },
-  { id: "limits", label: "Limits" },
-  { id: "explorer", label: "Explorer" },
-];
+import type { VTBVersion } from "../versions";
 
-export default function Toc({ activeId }: { activeId: string }) {
+type TocSection = { id: string; label: string };
+
+export function tocSections(version: VTBVersion): TocSection[] {
+  return [
+    { id: "why", label: "Why" },
+    { id: "table", label: "Capabilities" },
+    { id: "method", label: "Method" },
+    { id: "results", label: "Results" },
+    ...(version.choose ? [{ id: "choose", label: "Choose" }] : []),
+    { id: "limits", label: "Limits" },
+    { id: "explorer", label: "Explorer" },
+  ];
+}
+
+export default function Toc({
+  sections,
+  activeId,
+}: {
+  sections: TocSection[];
+  activeId: string;
+}) {
   return (
     <nav className="toc" aria-label="Sections">
-      {TOC_SECTIONS.map((section) => (
+      {sections.map((section) => (
         <a
           key={section.id}
           href={`#${section.id}`}

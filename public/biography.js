@@ -33,7 +33,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 ## Projects
 
 **1. Vision Tower Bench**
-- A benchmark that isolates the vision Tower from the rest of a VLM. Probes six frozen Towers (DINOv2, SigLIP2, and four extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
+- A benchmark that isolates the vision Tower from the rest of a VLM. Probes eleven frozen Towers (DINOv2, SigLIP2, and nine extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
 - Tech: Python, PyTorch, Hugging Face, uv
 - [Source](https://github.com/immanuel-peter/vision-tower-bench), [Report](https://ipeter.dev/blog/vision-tower-bench), [Towers](https://huggingface.co/collections/immanuelpeter/vision-towers)
 - Status: Completed

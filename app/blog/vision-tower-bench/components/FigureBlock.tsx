@@ -52,6 +52,9 @@ export default function FigureBlock({
         >
           {figure.title}
         </Caption>
+        {figure.caption && (
+          <p className="text-[0.88rem] text-vtb-mute">{figure.caption}</p>
+        )}
       </div>
     </div>
   );

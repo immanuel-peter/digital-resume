@@ -1,5 +1,6 @@
 import type { VTBResult, VTBVersion } from "../versions";
 import FigureBlock from "./FigureBlock";
+import MatrixBlock from "./MatrixBlock";
 import type { LightboxImage } from "./Lightbox";
 import VtbKicker from "./VtbKicker";
 
@@ -39,7 +40,10 @@ export function ResultSection({
           {result.body}
         </p>
       </div>
-      <FigureBlock figure={result.figure} framed captionAs="h4" className="mb-[88px]" onZoom={onZoom} />
+      {result.figure && (
+        <FigureBlock figure={result.figure} framed captionAs="h4" className="mb-[88px]" onZoom={onZoom} />
+      )}
+      {result.matrix && <MatrixBlock matrix={result.matrix} className="mb-[88px]" />}
     </div>
   );
 }

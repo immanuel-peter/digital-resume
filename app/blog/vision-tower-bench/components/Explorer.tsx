@@ -107,6 +107,12 @@ export default function Explorer({
               <span className="text-vtb-mute">recognition top-1</span>
               <span>{tower.sem}</span>
             </div>
+            {tower.few && (
+              <div className="flex justify-between gap-3.5">
+                <span className="text-vtb-mute">1% labels top-1</span>
+                <span>{tower.few}</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

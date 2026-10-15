@@ -21,7 +21,9 @@ export default function Limits({ version }: { version: VTBVersion }) {
             </li>
           ))}
         </ul>
-        <p className="text-[0.92rem] text-vtb-mute">{version.limitsNote}</p>
+        {version.limitsNote && (
+          <p className="text-[0.92rem] text-vtb-mute">{version.limitsNote}</p>
+        )}
       </div>
     </Split>
   );
