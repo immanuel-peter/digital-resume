@@ -41,9 +41,9 @@ export default function CapabilityTable({ version }: { version: VTBVersion }) {
           </thead>
           <tbody className="font-vtbmono text-[0.85rem] tabular-nums">
             {version.rows.map((row) => (
-              <tr key={row.tower}>
+              <tr key={row.tower} className={row.muted ? "text-vtb-mute" : ""}>
                 <td className="border-b border-vtb-linesoft py-[13px] pr-3.5 pl-0">
-                  <span className="font-display text-[0.95rem] font-semibold">
+                  <span className="font-display text-[0.95rem] font-semibold text-vtb-ink">
                     {row.tower}
                   </span>
                 </td>

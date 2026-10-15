@@ -20,6 +20,11 @@
   --color-vtb-line: #c6cbd2;
   --color-vtb-linesoft: #dfe3e8;
   --color-vtb-tocdim: #8d949e;
+  --color-vtb-pos: #2f6f5e;
+  --color-vtb-poswash: #dcebe4;
+  --color-vtb-neg: #a5442f;
+  --color-vtb-negwash: #f3ddd6;
+  --color-vtb-unres: #e6e8eb;
 }
 
 @layer components {
