@@ -9,11 +9,14 @@ import Projects from "@/components/Projects";
 import RedirectHandler from "@/components/RedirectHandler";
 import SiteFooter from "@/components/SiteFooter";
 import SiteHeader from "@/components/SiteHeader";
+import { getHuggingFaceDownloadsAllTime } from "@/lib/huggingface";
 import { instrumentSans } from "./fonts";
 
 export const revalidate = 3600;
 
-export default function App() {
+export default async function App() {
+  const downloads = await getHuggingFaceDownloadsAllTime();
+
   return (
     <>
       <Suspense fallback={null}>
@@ -26,7 +29,7 @@ export default function App() {
         <HomeChrome />
         <div className="mx-auto max-w-[1000px] px-[clamp(20px,5vw,48px)]">
           <SiteHeader />
-          <About />
+          <About downloads={downloads} />
           <Projects />
           <Experience />
           <OpenSource />
