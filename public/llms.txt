@@ -12,7 +12,7 @@ Member of Technical Staff Intern @ Tensormesh · CS, Physics & Math @ UChicago '
 - **Study:** CS, Physics, & Math at UChicago
 - **Interests:** Vision, Multimodal, World Models, Physical AI
 - **Current:** [Vision Tower Bench](https://ipeter.dev/blog/vision-tower-bench)
-- **Hugging Face:** over **19,000** downloads across [datasets and models](https://huggingface.co/immanuelpeter)
+- **Hugging Face:** over **22,000** downloads across [datasets and models](https://huggingface.co/immanuelpeter)
 
 Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume.pdf).
 

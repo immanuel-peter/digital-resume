@@ -20,7 +20,7 @@ Portfolio and technical blog at [ipeter.dev](https://ipeter.dev). Built for engi
 
 ## What this site includes
 
-- **Portfolio homepage** — Minimal single page: work, experience, open source, and education, with live Hugging Face download counts
+- **Portfolio homepage** — Minimal single page: work, experience, open source, and education, with over 22,000 Hugging Face downloads across datasets and models
 - **ImmanuelAI** — Embedded chat widget powered by the OpenAI Responses API for Q&A about my background and work
 - **Technical blog** — [Vision Tower Bench](https://ipeter.dev/blog/vision-tower-bench), a report benchmarking frozen vision towers
 - **[llms.txt](https://ipeter.dev/llms.txt)** — LLM-friendly site summary for discovery

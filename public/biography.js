@@ -25,6 +25,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Education: University of Chicago — BS in Computer Science, BA in Physics, and BA in Mathematics
 - Anticipated Graduation: June 2028
 - Current headline: Member of Technical Staff Intern @ Tensormesh · CS, Physics & Math @ UChicago '28
+- Hugging Face: over 22,000 downloads across datasets and models.
 
 ## Current Focus
 - Member of Technical Staff Intern at Tensormesh (team behind LMCache), March 2026 - present (Foster City, CA).

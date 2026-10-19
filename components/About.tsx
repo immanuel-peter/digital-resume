@@ -1,7 +1,4 @@
 import type { ReactNode } from "react";
-import type { HuggingFaceDownloads } from "@/lib/huggingface";
-
-const formatNumber = (value: number) => new Intl.NumberFormat("en-US").format(value);
 
 function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -12,7 +9,7 @@ function Fact({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-const About = ({ downloads }: { downloads: HuggingFaceDownloads | null }) => (
+const About = () => (
   <div className="pt-[104px]">
     <h1 className="max-w-[900px] text-[clamp(40px,5.4vw,76px)] leading-[1.04] font-medium tracking-[-0.035em]">
       I work on multimodal and physical AI.
@@ -26,21 +23,17 @@ const About = ({ downloads }: { downloads: HuggingFaceDownloads | null }) => (
           Vision Tower Bench
         </a>
       </Fact>
-      {downloads && (
-        <Fact label="Hugging Face">
-          <a
-            href="https://huggingface.co/immanuelpeter"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mn-link"
-          >
-            {formatNumber(downloads.total)} downloads
-          </a>{" "}
-          <span className="text-[#74746f]">
-            · {formatNumber(downloads.datasets)} on datasets, {formatNumber(downloads.models)} on models
-          </span>
-        </Fact>
-      )}
+      <Fact label="Hugging Face">
+        <a
+          href="https://huggingface.co/immanuelpeter"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mn-link"
+        >
+          Over 22,000 downloads
+        </a>{" "}
+        <span className="text-[#74746f]">across datasets and models</span>
+      </Fact>
     </dl>
   </div>
 );
