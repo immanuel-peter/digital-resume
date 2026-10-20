@@ -15,10 +15,11 @@ export default function ConditionalNav() {
     <div className="fixed top-4 left-4 z-50">
       <Link
         href="/"
-        className="flex items-center gap-2 px-4 py-2 bg-white shadow-md rounded-full text-gray-600 hover:bg-gray-100 transition-colors duration-200"
+        aria-label="Home"
+        className="flex items-center gap-2 px-3 py-1.5 bg-white shadow-md rounded-full text-gray-600 hover:bg-gray-100 transition-colors duration-200"
       >
         <FaArrowLeft size={16} />
-        <span className="text-sm font-medium">Home</span>
+        <img src="/ipeter.jpg" alt="" width={28} height={28} className="size-7 rounded-full" />
       </Link>
     </div>
   );
