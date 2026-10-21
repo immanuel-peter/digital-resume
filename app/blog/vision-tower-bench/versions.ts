@@ -17,6 +17,8 @@ export const POSTPLAN_ASSETS = {
     "https://assets.postplan.link/01M36JSPGWWZRYHQJMF43NV510.svg",
   v2Fig3Peaks:
     "https://assets.postplan.link/01M36JSQ2RCX90B0TZA5Q5T76V.svg",
+  v21Fig2LabelBudget:
+    "https://assets.postplan.link/01M5C05KYZYZCW4KT2FRFXGV5A.svg",
   plateMinimaxM3:
     "https://assets.postplan.link/01M36JSQHRTJ9QFE7E3S5K7ACB.png",
   plateGlm53Flash:
@@ -539,11 +541,91 @@ const v2: VTBVersion = {
   ],
 };
 
+const v21Tower = (key: string, changes: Partial<VTBExplorerTower>): VTBExplorerTower => ({
+  ...v2.explorerTowers.find((t) => t.key === key)!,
+  ...changes,
+});
+
+const v21: VTBVersion = {
+  ...v2,
+  id: "v2.1",
+  selectorLabel: "v2.1",
+  tableFootnote: [
+    v2.tableFootnote[0],
+    "Muse Glimmer and GLM 5.3 Flash are 2 points apart on 1% labels.",
+    ...v2.tableFootnote.slice(1),
+  ],
+  rows: [
+    row("DINOv2", ["0.377", "0.908", "0.702", "18.85", "0.539", "52%"], [2, 3, 4, 5]),
+    row("SigLIP2", ["0.656", "0.917", "0.670", "23.90", "0.401", "49%"]),
+    row("Muse Glimmer", ["0.703", "0.921", "0.659", "24.30", "0.214", "52%"], [0, 1, 5]),
+    row("GLM 5.3 Flash", ["0.683", "0.919", "0.643", "24.35", "0.382", "45%"]),
+    row("Nemotron Omni", ["0.544", "0.903", "0.641", "24.39", "0.419", "46%"]),
+    row("Kimi K2.6", ["0.388", "0.886", "0.659", "25.51", "0.365", "28%"]),
+    row("Qwen3.8", ["0.463", "0.879", "0.674", "24.24", "0.378", "30%"]),
+    row("DeepSeek V4.1", ["0.369", "0.874", "0.654", "25.27", "0.392", "35%"]),
+    row("Gemma 4", ["0.329", "0.874", "0.555", "27.25", "0.304", "30%"]),
+    row("Kimi K3", ["0.228", "0.837", "0.655", "27.03", "0.333", "20%"]),
+    row("MiniMax M3", ["0.052", "0.342", "0.542", "31.48", "0.235", "18%"], [], true),
+  ],
+  method: [
+    v2.method[0],
+    `${v2.method[1]} Label-budget readouts standardize each channel on the training split first, because a few towers carry very large channels that dominate the PCA.`,
+  ],
+  results: [
+    {
+      ...v2.results[0],
+      body: "DINOv2 leads the spatial columns. Muse Glimmer narrowly leads with 1% labels, ahead of GLM 5.3 Flash, and is nominally first with full labels, though the top three are unresolved there.",
+      figure: {
+        ...v2.results[0].figure!,
+        src: POSTPLAN_ASSETS.v21Fig2LabelBudget,
+        alt: "Recognition top-1 against labelled fraction for eleven towers, channels standardized before PCA; the spread is widest at 1% and narrows by 20%, with MiniMax M3 far below",
+      },
+    },
+    ...v2.results.slice(1),
+  ],
+  choose: {
+    ...v2.choose!,
+    rows: v2.choose!.rows.map((r) =>
+      r.priority === "Recognition with few labels"
+        ? {
+            ...r,
+            pick: "Muse Glimmer, GLM 5.3 Flash, SigLIP2",
+            note: "Within 5 points at 1% labels, so test all three.",
+          }
+        : r,
+    ),
+  },
+  limitsHeading: "What v2.1 does not establish",
+  explorerTowers: [
+    v21Tower("dinov2", { few: "0.377 · rank 7 of 11" }),
+    v21Tower("minimax_m3", { few: "0.052 · rank 11 of 11" }),
+    v21Tower("glm_5_3_flash", {
+      buttonLabel: "GLM 5.3 Flash — ScanNet leader",
+      note: "It is second at 1% labels and leads on ScanNet.",
+      few: "0.683 · rank 2 of 11",
+    }),
+    v21Tower("muse_glimmer", {
+      buttonLabel: "Muse Glimmer — recognition leader",
+      note: "Near-uniform speckle. It leads recognition at both label budgets and trails correspondence.",
+      few: "0.703 · rank 1 of 11",
+    }),
+  ],
+  changelog: [
+    {
+      date: "Oct 2026",
+      html:
+        'Vision Tower Bench v2.1 reruns low-label recognition with channels standardized before PCA.',
+    },
+    ...v2.changelog,
+  ],
+};
+
 // To publish a new version, append a new VTBVersion here with its own
 // figure URLs. The selector, ?v= routing, and explorer all key off this list.
-export const VTB_VERSIONS: VTBVersion[] = [v1, v2];
+export const VTB_VERSIONS: VTBVersion[] = [v1, v2, v21];
 
-export const VTB_DEFAULT_VERSION = "v2";
+export const VTB_DEFAULT_VERSION = "v2.1";
 
 export function getVTBVersion(id: string | undefined | null): VTBVersion {
   return (
