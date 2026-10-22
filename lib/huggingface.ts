@@ -59,3 +59,12 @@ export async function getHuggingFaceDownloadsAllTime(): Promise<HuggingFaceDownl
     return null;
   }
 }
+
+export const formatNumber = (value: number) => new Intl.NumberFormat("en-US").format(value);
+
+export async function getHuggingFaceSummary() {
+  const downloads = await getHuggingFaceDownloadsAllTime();
+  if (!downloads) return "[datasets and models](https://huggingface.co/immanuelpeter)";
+
+  return `[${formatNumber(downloads.total)} downloads](https://huggingface.co/immanuelpeter) · ${formatNumber(downloads.datasets)} on datasets, ${formatNumber(downloads.models)} on models`;
+}

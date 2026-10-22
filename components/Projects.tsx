@@ -52,7 +52,7 @@ const featured: FeaturedProject[] = [
     links: [
       { label: "Report", href: "/blog/vision-tower-bench" },
       { label: "Code", href: "https://github.com/immanuel-peter/vision-tower-bench" },
-      { label: "Towers", href: "https://huggingface.co/collections/immanuelpeter/vision-towers" },
+      { label: "Towers", href: "https://huggingface.co/collections/immanuelpeter/vision-heads" },
     ],
     tech: ["python", "pytorch", "huggingface", "uv"],
   },

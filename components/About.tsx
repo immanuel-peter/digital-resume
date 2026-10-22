@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
-import type { HuggingFaceDownloads } from "@/lib/huggingface";
-
-const formatNumber = (value: number) => new Intl.NumberFormat("en-US").format(value);
+import { formatNumber, type HuggingFaceDownloads } from "@/lib/huggingface";
 
 function Fact({ label, children }: { label: string; children: ReactNode }) {
   return (

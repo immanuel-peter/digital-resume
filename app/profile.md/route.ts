@@ -1,15 +1,9 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { getProfileMarkdown } from "@/lib/profile";
 
-export const dynamic = "force-static";
+export const revalidate = 3600;
 
 export async function GET() {
-  const markdown = await readFile(
-    join(process.cwd(), "public", "llms.md"),
-    "utf8"
-  );
-
-  return new Response(markdown, {
+  return new Response(await getProfileMarkdown(), {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
       Vary: "Accept",
