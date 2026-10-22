@@ -64,7 +64,7 @@ export const formatNumber = (value: number) => new Intl.NumberFormat("en-US").fo
 
 export async function getHuggingFaceSummary() {
   const downloads = await getHuggingFaceDownloadsAllTime();
-  if (!downloads) return "[datasets and models](https://huggingface.co/immanuelpeter)";
+  if (!downloads) return "[downloads across datasets and models](https://huggingface.co/immanuelpeter)";
 
   return `[${formatNumber(downloads.total)} downloads](https://huggingface.co/immanuelpeter) · ${formatNumber(downloads.datasets)} on datasets, ${formatNumber(downloads.models)} on models`;
 }
