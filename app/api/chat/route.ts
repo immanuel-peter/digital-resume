@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
+import { getHuggingFaceSummary } from "@/lib/huggingface";
 import { biography } from "@/public/biography";
 
 export const runtime = 'nodejs'
@@ -39,7 +40,7 @@ export async function POST(req: Request) {
       store: true,
       include: ["reasoning.encrypted_content", "web_search_call.action.sources"],
       reasoning: { effort: "low", summary: "auto" },
-      instructions: biography,
+      instructions: biography.replace("{{huggingface}}", await getHuggingFaceSummary()),
       tool_choice: "auto",
       tools: [
         {

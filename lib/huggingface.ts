@@ -6,6 +6,7 @@ const MODELS_URL =
   "https://huggingface.co/api/models?author=immanuelpeter&limit=100&expand[]=downloadsAllTime";
 
 const REVALIDATE_SECONDS = 3600;
+const FETCH_TIMEOUT_MS = 3000;
 
 const toCount = (value: unknown) => {
   const count = Number(value);
@@ -13,7 +14,10 @@ const toCount = (value: unknown) => {
 };
 
 async function fetchJson<T>(url: string): Promise<T> {
-  const response = await fetch(url, { next: { revalidate: REVALIDATE_SECONDS } });
+  const response = await fetch(url, {
+    next: { revalidate: REVALIDATE_SECONDS },
+    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+  });
 
   if (!response.ok) {
     throw new Error(`Failed to fetch ${url}: ${response.status}`);
@@ -58,4 +62,13 @@ export async function getHuggingFaceDownloadsAllTime(): Promise<HuggingFaceDownl
     console.error("Error fetching Hugging Face downloads:", error);
     return null;
   }
+}
+
+export const formatNumber = (value: number) => new Intl.NumberFormat("en-US").format(value);
+
+export async function getHuggingFaceSummary() {
+  const downloads = await getHuggingFaceDownloadsAllTime();
+  if (!downloads) return "[downloads across datasets and models](https://huggingface.co/immanuelpeter)";
+
+  return `[${formatNumber(downloads.total)} downloads](https://huggingface.co/immanuelpeter) · ${formatNumber(downloads.datasets)} on datasets, ${formatNumber(downloads.models)} on models`;
 }

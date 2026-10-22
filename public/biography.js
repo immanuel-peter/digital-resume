@@ -24,8 +24,9 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Location: Chicago, IL
 - Education: University of Chicago — BS in Computer Science, BA in Physics, and BA in Mathematics
 - Anticipated Graduation: June 2028
+- Current: Vision Tower Bench (https://ipeter.dev/blog/vision-tower-bench)
 - Current headline: Member of Technical Staff Intern @ Tensormesh · CS, Physics & Math @ UChicago '28
-- Hugging Face: over 22,000 downloads across datasets and models.
+- Hugging Face: {{huggingface}}
 
 ## Current Focus
 - Member of Technical Staff Intern at Tensormesh (team behind LMCache), March 2026 - present (Foster City, CA).
@@ -34,41 +35,44 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 
 ## Projects
 
-**1. Vision Tower Bench**
-- A benchmark that isolates the vision Tower from the rest of a VLM. Probes eleven frozen Towers (DINOv2, SigLIP2, and nine extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
+**1. Vision Tower Bench (2026)**
+- A benchmark for evaluating vision head capabilities.
+- Isolates the vision Tower from the rest of a VLM. Probes eleven frozen Towers (DINOv2, SigLIP2, and nine extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
 - Tech: Python, PyTorch, Hugging Face, uv
-- [Source](https://github.com/immanuel-peter/vision-tower-bench), [Report](https://ipeter.dev/blog/vision-tower-bench), [Towers](https://huggingface.co/collections/immanuelpeter/vision-heads)
-- Status: Completed
+- [Report](https://ipeter.dev/blog/vision-tower-bench), [Code](https://github.com/immanuel-peter/vision-tower-bench), [Towers](https://huggingface.co/collections/immanuelpeter/vision-heads)
 
-**2. Postplan**
-- A publishing service for HTML documents built for agents. Each document gets its own subdomain and an append-only version history via a token-authenticated API, with S3-compatible storage and Cloudflared tunneling.
-- Tech: TypeScript, Fastify, Drizzle, PostgreSQL, S3, Garage, Cloudflared
-- [Source](https://github.com/immanuel-peter/postplan)
-- Status: Completed
-
-**3. Hostess**
-- Hostess turns a single declarative stack file into a production deployment on Kubernetes. I built the end-to-end platform: a Go CLI and API that compile hostess.yml into multi-service workloads, a controller that reconciles database connection secrets after operators provision passwords, multi-cloud image builds (BuildKit / Cloud Build / ACR Tasks), GitHub App deploy-on-push with isolated PR preview environments, TLS-terminated external database access, Infisical-backed secrets, RBAC, and a Next.js Studio with service-specific metrics, traces, OpenAPI playground, and database admin.
-- Tech: Go, Gin, Cobra, controller-runtime, Kubernetes, CloudNativePG, HoWL Redis Operator, BuildKit, Pulumi, GCP/Azure, Infisical, Prometheus/OTel/Tempo, Next.js
-- [Live](https://hostess.sh)
-- Status: Completed
-
-**4. Redis Operator**
-- A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone, sentinel, and cluster modes with direct pod and PVC management.
-- Implements a fencing-first failover strategy to prevent split-brain scenarios and ensure data consistency during node failures.
-- [Source](https://github.com/howl-cloud/redis-operator)
-- Status: Completed
-
-**5. AutoMoE**
-- Modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture for CARLA simulation.
+**2. AutoMoE (2025)**
+- A MoE self-driving model in PyTorch.
+- Modular, multi-task self-driving system based on a Mixture-of-Experts (MoE) architecture, trained on a CARLA autopilot dataset with recorded speed, throttle, brake, and steering.
 - Uses specialized expert networks for perception and planning subtasks, with a gating network to route inputs.
 - Built with PyTorch (DDP), CUDA, and Linux. Designed for interpretability, scalability, and clean handoffs between modules.
-- [Source](https://github.com/immanuel-peter/self-driving-model)
-- Status: Completed
+- Tech: Python, PyTorch, CUDA, CARLA, Hugging Face
+- [Code](https://github.com/immanuel-peter/self-driving-model), [Data](https://huggingface.co/datasets/immanuelpeter/carla-autopilot-multimodal-dataset)
 
-**6. Grok Review**
+**3. Hostess (2026)**
+- Docker Compose for Production.
+- Hostess turns a single declarative stack file into a production deployment on Kubernetes. I built the end-to-end platform: a Go CLI and API that compile hostess.yml into multi-service workloads, a controller that reconciles database connection secrets after operators provision passwords, multi-cloud image builds (BuildKit / Cloud Build / ACR Tasks), GitHub App deploy-on-push with isolated PR preview environments, TLS-terminated external database access, Infisical-backed secrets, RBAC, and a Next.js Studio with service-specific metrics, traces, OpenAPI playground, and database admin.
+- Tech: Go, Gin, Cobra, controller-runtime, Kubernetes, CloudNativePG, HoWL Redis Operator, BuildKit, Pulumi, GCP/Azure, Infisical, Prometheus/OTel/Tempo, Next.js
+- [hostess.sh](https://hostess.sh)
+
+**4. Redis Operator (2026)**
+- CloudNativePG for Redis.
+- A Kubernetes operator for Redis, inspired by CloudNativePG. Supports standalone, sentinel, and cluster modes with direct pod and PVC management.
+- Implements a fencing-first failover strategy to prevent split-brain scenarios and ensure data consistency during node failures.
+- Tech: Go, Kubernetes, Redis
+- [Code](https://github.com/howl-cloud/redis-operator)
+
+**5. Postplan (2026)**
+- Easy toolchain to upload static files.
+- A publishing service for HTML documents and static assets, built for agents. Each document gets its own subdomain and an append-only version history via a token-authenticated API, and uploaded assets get stable public URLs, with S3-compatible storage and Cloudflared tunneling.
+- Tech: TypeScript, Fastify, Drizzle, PostgreSQL, S3, Garage, Cloudflared
+- [Code](https://github.com/immanuel-peter/postplan)
+
+**6. Grok Review (2026)**
+- Review your PRs with Grok.
 - Turns any public GitHub PR URL into a streaming AI code review powered by Grok 4.5. Paste a PR link and get instant, line-by-line feedback on logic, style, and potential bugs—streamed in real time.
-- [Live](https://grokreq.com) | [Source](https://github.com/immanuel-peter/grok-review)
-- Status: Completed
+- Tech: Next.js, TypeScript, PostgreSQL, GitHub API
+- [grokreq.com](https://grokreq.com) | [Code](https://github.com/immanuel-peter/grok-review)
 
 ## Experience Highlights
 
@@ -81,7 +85,7 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Built a KV cache discovery interface on top of the LMCache Coordinator API to browse cached keys, tokens, and utilization across engines.
 - Led an internal research effort on key weighting for long-context inference, from evals to writeups.
 
-**Software Engineer Intern, Quantum Rings (Summer 2025)**
+**Software Engineer Intern, Quantum Rings (June 2025 - August 2025, Chicago, IL)**
 - Delivered 19 PRs, 43 contributions, and 15 completed GitHub issues across the internship, adding ~15K LOC and removing ~3.6K LOC while reviewing code and driving schema refactors.
 - Migrated execution data from the user entity to a dedicated relational table with FKs, modularizing schema and ensuring test suite stability with no performance regression.
 - Implemented a telemetry aggregation background worker (AWS SQS + TypeORM) to asynchronously roll up user execution activity, improving scalability and simplifying downstream analytics queries.
@@ -90,17 +94,19 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 
 ## Open Source Contributions
 
-**LMCache — Python**
-- Added a coordinator endpoint for listing pinned cache entries in merged [PR #4960](https://github.com/LMCache/LMCache/pull/4960), and per-key access tracking in the coordinator key directory in merged [PR #4873](https://github.com/LMCache/LMCache/pull/4873).
+**[LMCache](https://github.com/LMCache/LMCache)**
+- Added a coordinator endpoint for listing pinned cache entries. [PR #4960](https://github.com/LMCache/LMCache/pull/4960)
+- Added per-key access tracking to the coordinator key directory. [PR #4873](https://github.com/LMCache/LMCache/pull/4873)
 
-**Brev CLI — Go**
-- Authored the core rsync-first file-transfer implementation with automatic SCP fallback and unit coverage. The original commits in [PR #297](https://github.com/brevdev/brev-cli/pull/297) were preserved in the maintainer-approved [merged PR #423](https://github.com/brevdev/brev-cli/pull/423).
+**[vLLM Production Stack](https://github.com/vllm-project/production-stack)**
+- Added router volume and mount support for read-only root filesystems. [PR #975](https://github.com/vllm-project/production-stack/pull/975)
+- Corrected the default NVIDIA runtime class, with regenerated CRD manifests. [PR #974](https://github.com/vllm-project/production-stack/pull/974)
 
-**Pyrefly — Rust · Python**
-- Contributed an upstream Rust cleanup in merged [Pyrefly PR #1370](https://github.com/facebook/pyrefly/pull/1370), standardizing the error-summary module and imports from \`summarise\` to \`summarize\`.
+**[Brev CLI](https://github.com/brevdev/brev-cli)**
+- Authored the core rsync-first file-transfer implementation, with automatic SCP fallback and unit coverage. [PR #423](https://github.com/brevdev/brev-cli/pull/423)
 
-**vLLM Production Stack — Kubernetes / Helm**
-- Added router volume and mount configuration for read-only root filesystems in merged [PR #975](https://github.com/vllm-project/production-stack/pull/975); corrected the default NVIDIA runtime class and regenerated its CRD in merged [PR #974](https://github.com/vllm-project/production-stack/pull/974).
+**[Pyrefly](https://github.com/facebook/pyrefly)**
+- Upstream Rust cleanup standardizing the error-summary module and imports from \`summarise\` to \`summarize\`. [PR #1370](https://github.com/facebook/pyrefly/pull/1370)
 
 ## Technical Skills
 - Languages: Python, Go, C++, JavaScript/TypeScript, Rust, SQL
@@ -143,6 +149,9 @@ I'm Immanuel's AI, here to answer questions about his engineering background, te
 - Email: hello@ipeter.dev
 - LinkedIn: https://linkedin.com/in/immanuel-peter/
 - GitHub: https://github.com/immanuel-peter/
+- Hugging Face: https://huggingface.co/immanuelpeter
+- X: https://x.com/moby763canary21
+- Blog: https://ipeter.dev/blog
 - Resume: https://ipeter.dev/resume.pdf
 
 ## Fun

@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  outputFileTracingIncludes: {
+    "/*": ["./content/**"],
+  },
   async headers() {
     return [
       {
@@ -21,12 +24,6 @@ const nextConfig: NextConfig = {
             key: "Link",
             value: '</llms.md>; rel="describedby"; type="text/markdown"',
           },
-        ],
-      },
-      {
-        source: "/llms.md",
-        headers: [
-          { key: "Content-Type", value: "text/markdown; charset=utf-8" },
         ],
       },
     ];
