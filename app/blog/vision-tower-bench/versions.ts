@@ -24,11 +24,11 @@ export const POSTPLAN_ASSETS = {
   plateGlm53Flash:
     "https://assets.postplan.link/01M36JSQYMW3QBWYVRDBYZPHKB.png",
   v3Fig2Peaks:
-    "https://assets.postplan.link/01M5P8HN1Y91E2NPGC7W29VGY4.svg",
+    "https://assets.postplan.link/01M5P9SCWZ023KEVN2QCXGT80V.svg",
   v3Fig3TowerVsProjector:
-    "https://assets.postplan.link/01M5KP7BERA0HKK8Q27S54ZT9V.svg",
+    "https://assets.postplan.link/01M5P9SEF9TB9QRAYDKJEVPSN7.svg",
   v3Fig5LabelBudget:
-    "https://assets.postplan.link/01M5KPQXC29F6DZ0ZSEKPPT0RX.svg",
+    "https://assets.postplan.link/01M5P9SG0G5XRSXHVWW7J163WH.svg",
   plateDinov3:
     "https://assets.postplan.link/01M5BV9V591HRBYJ8B5FRJ8T64.png",
   plateNemotron35Super:
@@ -646,7 +646,7 @@ const v3: VTBVersion = {
     "Recognition standardizes channels before PCA. GLM 5.3 Flash, Muse Glimmer, SigLIP2 and DINOv3 sit within 0.004 at full labels; treat them as tied.",
     "Depth and normals use the best matched tower layer. NAVI uses the final tower layer.",
     "Nemotron 3.5 Bolt ships without its tower stage, so recognition reads its merged stage.",
-    "One outlier channel dominates MiMo 2.6's final tower layer, which leaves its occlusion readout at chance.",
+    "One outlier channel dominates MiMo V2.6's final tower layer, which leaves its occlusion readout at chance.",
     "↑ higher is better, ↓ lower is better.",
   ],
   rows: [
@@ -663,8 +663,8 @@ const v3: VTBVersion = {
     row("DeepSeek V4.1", ["0.369", "0.877", "0.654", "25.27", "0.392", "35%"]),
     row("Gemma 4", ["0.329", "0.876", "0.555", "27.25", "0.304", "30%"]),
     row("Kimi K3", ["0.228", "0.852", "0.655", "27.03", "0.333", "20%"]),
-    row("MiMo 2.6 Pro", ["0.240", "0.825", "0.648", "25.53", "0.363", "—"]),
-    row("MiMo 2.6 Flash", ["0.239", "0.830", "0.653", "25.55", "0.367", "—"]),
+    row("MiMo V2.6 Pro", ["0.240", "0.825", "0.648", "25.53", "0.363", "—"]),
+    row("MiMo V2.6 Flash", ["0.239", "0.830", "0.653", "25.55", "0.367", "—"]),
     row("MiniMax M3", ["0.052", "0.324", "0.543", "31.48", "0.235", "18%"], [], true),
   ],
   method: [
@@ -718,7 +718,7 @@ const v3: VTBVersion = {
       id: "result-3",
       kicker: "Finding 3",
       title: "Few labels separate towers that full labels cannot",
-      body: "With full labels, 12 of 16 towers sit between 0.876 and 0.919. With 1% labels they spread from 0.05 to 0.70, led by Muse Glimmer, GLM 5.3 Flash and SigLIP2. Standardizing channels before PCA lifted Muse Glimmer from 0.43 to 0.70 and MiMo 2.6 from chance to 0.24.",
+      body: "With full labels, 12 of 16 towers sit between 0.876 and 0.919. With 1% labels they spread from 0.05 to 0.70, led by Muse Glimmer, GLM 5.3 Flash and SigLIP2. Standardizing channels before PCA lifted Muse Glimmer from 0.43 to 0.70 and MiMo V2.6 from chance to 0.24.",
       figure: {
         src: POSTPLAN_ASSETS.v3Fig5LabelBudget,
         alt: "Recognition top-1 against labelled fraction for sixteen towers, channels standardized before PCA",
@@ -747,7 +747,7 @@ const v3: VTBVersion = {
   limits: [
     v2.limits[0],
     "Best layers are picked on test scores, so Figures 2 and 3 are descriptive.",
-    "MiMo 2.6's final tower layer is dominated by one channel, which distorts its final-layer cells and projector comparisons.",
+    "MiMo V2.6's final tower layer is dominated by one channel, which distorts its final-layer cells and projector comparisons.",
     "Nemotron 3.5 Bolt ships without a tower stage, and Nemotron 3.5 Super's tower cells precede its final LayerNorm.",
     v2.limits[2],
   ],
