@@ -23,7 +23,7 @@ Need a quick crash course on me? Check out my [resume](https://ipeter.dev/resume
 ### [Vision Tower Bench](https://ipeter.dev/blog/vision-tower-bench) · 2026
 > A benchmark for evaluating vision head capabilities.
 
-A benchmark that isolates the vision Tower from the rest of a VLM. Probes eleven frozen Towers (DINOv2, SigLIP2, and nine extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
+A benchmark that isolates the vision Tower from the rest of a VLM. Probes sixteen frozen Towers (DINOv2, DINOv3, SigLIP2, and thirteen extracted from multimodal LLMs) across recognition, geometry, cross-view correspondence, and occlusion, with paired bootstrap intervals and published Tower extracts on Hugging Face.
 
 `Python` `PyTorch` `Hugging Face` `uv` · [Report](https://ipeter.dev/blog/vision-tower-bench) · [Code](https://github.com/immanuel-peter/vision-tower-bench) · [Towers](https://huggingface.co/collections/immanuelpeter/vision-heads)
 
