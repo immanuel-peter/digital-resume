@@ -55,6 +55,13 @@ export default function FigureBlock({
         {figure.caption && (
           <p className="text-[0.88rem] text-vtb-mute">{figure.caption}</p>
         )}
+        {figure.notes && (
+          <ul className="m-0 flex list-disc flex-col gap-1 pl-[18px] text-[0.82rem] text-vtb-mute">
+            {figure.notes.map((note) => (
+              <li key={note}>{note}</li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
