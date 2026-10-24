@@ -23,6 +23,16 @@ export const POSTPLAN_ASSETS = {
     "https://assets.postplan.link/01M36JSQHRTJ9QFE7E3S5K7ACB.png",
   plateGlm53Flash:
     "https://assets.postplan.link/01M36JSQYMW3QBWYVRDBYZPHKB.png",
+  v3Fig2Peaks:
+    "https://assets.postplan.link/01M5P8HN1Y91E2NPGC7W29VGY4.svg",
+  v3Fig3TowerVsProjector:
+    "https://assets.postplan.link/01M5KP7BERA0HKK8Q27S54ZT9V.svg",
+  v3Fig5LabelBudget:
+    "https://assets.postplan.link/01M5KPQXC29F6DZ0ZSEKPPT0RX.svg",
+  plateDinov3:
+    "https://assets.postplan.link/01M5BV9V591HRBYJ8B5FRJ8T64.png",
+  plateNemotron35Super:
+    "https://assets.postplan.link/01M5BV9TWPMRT5NFZVQHD2PHVJ.png",
 } as const;
 
 export interface VTBTableCell {
@@ -42,6 +52,7 @@ export interface VTBFigure {
   label: string;
   title: string;
   caption?: string;
+  notes?: string[];
 }
 
 export type VTBMatrixTone = "pos" | "neg" | "unres";
@@ -97,7 +108,7 @@ export interface VTBVersion {
   fig1: VTBFigure;
   resultsHeading: string;
   results: VTBResult[];
-  choose?: { intro: string[]; rows: { priority: string; pick: string; note: string }[] };
+  choose?: { intro: string[]; rows: { priority: string; pick: string; note?: string }[] };
   limitsHeading: string;
   limits: string[];
   limitsNote?: string;
@@ -621,11 +632,192 @@ const v21: VTBVersion = {
   ],
 };
 
+const v3: VTBVersion = {
+  ...v21,
+  id: "v3",
+  selectorLabel: "v3",
+  lede: "We probed sixteen frozen vision towers across layers. Most towers lose geometry by their final layer, projectors mostly recover that loss rather than add to it, and few-label recognition separates towers that full labels cannot.",
+  findingCards: [
+    { n: "Finding 1", title: "Geometry fades by the final layer", href: "#result-1" },
+    { n: "Finding 2", title: "Projectors repair the final layer, not the best one", href: "#result-2" },
+    { n: "Finding 3", title: "Few labels separate towers that full labels cannot", href: "#result-3" },
+  ],
+  tableFootnote: [
+    "Recognition standardizes channels before PCA. GLM 5.3 Flash, Muse Glimmer, SigLIP2 and DINOv3 sit within 0.004 at full labels; treat them as tied.",
+    "Depth and normals use the best matched tower layer. NAVI uses the final tower layer.",
+    "Nemotron 3.5 Bolt ships without its tower stage, so recognition reads its merged stage.",
+    "One outlier channel dominates MiMo 2.6's final tower layer, which leaves its occlusion readout at chance.",
+    "↑ higher is better, ↓ lower is better.",
+  ],
+  rows: [
+    row("DINOv3", ["0.530", "0.915", "0.768", "19.08", "0.541", "40%"], [2, 4]),
+    row("DINOv2", ["0.377", "0.908", "0.702", "18.85", "0.539", "52%"], [3, 5]),
+    row("SigLIP2", ["0.656", "0.917", "0.670", "23.90", "0.401", "49%"]),
+    row("Muse Glimmer", ["0.703", "0.918", "0.659", "24.30", "0.214", "52%"], [0]),
+    row("GLM 5.3 Flash", ["0.683", "0.919", "0.643", "24.35", "0.382", "45%"], [1]),
+    row("Nemotron 3.5 Super", ["0.480", "0.902", "0.690", "23.06", "0.502", "36%"]),
+    row("Nemotron 3 Omni", ["0.544", "0.905", "0.641", "24.39", "0.419", "46%"]),
+    row("Nemotron 3.5 Bolt", ["0.484", "0.895", "—", "—", "—", "—"]),
+    row("Qwen3.8", ["0.463", "0.878", "0.674", "24.24", "0.378", "30%"]),
+    row("Kimi K2.6", ["0.388", "0.888", "0.660", "25.51", "0.365", "28%"]),
+    row("DeepSeek V4.1", ["0.369", "0.877", "0.654", "25.27", "0.392", "35%"]),
+    row("Gemma 4", ["0.329", "0.876", "0.555", "27.25", "0.304", "30%"]),
+    row("Kimi K3", ["0.228", "0.852", "0.655", "27.03", "0.333", "20%"]),
+    row("MiMo 2.6 Pro", ["0.240", "0.825", "0.648", "25.53", "0.363", "—"]),
+    row("MiMo 2.6 Flash", ["0.239", "0.830", "0.653", "25.55", "0.367", "—"]),
+    row("MiniMax M3", ["0.052", "0.324", "0.543", "31.48", "0.235", "18%"], [], true),
+  ],
+  method: [
+    v2.method[0],
+    "Heads are reduced to 512 dimensions with train-split PCA, and recognition standardizes channels first. Each cell selects a learning rate on validation and runs three seeds.",
+  ],
+  results: [
+    {
+      id: "result-1",
+      kicker: "Finding 1",
+      title: "Geometry fades by the final layer",
+      body: "Geometry peaks before the final layer in 56 of 60 arms, but DINO and RADIO towers barely fade. DINOv3 and Nemotron 3.5 Super lose no depth at their final layer, and DINOv2, Nemotron 3 Omni and GLM 5.3 Flash lose under 0.03 d1. Qwen3.8, Muse Glimmer, Kimi K3 and DeepSeek V4.1 lose more than 0.10.",
+      figure: {
+        src: POSTPLAN_ASSETS.v3Fig2Peaks,
+        alt: "DIODE depth d1 across relative depth for fifteen towers, with stars marking each tower's depth peak",
+        label: "Figure 2",
+        title: "Geometry peaks early",
+        caption: "Stars mark each tower's depth peak in the matched arm.",
+        notes: ["The original six towers’ matched sweeps used unseeded PCA."],
+      },
+    },
+    {
+      id: "result-2",
+      kicker: "Finding 2",
+      title: "Projectors repair the final layer, not the best one",
+      body: "Against the final tower layer, the projector wins 30 of 48 DIODE comparisons. Against the best intermediate layer, it is ahead on depth only for GLM 5.3 Flash and Gemma 4. Most of the projector's gain recovers what the final layer lost.",
+      figure: {
+        src: POSTPLAN_ASSETS.v3Fig3TowerVsProjector,
+        alt: "Best tower layer, final tower layer and projector output on DIODE depth and normals for twelve towers with projectors",
+        label: "Figure 3",
+        title: "The best tower layer beats the projector",
+        caption: "The best layer is chosen on test scores, so the gap is descriptive.",
+      },
+      matrix: {
+        ...v2.results[2].matrix!,
+        caption: [
+          ...v2.results[2].matrix!.caption
+        ],
+        rows: [
+          ...v2.results[2].matrix!.rows.map((r) =>
+            r.name === "Nemotron Omni" ? { ...r, name: "Nemotron 3 Omni" } : r,
+          ),
+          matrixRow("Nemotron 3.5 Super", "n−.057 n−.151 n−1.55° n−1.60° n−.016 n−.056 n−.067 n−.131"),
+          matrixRow("MiMo 2.6 Pro", "p+.097 n−.364 p+6.73° u−0.29° p+.018 p+.008 n−.017 p+.027"),
+          matrixRow("MiMo 2.6 Flash", "p+.173 n−.063 p+8.90° p+0.48° p+.033 p+.029 n−.010 p+.019"),
+        ],
+      },
+      separated: true,
+    },
+    {
+      id: "result-3",
+      kicker: "Finding 3",
+      title: "Few labels separate towers that full labels cannot",
+      body: "With full labels, 12 of 16 towers sit between 0.876 and 0.919. With 1% labels they spread from 0.05 to 0.70, led by Muse Glimmer, GLM 5.3 Flash and SigLIP2. Standardizing channels before PCA lifted Muse Glimmer from 0.43 to 0.70 and MiMo 2.6 from chance to 0.24.",
+      figure: {
+        src: POSTPLAN_ASSETS.v3Fig5LabelBudget,
+        alt: "Recognition top-1 against labelled fraction for sixteen towers, channels standardized before PCA",
+        label: "Figure 5",
+        title: "Recognition rankings change with label budget",
+        caption: "Channels are standardized before PCA.",
+      },
+      separated: true,
+    },
+  ],
+  choose: {
+    intro: [
+      "Pick the tower first, then the layer, then the projector. With no dominant requirement, start with <b>SigLIP2</b>. It is top three on recognition at both label budgets, with no weak axis.",
+      "For spatial work, tap an intermediate layer and use Figure 2 to place it. The final layer is safe for DINOv3, DINOv2 and the Nemotron towers.",
+    ],
+    rows: [
+      { priority: "Depth or ScanNet correspondence", pick: "DINOv3", note: "Its final layer is its depth peak." },
+      { priority: "Normals or NAVI correspondence", pick: "DINOv2, DINOv3" },
+      { priority: "Spatial work inside an existing VLM", pick: "Nemotron 3.5 Super" },
+      { priority: "Recognition with few labels", pick: "Muse Glimmer, GLM 5.3 Flash, SigLIP2", note: "Standardize channels first." },
+      { priority: "Recognition with abundant labels", pick: "GLM 5.3 Flash, Muse Glimmer, SigLIP2, DINOv3" },
+      { priority: "Robustness to occlusion", pick: "DINOv2, Muse Glimmer, SigLIP2" },
+    ],
+  },
+  limitsHeading: "What v3 does not establish",
+  limits: [
+    v2.limits[0],
+    "Best layers are picked on test scores, so Figures 2 and 3 are descriptive.",
+    "MiMo 2.6's final tower layer is dominated by one channel, which distorts its final-layer cells and projector comparisons.",
+    "Nemotron 3.5 Bolt ships without a tower stage, and Nemotron 3.5 Super's tower cells precede its final LayerNorm.",
+    v2.limits[2],
+  ],
+  explorerTowers: [
+    {
+      key: "dinov3",
+      buttonLabel: "DINOv3 — spatial leader",
+      plateSrc: POSTPLAN_ASSETS.plateDinov3,
+      plateAlt: "DINOv3 tower PCA plate",
+      plateLabel: "DINOv3 · tower · 28 x 28",
+      name: "DINOv3 traces the subject smoothly",
+      note: "The eagle reads as one region with a soft gradient. First on depth, NAVI and ScanNet, and its final layer is its depth peak.",
+      navi: "0.541 · rank 1 of 15",
+      sem: "0.915 · rank 4 of 16",
+      few: "0.530 · rank 5 of 16",
+    },
+    {
+      ...v2.explorerTowers[0],
+      buttonLabel: "DINOv2 — normals and occlusion",
+      note: "The eagle separates as one solid region. Lowest normal error, and it keeps half its accuracy at 50% occlusion.",
+      navi: "0.539 · rank 2 of 15",
+      sem: "0.908 · rank 5 of 16",
+      few: "0.377 · rank 10 of 16",
+    },
+    {
+      key: "nemotron_3_5_super",
+      buttonLabel: "Nemotron 3.5 Super — best VLM tower",
+      plateSrc: POSTPLAN_ASSETS.plateNemotron35Super,
+      plateAlt: "Nemotron 3.5 Super tower PCA plate",
+      plateLabel: "Nemotron 3.5 Super · tower · 28 x 28",
+      name: "Nemotron 3.5 Super looks mottled",
+      note: "Little visible structure, yet it is the strongest multimodal tower on depth, NAVI and ScanNet.",
+      navi: "0.502 · rank 3 of 15",
+      sem: "0.902 · rank 7 of 16",
+      few: "0.480 · rank 7 of 16",
+    },
+    {
+      ...v2.explorerTowers.find((t) => t.key === "muse_glimmer")!,
+      buttonLabel: "Muse Glimmer — few-label leader",
+      note: "Near-uniform speckle. It leads 1% recognition and trails every correspondence set.",
+      navi: "0.214 · rank 15 of 15",
+      sem: "0.918 · rank 2 of 16",
+      few: "0.703 · rank 1 of 16",
+    },
+  ],
+  defaultTower: "dinov3",
+  changelog: [
+    {
+      date: "Oct 2026",
+      html: "Vision Tower Bench v3 adds five new Towers.",
+    },
+    {
+      date: "Oct 2026",
+      html:
+        'Vision Towers for MiMo V2.6 Pro and MiMo V2.6 Flash published on <a href="https://huggingface.co/collections/immanuelpeter/vision-heads" target="_blank" rel="noopener noreferrer">Hugging Face</a>.',
+    },
+    {
+      date: "Oct 2026",
+      html:
+        'Vision Towers for Nemotron 3.5 Super and Nemotron 3.5 Bolt published on <a href="https://huggingface.co/collections/immanuelpeter/vision-heads" target="_blank" rel="noopener noreferrer">Hugging Face</a>.',
+    },
+    ...v21.changelog,
+  ],
+};
+
 // To publish a new version, append a new VTBVersion here with its own
 // figure URLs. The selector, ?v= routing, and explorer all key off this list.
-export const VTB_VERSIONS: VTBVersion[] = [v1, v2, v21];
+export const VTB_VERSIONS: VTBVersion[] = [v1, v2, v21, v3];
 
-export const VTB_DEFAULT_VERSION = "v2.1";
+export const VTB_DEFAULT_VERSION = "v3";
 
 export function getVTBVersion(id: string | undefined | null): VTBVersion {
   return (
