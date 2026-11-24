@@ -57,7 +57,6 @@ At Quantum Rings: 19 PRs, 43 contributions, schema refactors, telemetry aggregat
 - **Next.js 15**, **React 19**, **TypeScript**, **Tailwind CSS**
 - **OpenAI Responses API** — embedded AI assistant
 - **react-markdown** + **remark-gfm** — assistant rendering
-- **Vercel** — Analytics, Speed Insights, deployment
 
 ---
 
