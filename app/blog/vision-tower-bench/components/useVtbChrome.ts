@@ -20,6 +20,7 @@ export function useVtbChrome(sectionIds: string[], resetKey: string) {
         const el = document.getElementById(id);
         if (el && el.getBoundingClientRect().top <= 140) current = id;
       }
+      if (travel > 0 && root.scrollTop >= travel - 2) current = sectionIds[sectionIds.length - 1];
       setActiveId(current);
     };
     const onScroll = () => {

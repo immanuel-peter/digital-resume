@@ -11,6 +11,7 @@ export function tocSections(version: VTBVersion): TocSection[] {
     ...(version.choose ? [{ id: "choose", label: "Choose" }] : []),
     { id: "limits", label: "Limits" },
     { id: "explorer", label: "Explorer" },
+    { id: "changelog", label: "Changelog" },
   ];
 }
 

@@ -33,6 +33,18 @@ export const POSTPLAN_ASSETS = {
     "https://assets.postplan.link/01M5BV9V591HRBYJ8B5FRJ8T64.png",
   plateNemotron35Super:
     "https://assets.postplan.link/01M5BV9TWPMRT5NFZVQHD2PHVJ.png",
+  v4Fig2Peaks:
+    "https://assets.postplan.link/01M7PQCEJZ8691P2NC9DC4E5DW.png",
+  v4Fig3TowerVsProjector:
+    "https://assets.postplan.link/01M7PZ213DHZXQDXC6PPX81DTR.png",
+  v4Fig5Standardize:
+    "https://assets.postplan.link/01M7PZ21AGN65RM1BK5YTKQZZ0.png",
+  v4Fig6Scatter:
+    "https://assets.postplan.link/01M7PZ20WACTYCNJPM59SMDM3G.png",
+  v4Fig7LabelBudget:
+    "https://assets.postplan.link/01M7PPSS71958ZDNC8KYBVJ6ZQ.png",
+  v4Fig8Siblings:
+    "https://assets.postplan.link/01M7PPSTQRJR4WNTXDK6DV296P.png",
 } as const;
 
 export interface VTBTableCell {
@@ -53,6 +65,7 @@ export interface VTBFigure {
   title: string;
   caption?: string;
   notes?: string[];
+  wide?: boolean;
 }
 
 export type VTBMatrixTone = "pos" | "neg" | "unres";
@@ -67,6 +80,8 @@ export interface VTBMatrix {
   legend: Record<VTBMatrixTone, string>;
 }
 
+export type VTBResultBlock = { text: string } | { figure: VTBFigure } | { matrix: VTBMatrix };
+
 export interface VTBResult {
   id: string;
   kicker: string;
@@ -74,6 +89,7 @@ export interface VTBResult {
   body: string;
   figure?: VTBFigure;
   matrix?: VTBMatrix;
+  blocks?: VTBResultBlock[];
   separated?: boolean;
 }
 
@@ -813,11 +829,211 @@ const v3: VTBVersion = {
   ],
 };
 
+const v3Tower = (key: string, changes: Partial<VTBExplorerTower>): VTBExplorerTower => ({
+  ...v3.explorerTowers.find((t) => t.key === key)!,
+  ...changes,
+});
+
+const v4: VTBVersion = {
+  ...v3,
+  id: "v4",
+  selectorLabel: "v4",
+  lede: "We probed twenty-two frozen vision towers across layers. The final layer is rarely the best place to read a tower taken from a VLM, no tower leads both recognition and spatial tasks, and a tower's family predicts its profile better than its variant does.",
+  findingCards: [
+    { n: "Finding 1", title: "The final layer is the wrong place to read a VLM tower", href: "#result-1" },
+    { n: "Finding 2", title: "No tower leads both recognition and spatial tasks", href: "#result-2" },
+    { n: "Finding 3", title: "Family sets the profile, but variants barely move it", href: "#result-3" },
+  ],
+  tableFootnote: [
+    ...v3.tableFootnote.slice(0, 3),
+    "MiMo V2.6, Mistral Large 4 and Qwen3.8 Flash-Next have no occlusion entry because outlier channels dominate the final tower layer.",
+    ...v3.tableFootnote.slice(4),
+  ],
+  rows: [
+    row("DINOv3", ["0.530", "0.915", "0.768", "19.08", "0.541", "40%"], [2, 4]),
+    row("DINOv2", ["0.377", "0.908", "0.702", "18.85", "0.539", "52%"], [3, 5]),
+    row("SigLIP2", ["0.656", "0.917", "0.670", "23.90", "0.401", "49%"]),
+    row("PE-Lang L", ["0.400", "0.888", "0.698", "26.01", "0.414", "27%"]),
+    row("Inkling 2 Small", ["0.403", "0.901", "0.687", "24.28", "0.434", "25%"]),
+    row("Muse Glimmer", ["0.703", "0.918", "0.659", "24.30", "0.214", "52%"], [0]),
+    row("GLM 5.3 Flash", ["0.683", "0.919", "0.643", "24.35", "0.382", "45%"], [1]),
+    row("Nemotron 3.5 Super", ["0.480", "0.902", "0.690", "23.06", "0.502", "36%"]),
+    row("Nemotron 3 Omni", ["0.544", "0.905", "0.641", "24.39", "0.419", "46%"]),
+    row("Nemotron 3.5 Bolt", ["0.484", "0.895", "—", "—", "—", "—"]),
+    row("Qwen3.8", ["0.463", "0.878", "0.674", "24.24", "0.378", "30%"]),
+    row("Qwen3.8 Flash-Next", ["0.448", "0.891", "0.662", "24.50", "0.392", "—"]),
+    row("DeepSeek V4.1", ["0.369", "0.877", "0.654", "25.27", "0.392", "35%"]),
+    row("Kimi K2.6", ["0.388", "0.888", "0.659", "25.51", "0.365", "28%"]),
+    row("Kimi K3", ["0.228", "0.852", "0.655", "27.03", "0.333", "20%"]),
+    row("Kimi K3.1 Pro", ["0.234", "0.851", "0.652", "26.38", "0.346", "22%"]),
+    row("Gemma 4", ["0.329", "0.876", "0.555", "27.25", "0.304", "30%"]),
+    row("Mistral Large 4", ["0.342", "0.871", "0.656", "25.54", "0.175", "—"]),
+    row("MiMo V2.6 Pro", ["0.240", "0.825", "0.648", "25.53", "0.363", "—"]),
+    row("MiMo V2.6 Flash", ["0.239", "0.830", "0.652", "25.55", "0.367", "—"]),
+    row("MiniMax M3", ["0.087", "0.575", "0.601", "28.42", "0.231", "13%"]),
+    row("MiniMax M3.1 Flash", ["0.083", "0.583", "0.585", "28.50", "0.227", "18%"]),
+  ],
+  results: [
+    {
+      id: "result-1",
+      kicker: "Finding 1",
+      title: "The final layer is the wrong place to read a VLM tower",
+      body: "Almost every tower reads depth and normals best from a middle layer. The four standalone encoders lose little by their final layer. Towers taken from VLMs often lose a lot. About half give up more than 0.10 d1 by the end, and Mistral Large 4 and Qwen3.8 Flash-Next give up most of their depth signal.",
+      blocks: [
+        {
+          figure: {
+            src: POSTPLAN_ASSETS.v4Fig2Peaks,
+            alt: "DIODE depth d1 across relative depth for 21 towers, with stars marking each tower's depth peak",
+            label: "Figure 2",
+            title: "Depth peaks before the final layer",
+            caption: "Stars mark each tower's depth peak in the matched arm.",
+          },
+        },
+        { text: "Projectors give most of that loss back, but rarely more. For most VLM towers the projector reads depth better than the final tower layer. Only for GLM 5.3 Flash and Gemma 4 does it beat the tower's best layer, and it never does on normals." },
+        {
+          figure: {
+            src: POSTPLAN_ASSETS.v4Fig3TowerVsProjector,
+            alt: "Final tower layer, best tower layer and projector output on DIODE depth and normal error for 21 towers",
+            label: "Figure 3",
+            title: "The best tower layer beats the projector",
+            caption: "Right is better in both panels. The normal-error axis is reversed.",
+            notes: ["The four encoders above the line have no projector."],
+            wide: true,
+          },
+        },
+        { text: "The gain depends on the task. The projector usually wins on DIODE and NAVI. ScanNet reverses, with most towers matching points better before the projector." },
+        {
+          matrix: {
+            ...v3.results[1].matrix!,
+            rows: [
+              matrixRow("Muse Glimmer", "p+.026 p+.093 p+0.79° p+2.89° n−.004 p+.106 p+.032 p+.133"),
+              matrixRow("GLM 5.3 Flash", "p+.038 n−.072 p+0.97° u+0.10° u−.002 p+.037 n−.003 p+.015"),
+              matrixRow("Gemma 4", "p+.101 p+.056 p+2.72° p+2.31° p+.026 p+.042 n−.001 p+.012"),
+              matrixRow("DeepSeek V4.1", "p+.080 n−.026 p+3.33° u−0.09° n−.009 p+.012 n−.033 n−.023"),
+              matrixRow("Kimi K2.6", "p+.017 u+.020 p+2.20° p+3.11° n−.005 p+.057 p+.008 p+.115"),
+              matrixRow("Kimi K3", "p+.078 p+.027 p+2.50° p+2.83° u+.001 p+.059 p+.021 n−.014"),
+              matrixRow("Kimi K3.1 Pro", "p+.079 p+.016 p+2.65° p+2.91° p+.004 p+.056 p+.022 n−.008"),
+              matrixRow("Qwen3.8", "p+.058 p+.160 p+4.31° p+4.44° u−.002 p+.019 n−.019 p+.022"),
+              matrixRow("Qwen3.8 Flash-Next", "p+.368 p+.358 p+17.19° p+17.85° p+.019 p+.020 n−.022 p+.058"),
+              matrixRow("Nemotron 3 Omni", "u−.009 n−.050 p+0.37° n−0.47° n−.011 u+.002 n−.021 n−.011"),
+              matrixRow("Nemotron 3.5 Super", "n−.057 n−.151 n−1.55° n−1.60° n−.016 n−.056 n−.067 n−.131"),
+              matrixRow("Inkling 2 Small", "u−.007 p+.018 p+0.40° p+3.76° n−.007 p+.016 n−.021 n−.016"),
+              matrixRow("Mistral Large 4", "p+.295 p+.097 p+11.67° p+5.68° p+.045 p+.151 p+.012 p+.088"),
+              matrixRow("MiMo V2.6 Pro", "p+.097 n−.364 p+6.73° u−0.29° p+.018 p+.008 n−.017 p+.027"),
+              matrixRow("MiMo V2.6 Flash", "p+.173 n−.063 p+8.90° p+0.48° p+.033 p+.029 n−.010 p+.019"),
+              matrixRow("MiniMax M3", "n−.102 n−.082 n−3.53° u+0.22° n−.117 u−.004 n−.024 u−.002"),
+              matrixRow("MiniMax M3.1 Flash", "n−.078 n−.207 n−2.40° u+0.28° n−.068 p+.006 n−.014 p+.008"),
+            ],
+          },
+        },
+        { text: "Recognition has the same problem, with a cheaper fix. Read as released, the final layer of seven VLM towers scores well below what it scores once each channel is standardized, and four of them sit near chance. The information is there, but channel scale hides it from the probe. Standalone encoders score the same either way." },
+        {
+          figure: {
+            src: POSTPLAN_ASSETS.v4Fig5Standardize,
+            alt: "Recognition top-1 at 1% labels for 22 towers, as released and after standardizing channels",
+            label: "Figure 5",
+            title: "Standardizing channels rescues seven final layers",
+            caption: "Recognition top-1 at 1% labels, before and after standardizing channels ahead of PCA.",
+            notes: ["Labels show shifts above 0.10."],
+          },
+        },
+      ],
+    },
+    {
+      id: "result-2",
+      kicker: "Finding 2",
+      title: "No tower leads both recognition and spatial tasks",
+      body: "Recognition and correspondence are separate skills. A tower's rank on one recognition readout predicts its rank on another, and the same holds among correspondence sets, but rank on one side only loosely predicts rank on the other. Muse Glimmer leads few-label recognition and is second to last on NAVI. DINOv2 is second on NAVI and in the bottom half on few-label recognition. DINOv3 comes closest to having both, first on NAVI and fifth at 1% labels.",
+      blocks: [
+        {
+          figure: {
+            src: POSTPLAN_ASSETS.v4Fig6Scatter,
+            alt: "Scatter of 21 towers: recognition top-1 at 1% labels against NAVI recall at 2 cm",
+            label: "Figure 6",
+            title: "Recognition and correspondence do not move together",
+            caption: "Blue marks the four standalone encoders.",
+            notes: ["NAVI reads the final tower layer.", "Recognition standardizes channels."],
+          },
+        },
+        { text: "With full labels most towers finish within 0.05 of the leader. At 1% labels they spread from 0.08 to 0.70, which is why the scatter uses that readout." },
+        {
+          figure: {
+            src: POSTPLAN_ASSETS.v4Fig7LabelBudget,
+            alt: "Recognition top-1 against labelled fraction for 22 towers, channels standardized before PCA",
+            label: "Figure 7",
+            title: "Recognition rankings change with label budget",
+            caption: "Channels are standardized before PCA.",
+          },
+        },
+      ],
+      separated: true,
+    },
+    {
+      id: "result-3",
+      kicker: "Finding 3",
+      title: "Family sets the profile, but variants barely move it",
+      body: "A tower's family tells you most of its profile. Variants within one generation land almost on top of each other on every axis. A new generation is where the profile moves, and not always up. DINOv3 improves on DINOv2 at few-label recognition, Nemotron 3.5 Super improves on Nemotron 3 Omni on NAVI, and Kimi K3 falls behind Kimi K2.6 at few-label recognition.",
+      figure: {
+        src: POSTPLAN_ASSETS.v4Fig8Siblings,
+        alt: "Seven probe scores for eight sibling tower pairs, three across generations and five within one",
+        label: "Figure 8",
+        title: "Variants overlap but generations move",
+        caption: "Hollow marks the first tower in each row, filled the second. Grey dots are every other tower.",
+        notes: [
+          "Each panel has its own scale; right is better in all seven.",
+          "Depth and normals read the best tower layer. Correspondence reads the final one.",
+        ],
+        wide: true,
+      },
+      separated: true,
+    },
+  ],
+  limitsHeading: "What v4 does not establish",
+  limits: [
+    v3.limits[0],
+    v3.limits[1],
+    "Outlier channels dominate the final tower layer of MiMo V2.6 Pro, MiMo V2.6 Flash, Mistral Large 4, and Qwen3.8 Flash-Next.",
+    v3.limits[3],
+    "MiniMax M3 was rerun with each image encoded independently, which lifts its full-label recognition from 0.324 to 0.575.",
+    v3.limits[4],
+  ],
+  explorerTowers: [
+    v3Tower("dinov3", { navi: "0.541 · rank 1 of 21", sem: "0.915 · rank 4 of 22", few: "0.530 · rank 5 of 22" }),
+    v3Tower("dinov2", { navi: "0.539 · rank 2 of 21", sem: "0.908 · rank 5 of 22", few: "0.377 · rank 13 of 22" }),
+    v3Tower("nemotron_3_5_super", { navi: "0.502 · rank 3 of 21", sem: "0.902 · rank 7 of 22", few: "0.480 · rank 7 of 22" }),
+    v3Tower("muse_glimmer", {
+      note: "Near-uniform speckle. It leads 1% recognition and sits in the bottom three on every correspondence set.",
+      navi: "0.214 · rank 20 of 21",
+      sem: "0.918 · rank 2 of 22",
+      few: "0.703 · rank 1 of 22",
+    }),
+  ],
+  changelog: [
+    { date: "Nov 2026", html: "Vision Tower Bench v4 adds six Towers and reruns MiniMax M3." },
+    {
+      date: "Nov 2026",
+      html:
+        'Vision Towers for Inkling 2 Small published on <a href="https://huggingface.co/collections/immanuelpeter/vision-heads" target="_blank" rel="noopener noreferrer">Hugging Face</a>.',
+    },
+    {
+      date: "Nov 2026",
+      html:
+        'Vision Towers for Mistral Large 4 and Qwen3.8 Flash-Next published on <a href="https://huggingface.co/collections/immanuelpeter/vision-heads" target="_blank" rel="noopener noreferrer">Hugging Face</a>.',
+    },
+    {
+      date: "Nov 2026",
+      html:
+        'Vision Towers for Kimi K3.1 Pro and MiniMax M3.1 Flash published on <a href="https://huggingface.co/collections/immanuelpeter/vision-heads" target="_blank" rel="noopener noreferrer">Hugging Face</a>.',
+    },
+    ...v3.changelog,
+  ],
+};
+
 // To publish a new version, append a new VTBVersion here with its own
 // figure URLs. The selector, ?v= routing, and explorer all key off this list.
-export const VTB_VERSIONS: VTBVersion[] = [v1, v2, v21, v3];
+export const VTB_VERSIONS: VTBVersion[] = [v1, v2, v21, v3, v4];
 
-export const VTB_DEFAULT_VERSION = "v3";
+export const VTB_DEFAULT_VERSION = "v4";
 
 export function getVTBVersion(id: string | undefined | null): VTBVersion {
   return (

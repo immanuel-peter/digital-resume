@@ -4,7 +4,7 @@ import VtbKicker from "./VtbKicker";
 
 export default function Changelog({ version }: { version: VTBVersion }) {
   return (
-    <Split className="border-t-2 border-vtb-ink pt-10">
+    <Split id="changelog" className="scroll-mt-6 border-t-2 border-vtb-ink pt-10">
       <VtbKicker className="pt-[5px]">Changelog</VtbKicker>
       <div className="flex flex-col gap-4">
         {version.changelog.map((entry, i) => (

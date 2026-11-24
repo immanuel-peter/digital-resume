@@ -1,4 +1,4 @@
-import type { VTBResult, VTBVersion } from "../versions";
+import type { VTBResult, VTBResultBlock, VTBVersion } from "../versions";
 import FigureBlock from "./FigureBlock";
 import MatrixBlock from "./MatrixBlock";
 import type { LightboxImage } from "./Lightbox";
@@ -22,6 +22,12 @@ export function ResultSection({
   result: VTBResult;
   onZoom: (image: LightboxImage) => void;
 }) {
+  const blocks: VTBResultBlock[] = [
+    ...(result.figure ? [{ figure: result.figure }] : []),
+    ...(result.matrix ? [{ matrix: result.matrix }] : []),
+    ...(result.blocks ?? []),
+  ];
+
   return (
     <div>
       <div
@@ -40,10 +46,21 @@ export function ResultSection({
           {result.body}
         </p>
       </div>
-      {result.figure && (
-        <FigureBlock figure={result.figure} framed captionAs="h4" className="mb-[88px]" onZoom={onZoom} />
-      )}
-      {result.matrix && <MatrixBlock matrix={result.matrix} className="mb-[88px]" />}
+      {blocks.map((block, i) => {
+        if ("text" in block) {
+          return (
+            <p key={i} className="mb-[30px] text-[1.02rem] text-vtb-body">
+              {block.text}
+            </p>
+          );
+        }
+        const spacing = blocks[i + 1] && "text" in blocks[i + 1] ? "mb-14" : "mb-[88px]";
+        return "figure" in block ? (
+          <FigureBlock key={i} figure={block.figure} framed captionAs="h4" className={spacing} onZoom={onZoom} />
+        ) : (
+          <MatrixBlock key={i} matrix={block.matrix} className={spacing} />
+        );
+      })}
     </div>
   );
 }

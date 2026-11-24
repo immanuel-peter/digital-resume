@@ -25,7 +25,9 @@ export default function FigureBlock({
   );
   return (
     <div
-      className={`grid grid-cols-1 items-start gap-5 min-[900px]:grid-cols-[minmax(0,1fr)_300px] min-[900px]:gap-11 ${className}`}
+      className={`grid grid-cols-1 items-start gap-5 ${
+        figure.wide ? "" : "min-[900px]:grid-cols-[minmax(0,1fr)_300px] min-[900px]:gap-11"
+      } ${className}`}
     >
       {onZoom ? (
         <button
@@ -39,7 +41,7 @@ export default function FigureBlock({
       ) : (
         img
       )}
-      <div className="flex flex-col gap-[11px]">
+      <div className={`flex flex-col gap-[11px] ${figure.wide ? "max-w-[640px]" : ""}`}>
         <span className="font-display font-vtbmono text-[0.68rem] tracking-[0.12em] text-vtb-mute uppercase">
           {figure.label}
         </span>
