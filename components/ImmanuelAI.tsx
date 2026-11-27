@@ -5,12 +5,16 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useSearchParams } from "next/navigation";
 import { FaCommentDots, FaTimes, FaPaperPlane } from "react-icons/fa";
+import { instrumentSans } from "@/app/fonts";
 import queryPrompts from "../lib/utils/queryPrompts.json";
 
 type ChatMessage = { role: string; content: string; reasoning?: string };
 
+const HINT_DISMISSED_KEY = "immanuelai-hint-dismissed";
+
 const ImmanuelAI = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showHint, setShowHint] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,6 +29,24 @@ const ImmanuelAI = () => {
   useEffect(() => {
     messagesRef.current = messages;
   }, [messages]);
+
+  useEffect(() => {
+    try {
+      setShowHint(localStorage.getItem(HINT_DISMISSED_KEY) !== "1");
+    } catch {
+      setShowHint(true);
+    }
+  }, []);
+
+  const handleFabClick = () => {
+    setIsOpen((o) => !o);
+    setShowHint(false);
+    try {
+      localStorage.setItem(HINT_DISMISSED_KEY, "1");
+    } catch {
+      // Storage blocked: the hint simply returns on the next visit.
+    }
+  };
 
   const appendAssistantMessage = useCallback((content: string) => {
     setMessages((currentMessages) => {
@@ -267,9 +289,23 @@ const ImmanuelAI = () => {
         </div>
       </div>
 
-      {/* FAB */}
+      {showHint && !isOpen && (
+        <div
+          aria-hidden="true"
+          className={`${instrumentSans.className} ai-hint pointer-events-none fixed bottom-[92px] right-6 z-50`}
+        >
+          <div className="relative flex items-center gap-2 whitespace-nowrap rounded-full bg-gray-900 px-4 py-2.5 text-sm leading-[1.3] font-medium text-white shadow-[0_8px_20px_rgba(0,0,0,0.14)]">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.5l1.9 7.6 7.6 1.9-7.6 1.9-1.9 7.6-1.9-7.6-7.6-1.9 7.6-1.9z" />
+            </svg>
+            Ask my AI
+            <span className="absolute -bottom-[5px] right-[23px] size-2.5 rotate-45 rounded-[2px] bg-gray-900" />
+          </div>
+        </div>
+      )}
+
       <button
-        onClick={() => setIsOpen((o) => !o)}
+        onClick={handleFabClick}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gray-900 text-white shadow-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer"
         aria-label="Open ImmanuelAI chat"
       >
