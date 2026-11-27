@@ -68,6 +68,22 @@
   .mn-hi:hover svg, .mn-hi-current svg { opacity: 1; }
   .mn-hi:focus-visible { outline: 2px solid #141414; outline-offset: -4px; border-radius: 8px; }
 
+  .mn-more-btn { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    border-radius: 999px; color: #141414; cursor: pointer; transition: background-color 0.15s ease; }
+  .mn-more-btn svg { width: 20px; height: 20px; }
+  .mn-more-btn.is-open { background: #ececea; }
+  .mn-more-btn:focus-visible { outline: 2px solid #141414; outline-offset: -2px; }
+  .mn-pill { position: absolute; top: calc(100% + 6px); left: 50%; translate: -50% 0; z-index: 40;
+    display: flex; flex-direction: column; align-items: center; gap: 4px; width: 56px; padding: 6px;
+    border-radius: 999px; background: #ffffff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 14px 36px rgba(0, 0, 0, 0.14); }
+  .mn-pill[hidden] { display: none; }
+  .mn-pill-link { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+    border-radius: 999px; color: #141414; }
+  .mn-pill-link svg { width: 18px; height: 18px; }
+  .mn-pill-link:hover { background: #f3f3f1; }
+  .mn-pill-link:focus-visible { outline: 2px solid #141414; outline-offset: -2px; }
+
   .mn-bl { margin-top: 12px; padding-left: 18px; list-style: disc; font-size: 15.5px; line-height: 1.6; color: #33332f; }
   .mn-bl li { margin-bottom: 6px; }
   .mn-bl li::marker { color: #b5b5b0; }
@@ -104,7 +120,7 @@
   .mn-toc a:focus-visible { outline: 2px solid #141414; outline-offset: 3px; }
   @media (max-width: 1199px) { .mn-toc { display: none; } }
   @media (prefers-reduced-motion: reduce) {
-    .mn-ic, .mn-hi svg, .mn-post-arrow, .mn-toc .dot, .mn-toc .label { transition: none; }
+    .mn-ic, .mn-hi svg, .mn-more-btn, .mn-post-arrow, .mn-toc .dot, .mn-toc .label { transition: none; }
   }
 }
 
